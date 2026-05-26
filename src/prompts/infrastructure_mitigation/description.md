@@ -1,0 +1,2 @@
+# Infrastructure Mitigation
+Focuses on assessing and protecting critical infrastructure during an active disaster event. Includes flood impact zones, hurricane surge exposure, wildfire threat zones, tornado-driven hospital exposure mapping, and regional wildfire infrastructure risk. Also covers critical infrastructure hardening, supply chain resilience analysis, water system and power grid protection under active hazards, and environmental contamination risk to water treatment infrastructure from ash or chemical runoff.

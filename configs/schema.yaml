@@ -1,0 +1,48 @@
+# Schema Definition for Disaster Context Graph
+# Edit this file to add new Features and Concepts.
+# Run `python scripts/build_schema.py` to sync with Neo4j.
+
+features:
+  # Critical Life Infrastructure
+  - id: hex_fc_rac_hospital
+    name: Hospital Access
+    source: CRIT_LIFE_001.parquet
+    aggregation: AVG
+    description: Hospital accessibility score per hex
+
+  - id: hex_fc_rac_grocery
+    name: Grocery Access
+    source: CRIT_LIFE_001.parquet
+    aggregation: AVG
+    description: Grocery store accessibility score per hex
+
+  # Exposure
+  - id: building_count
+    name: Building Count
+    source: EX_BLD_001.parquet
+    aggregation: SUM
+    description: Total buildings per hex
+
+concepts:
+  - id: medical_access
+    name: Medical Access
+    maps_to: [hex_fc_rac_hospital]
+    synonyms: ["hospital", "emergency room", "healthcare", "clinic"]
+
+  - id: flood_risk
+    name: Flood Risk
+    maps_to: []  # To be defined when flood data is added
+    synonyms: ["flooding", "inundation", "high water"]
+
+aggregation_rules:
+  - id: sum
+    formula: "SUM(x)"
+    use_for: ["count", "total"]
+
+  - id: avg
+    formula: "AVG(x)"
+    use_for: ["score", "index", "rate"]
+
+  - id: area_weighted_avg
+    formula: "SUM(x * area) / SUM(area)"
+    use_for: ["depth", "risk"]

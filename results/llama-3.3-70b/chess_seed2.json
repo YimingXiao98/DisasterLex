@@ -1,0 +1,4400 @@
+{
+  "ablation": "chess",
+  "pipeline_model": "google/gemini-3.1-flash-lite-preview",
+  "claim_extractor_model": "google/gemini-2.5-flash",
+  "reasoning_judge_model": "google/gemini-2.5-flash",
+  "mean_judge_score": 1.027,
+  "mean_fact_score": 0.053,
+  "mean_reasoning_score": 0.0,
+  "score_distribution": {
+    "1": 74,
+    "2": 0,
+    "3": 1,
+    "4": 0,
+    "5": 0
+  },
+  "total": 75,
+  "cases": [
+    {
+      "id": "draft_r16",
+      "tier": "R",
+      "category": "routing_accuracy",
+      "question": "Tornado outbreak in Potter County. Triage critical lifeline infrastructure \u2014 which hospitals and power substations fall within the highest-risk tornado zones in the county?",
+      "system_answer": "The CHESS baseline produced the following SQL but it failed to execute:\n\n```sql\nSELECT T2.hospitals_n, T3.energy_substations_n FROM HP_TOR_001 AS T1 INNER JOIN HIFLD-HEALTH-HOSP-N AS T2 ON T1.hex_id = T2.hex_id INNER JOIN HIFLD-ENERGY-SUBSTN-N AS T3 ON T1.hex_id = T3.hex_id INNER JOIN hex_county_state_zip_crosswalk AS T4 ON T1.hex_id = T4.hex_id WHERE T4.County = 'Potter County' AND T1.nri_tornado = (SELECT MAX(nri_tornado) FROM HP_TOR_001 AS T5 INNER JOIN hex_county_state_zip_crosswalk AS T6 ON T5.hex_id = T6.hex_id WHERE T6.County = 'Potter County')\n```\n\nError: ParserException: Parser Error: syntax error at or near \"-\"\n\nLINE 1: ... T3.energy_substations_n FROM HP_TOR_001 AS T1 INNER JOIN HIFLD-HEALTH-HOSP-N AS T2 ON T1.hex_id = T2.hex_id INNER JOIN...\n                                                                          ^\n\nSTRUCTURED FACTS:\n",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0,
+      "extracted_claims": {
+        "entities": [
+          "potter"
+        ],
+        "ordered_entities": [],
+        "numeric_claims": [],
+        "boolean_claims": [],
+        "causal_relation_tokens": [],
+        "causal_claims": [],
+        "recommendations": [],
+        "pipeline_state": {
+          "criticality": 0,
+          "cluster": "",
+          "query_type": "",
+          "area_of_interest": "",
+          "hazard_type": "",
+          "data_availability_warnings": []
+        }
+      },
+      "fact_checks_passed": [],
+      "fact_checks_failed": [
+        {
+          "id": "routing_criticality",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "criticality",
+            "expected": [
+              3,
+              4
+            ],
+            "actual": null
+          }
+        },
+        {
+          "id": "routing_cluster",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "cluster",
+            "expected": "damage_assessment_response",
+            "actual": null
+          }
+        },
+        {
+          "id": "routing_query_type",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "query_type",
+            "expected": "lifeline_criticality_scan",
+            "actual": null
+          }
+        },
+        {
+          "id": "num_draft_r16",
+          "kind": "numeric_value_match",
+          "evaluator": "deterministic",
+          "weight": 2.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "subject": "potter",
+            "metric": "hospital_hexes_potter",
+            "expected": 9.0,
+            "actual": null
+          }
+        },
+        {
+          "id": "rec_draft_r16",
+          "kind": "recommendation_count",
+          "evaluator": "deterministic",
+          "weight": 1.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "min_count": 2,
+            "actual_count": 0,
+            "recommendations": []
+          }
+        }
+      ],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "SELECT T2.hospitals_n, T3.energy_substations_n FROM HP_TOR_001 AS T1 INNER JOIN HIFLD-HEALTH-HOSP-N AS T2 ON T1.hex_id = T2.hex_id INNER JOIN HIFLD-ENERGY-SUBSTN-N AS T3 ON T1.hex_id = T3.hex_id INNER JOIN hex_county_state_zip_crosswalk AS T4 ON T1.hex_id = T4.hex_id WHERE T4.County = 'Potter County' AND T1.nri_tornado = (SELECT MAX(nri_tornado) FROM HP_TOR_001 AS T5 INNER JOIN hex_county_state_zip_crosswalk AS T6 ON T5.hex_id = T6.hex_id WHERE T6.County = 'Potter County')"
+    },
+    {
+      "id": "draft_r17",
+      "tier": "R",
+      "category": "routing_accuracy",
+      "question": "Flash flood watch for Webb County. Quantify population exposure and identify hexes with high social vulnerability and low community resilience.",
+      "system_answer": "The CHESS baseline produced the following SQL and executed it against the DuckDB:\n\n```sql\nSELECT T1.hex_id, T1.population_7km, T2.sovi, T3.nri_ealb_VLCN, T3.nri_ealpe_TRND, T3.nri_ealpe_WFIR, T3.nri_ealpe_LTNG, T3.nri_ealpe_HAIL, T3.nri_ealpe_RFLD, T3.nri_ealpe_CWAV, T3.nri_ealpe_SWND, T3.nri_ealpe_LNDS, T3.nri_ealpe_HRCN, T3.nri_ealpe_CFLD, T3.nri_ealpe_ISTM, T3.nri_ealpe_AVLN, T3.nri_ealpe_HWAV, T3.nri_ealpe_ERQK, T3.nri_ealpe_TSUN FROM EX_POP_001 AS T1 INNER JOIN VUL_002 AS T2 ON T1.hex_id = T2.hex_id INNER JOIN VUL_003 AS T3 ON T1.hex_id = T3.hex_id WHERE T2.hex_id IN (SELECT hex_id FROM hex_county_state_zip_crosswalk WHERE County = 'Webb County') AND T3.hex_id IN (SELECT hex_id FROM hex_county_state_zip_crosswalk WHERE County = 'Webb County') AND T3.nri_ealb_VLCN > 0.5\n```\n\nResult rows:\n  (no rows returned)\n\nSTRUCTURED FACTS:",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0,
+      "extracted_claims": {
+        "entities": [
+          "webb"
+        ],
+        "ordered_entities": [],
+        "numeric_claims": [],
+        "boolean_claims": [],
+        "causal_relation_tokens": [],
+        "causal_claims": [],
+        "recommendations": [],
+        "pipeline_state": {
+          "criticality": 0,
+          "cluster": "",
+          "query_type": "",
+          "area_of_interest": "",
+          "hazard_type": "",
+          "data_availability_warnings": []
+        }
+      },
+      "fact_checks_passed": [],
+      "fact_checks_failed": [
+        {
+          "id": "routing_criticality",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "criticality",
+            "expected": [
+              2,
+              3
+            ],
+            "actual": null
+          }
+        },
+        {
+          "id": "routing_cluster",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "cluster",
+            "expected": "damage_assessment_response",
+            "actual": null
+          }
+        },
+        {
+          "id": "routing_query_type",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "query_type",
+            "expected": "population_impact",
+            "actual": null
+          }
+        },
+        {
+          "id": "num_draft_r17",
+          "kind": "numeric_value_match",
+          "evaluator": "deterministic",
+          "weight": 2.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "subject": "webb",
+            "metric": "avg_pop_webb",
+            "expected": 4668.91,
+            "actual": null
+          }
+        },
+        {
+          "id": "rec_draft_r17",
+          "kind": "recommendation_count",
+          "evaluator": "deterministic",
+          "weight": 1.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "min_count": 2,
+            "actual_count": 0,
+            "recommendations": []
+          }
+        }
+      ],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "SELECT T1.hex_id, T1.population_7km, T2.sovi, T3.nri_ealb_VLCN, T3.nri_ealpe_TRND, T3.nri_ealpe_WFIR, T3.nri_ealpe_LTNG, T3.nri_ealpe_HAIL, T3.nri_ealpe_RFLD, T3.nri_ealpe_CWAV, T3.nri_ealpe_SWND, T3.nri_ealpe_LNDS, T3.nri_ealpe_HRCN, T3.nri_ealpe_CFLD, T3.nri_ealpe_ISTM, T3.nri_ealpe_AVLN, T3.nri_ealpe_HWAV, T3.nri_ealpe_ERQK, T3.nri_ealpe_TSUN FROM EX_POP_001 AS T1 INNER JOIN VUL_002 AS T2 ON T1.hex_id = T2.hex_id INNER JOIN VUL_003 AS T3 ON T1.hex_id = T3.hex_id WHERE T2.hex_id IN (SELECT hex_id FROM hex_county_state_zip_crosswalk WHERE County = 'Webb County') AND T3.hex_id IN (SELECT hex_id FROM hex_county_state_zip_crosswalk WHERE County = 'Webb County') AND T3.nri_ealb_VLCN > 0.5"
+    },
+    {
+      "id": "draft_k13",
+      "tier": "K",
+      "category": "kg_causal",
+      "question": "Severe flooding in Webb County. How does social vulnerability compound emergency response challenges during an active flood? Identify the highest-priority zones for swift-water rescue deployment.",
+      "system_answer": "The CHESS baseline produced the following SQL and executed it against the DuckDB:\n\n```sql\nWITH critical_life_index AS (   SELECT T4.hex_id, T4.conc_index_grocery, T4.conc_index_hospital   FROM CRIT_LIFE_003 AS T4   INNER JOIN hex_county_state_zip_crosswalk AS T5 ON T4.hex_id = T5.hex_id   WHERE T5.County = 'Webb County' ) SELECT T1.sovi, T2.conc_index_grocery, T2.conc_index_hospital FROM VUL_002 AS T1 INNER JOIN CRIT_LIFE_003 AS T2 ON T1.hex_id = T2.hex_id WHERE T2.hex_id IN (SELECT hex_id FROM critical_life_index)\n```\n\nResult rows:\n  sovi=0.6927 | conc_index_grocery=None | conc_index_hospital=None\n  sovi=0.6927 | conc_index_grocery=None | conc_index_hospital=None\n  sovi=0.8758 | conc_index_grocery=None | conc_index_hospital=None\n  sovi=0.6927 | conc_index_grocery=None | conc_index_hospital=None\n  sovi=0.6927 | conc_index_grocery=None | conc_index_hospital=None\n  sovi=0.6927 | conc_index_grocery=None | conc_index_hospital=None\n  sovi=0.6927 | conc_index_grocery=None | conc_index_hospital=None\n  sovi=0.6927 | conc_index_grocery=None | conc_index_hospital=None\n  sovi=0.6927 | conc_index_grocery=None | conc_index_hospital=None\n  sovi=0.6927 | conc_index_grocery=None | conc_index_hospital=None\n  sovi=0.8758 | conc_index_grocery=None | conc_index_hospital=None\n  sovi=0.8367 | conc_index_grocery=None | conc_index_hospital=None\n  sovi=0.6927 | conc_index_grocery=None | conc_index_hospital=None\n  sovi=0.6927 | conc_index_grocery=None | conc_index_hospital=None\n  sovi=0.6927 | conc_index_grocery=None | conc_index_hospital=None\n  sovi=0.8758 | conc_index_grocery=None | conc_index_hospital=None\n  sovi=0.6927 | conc_index_grocery=None | conc_index_hospital=None\n  sovi=0.6927 | conc_index_grocery=None | conc_index_hospital=None\n  sovi=0.6927 | conc_index_grocery=None | conc_index_hospital=None\n  sovi=0.8367 | conc_index_grocery=None | conc_index_hospital=None\n  ... (10177 more rows)\n\nSTRUCTURED FACTS:\n- subject: sovi  metric: sovi  value: 0.6927\n- subject: sovi  metric: sovi  value: 0.6927\n- subject: sovi  metric: sovi  value: 0.8758\n- subject: sovi  metric: sovi  value: 0.6927\n- subject: sovi  metric: sovi  value: 0.6927\n- subject: sovi  metric: sovi  value: 0.6927\n- subject: sovi  metric: sovi  value: 0.6927\n- subject: sovi  metric: sovi  value: 0.6927\n- subject: sovi  metric: sovi  value: 0.6927\n- subject: sovi  metric: sovi  value: 0.6927\n- subject: sovi  metric: sovi  value: 0.8758\n- subject: sovi  metric: sovi  value: 0.8367\n- subject: sovi  metric: sovi  value: 0.6927\n- subject: sovi  metric: sovi  value: 0.6927\n- subject: sovi  metric: sovi  value: 0.6927\n- subject: sovi  metric: sovi  value: 0.8758\n- subject: sovi  metric: sovi  value: 0.6927\n- subject: sovi  metric: sovi  value: 0.6927\n- subject: sovi  metric: sovi  value: 0.6927\n- subject: sovi  metric: sovi  value: 0.8367",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0,
+      "extracted_claims": {
+        "entities": [],
+        "ordered_entities": [],
+        "numeric_claims": [
+          {
+            "subject": "sovi",
+            "metric": "sovi",
+            "value": 0.6927
+          },
+          {
+            "subject": "sovi",
+            "metric": "sovi",
+            "value": 0.8758
+          },
+          {
+            "subject": "sovi",
+            "metric": "sovi",
+            "value": 0.8367
+          },
+          {
+            "subject": "dataset",
+            "metric": "sovi",
+            "value": 0.6927
+          },
+          {
+            "subject": "dataset",
+            "metric": "sovi",
+            "value": 0.8758
+          },
+          {
+            "subject": "dataset",
+            "metric": "sovi",
+            "value": 0.8367
+          }
+        ],
+        "boolean_claims": [],
+        "causal_relation_tokens": [],
+        "causal_claims": [],
+        "recommendations": [],
+        "pipeline_state": {
+          "criticality": 0,
+          "cluster": "",
+          "query_type": "",
+          "area_of_interest": "",
+          "hazard_type": "",
+          "data_availability_warnings": []
+        }
+      },
+      "fact_checks_passed": [],
+      "fact_checks_failed": [
+        {
+          "id": "causal_draft_k13",
+          "kind": "entity_set_match",
+          "evaluator": "deterministic",
+          "weight": 1.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "expected": [
+              "community_resilience|REDUCES|emergency_response_capacity"
+            ],
+            "actual": [],
+            "matched": []
+          }
+        },
+        {
+          "id": "num_draft_k13",
+          "kind": "numeric_value_match",
+          "evaluator": "deterministic",
+          "weight": 1.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "subject": "webb",
+            "metric": "sar_priority_hexes_webb",
+            "expected": 3202.0,
+            "actual": null
+          }
+        },
+        {
+          "id": "bool_draft_k13",
+          "kind": "boolean_match",
+          "evaluator": "deterministic",
+          "weight": 1.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "name": "vulnerability_response_chain",
+            "expected": true,
+            "actual": null
+          }
+        },
+        {
+          "id": "rec_draft_k13",
+          "kind": "recommendation_count",
+          "evaluator": "deterministic",
+          "weight": 1.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "min_count": 2,
+            "actual_count": 0,
+            "recommendations": []
+          }
+        }
+      ],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "WITH critical_life_index AS (   SELECT T4.hex_id, T4.conc_index_grocery, T4.conc_index_hospital   FROM CRIT_LIFE_003 AS T4   INNER JOIN hex_county_state_zip_crosswalk AS T5 ON T4.hex_id = T5.hex_id   WHERE T5.County = 'Webb County' ) SELECT T1.sovi, T2.conc_index_grocery, T2.conc_index_hospital FROM VUL_002 AS T1 INNER JOIN CRIT_LIFE_003 AS T2 ON T1.hex_id = T2.hex_id WHERE T2.hex_id IN (SELECT hex_id FROM critical_life_index)"
+    },
+    {
+      "id": "draft_m18",
+      "tier": "M",
+      "category": "multi_component",
+      "question": "Tornado warning in Midland County. Triage critical lifeline infrastructure: count hospital hexes and substation hexes in high tornado risk zones. Report resource gap.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_m20",
+      "tier": "M",
+      "category": "multi_component",
+      "question": "Wildfire threatening Midland County. Identify the highest-risk fire zones and assess power infrastructure exposure. Does the county have sufficient first responder resources to cover the threatened area?",
+      "system_answer": "The CHESS baseline produced the following SQL but it failed to execute:\n\n```sql\nSELECT      (SELECT `hex_id` FROM `crown_fire_probability` WHERE `crown_fire_prob` IS NOT NULL ORDER BY `crown_fire_prob` DESC LIMIT 10) AS high_risk_fire_zones,     (SELECT COUNT(`hifld_energy_tx_km_230p`) FROM `HIFLD-ENERGY-TXKM-230P` WHERE `hex_id` IN (SELECT `hex_id` FROM `crown_fire_probability` WHERE `crown_fire_prob` IS NOT NULL ORDER BY `crown_fire_prob` DESC LIMIT 10)) AS power_infrastructure_exposure,     (SELECT COUNT(`hifld_local_law_enforcement_n`) FROM `HIFLD-EMERGENC-LOCAL_LAW-N` WHERE `hex_id` IN (SELECT `hex_id` FROM `crown_fire_probability` WHERE `crown_fire_prob` IS NOT NULL ORDER BY `crown_fire_prob` DESC LIMIT 10)) AS first_responder_resources\n```\n\nError: ParserException: Parser Error: syntax error at or near \"`\"\n\nLINE 1: SELECT      (SELECT `hex_id` FROM `crown_fire_probability` WHERE `crown_fire_prob` IS NOT...\n                                          ^\n\nSTRUCTURED FACTS:\n",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0,
+      "extracted_claims": {
+        "entities": [],
+        "ordered_entities": [],
+        "numeric_claims": [],
+        "boolean_claims": [],
+        "causal_relation_tokens": [],
+        "causal_claims": [],
+        "recommendations": [],
+        "pipeline_state": {
+          "criticality": 0,
+          "cluster": "",
+          "query_type": "",
+          "area_of_interest": "",
+          "hazard_type": "",
+          "data_availability_warnings": []
+        }
+      },
+      "fact_checks_passed": [],
+      "fact_checks_failed": [
+        {
+          "id": "routing_cluster",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 1.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "cluster",
+            "expected": "infrastructure_mitigation",
+            "actual": null
+          }
+        },
+        {
+          "id": "num1_draft_m20",
+          "kind": "numeric_value_match",
+          "evaluator": "deterministic",
+          "weight": 1.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "subject": "midland",
+            "metric": "high_fire_hexes_midland",
+            "expected": 547.0,
+            "actual": null
+          }
+        },
+        {
+          "id": "num2_draft_m20",
+          "kind": "numeric_value_match",
+          "evaluator": "deterministic",
+          "weight": 1.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "subject": "midland",
+            "metric": "fire_ems_midland",
+            "expected": 13.0,
+            "actual": null
+          }
+        },
+        {
+          "id": "bool_draft_m20",
+          "kind": "boolean_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "name": "low_resource_flagged",
+            "expected": true,
+            "actual": null
+          }
+        },
+        {
+          "id": "rec_draft_m20",
+          "kind": "recommendation_count",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "min_count": 2,
+            "actual_count": 0,
+            "recommendations": []
+          }
+        }
+      ],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "SELECT      (SELECT `hex_id` FROM `crown_fire_probability` WHERE `crown_fire_prob` IS NOT NULL ORDER BY `crown_fire_prob` DESC LIMIT 10) AS high_risk_fire_zones,     (SELECT COUNT(`hifld_energy_tx_km_230p`) FROM `HIFLD-ENERGY-TXKM-230P` WHERE `hex_id` IN (SELECT `hex_id` FROM `crown_fire_probability` WHERE `crown_fire_prob` IS NOT NULL ORDER BY `crown_fire_prob` DESC LIMIT 10)) AS power_infrastructure_exposure,     (SELECT COUNT(`hifld_local_law_enforcement_n`) FROM `HIFLD-EMERGENC-LOCAL_LAW-N` WHERE `hex_id` IN (SELECT `hex_id` FROM `crown_fire_probability` WHERE `crown_fire_prob` IS NOT NULL ORDER BY `crown_fire_prob` DESC LIMIT 10)) AS first_responder_resources"
+    },
+    {
+      "id": "draft_m23",
+      "tier": "M",
+      "category": "multi_component",
+      "question": "Tornado strike in Potter County. Estimate the structural damage footprint: how many buildings are in the highest-risk tornado zones, what is the expected annual loss, and does this event warrant a federal disaster declaration request?",
+      "system_answer": "The CHESS baseline produced the following SQL and executed it against the DuckDB:\n\n```sql\nSELECT    COUNT(T2.building_count) AS number_of_buildings,   SUM(T3.nri_eal) AS expected_annual_loss,   CASE WHEN SUM(T3.nri_eal) > 1000000000 THEN 1 ELSE 0 END AS federal_disaster_declaration_request FROM HP_TOR_001 AS T1 INNER JOIN hex_county_state_zip_crosswalk AS T4 ON T1.hex_id = T4.hex_id INNER JOIN EX_BLD_001 AS T2 ON T4.hex_id = T2.hex_id INNER JOIN VUL_003 AS T3 ON T1.hex_id = T3.hex_id WHERE T1.nri_tornado IN (   SELECT T3.nri_tornado   FROM (     SELECT T2.nri_tornado, RANK() OVER (ORDER BY T2.nri_tornado DESC) AS rank     FROM HP_TOR_001 AS T2   ) AS T3   WHERE T3.rank <= 0.1 * (SELECT COUNT(*) FROM HP_TOR_001) ) AND T4.County = 'Potter County'\n```\n\nResult rows:\n  number_of_buildings=2632 | expected_annual_loss=7265497479.221359 | federal_disaster_declaration_request=1\n\nSTRUCTURED FACTS:\n- subject: number_of_buildings  metric: number_of_buildings  value: 2632\n- subject: expected_annual_loss  metric: expected_annual_loss  value: 7265497479.221359\n- subject: federal_disaster_declaration_request  metric: federal_disaster_declaration_request  value: 1",
+      "judge_score": 1,
+      "judge_score_raw": 0.5,
+      "fact_score": 0.5,
+      "reasoning_score": 0,
+      "extracted_claims": {
+        "entities": [
+          "potter"
+        ],
+        "ordered_entities": [],
+        "numeric_claims": [
+          {
+            "subject": "number_of_buildings",
+            "metric": "number_of_buildings",
+            "value": 2632.0
+          },
+          {
+            "subject": "expected_annual_loss",
+            "metric": "expected_annual_loss",
+            "value": 7265497479.221359
+          },
+          {
+            "subject": "federal_disaster_declaration_request",
+            "metric": "federal_disaster_declaration_request",
+            "value": 1.0
+          },
+          {
+            "subject": "potter",
+            "metric": "total_buildings_potter",
+            "value": 2632
+          },
+          {
+            "subject": "potter",
+            "metric": "tornado_eal_potter",
+            "value": 7265497479.221359
+          }
+        ],
+        "boolean_claims": [
+          {
+            "name": "fema_pda_mentioned",
+            "value": true
+          }
+        ],
+        "causal_relation_tokens": [],
+        "causal_claims": [],
+        "recommendations": [],
+        "pipeline_state": {
+          "criticality": 0,
+          "cluster": "",
+          "query_type": "",
+          "area_of_interest": "",
+          "hazard_type": "",
+          "data_availability_warnings": []
+        }
+      },
+      "fact_checks_passed": [
+        {
+          "id": "bool_draft_m23",
+          "kind": "boolean_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 1.0,
+          "weighted_score": 0.5,
+          "passed": true,
+          "details": {
+            "name": "fema_pda_mentioned",
+            "expected": true,
+            "actual": true
+          }
+        }
+      ],
+      "fact_checks_failed": [
+        {
+          "id": "routing_cluster",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 1.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "cluster",
+            "expected": "damage_assessment_response",
+            "actual": null
+          }
+        },
+        {
+          "id": "num1_draft_m23",
+          "kind": "numeric_value_match",
+          "evaluator": "deterministic",
+          "weight": 1.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "subject": "potter",
+            "metric": "total_buildings_potter",
+            "expected": 58124.0,
+            "actual": 2632.0,
+            "tolerance": 5000.0,
+            "delta": 55492.0
+          }
+        },
+        {
+          "id": "num2_draft_m23",
+          "kind": "numeric_value_match",
+          "evaluator": "deterministic",
+          "weight": 1.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "subject": "potter",
+            "metric": "tornado_eal_potter",
+            "expected": 1947656129.94,
+            "actual": 7265497479.221359,
+            "tolerance": 500000.0,
+            "delta": 5317841349.281359
+          }
+        },
+        {
+          "id": "rec_draft_m23",
+          "kind": "recommendation_count",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "min_count": 2,
+            "actual_count": 0,
+            "recommendations": []
+          }
+        }
+      ],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "SELECT    COUNT(T2.building_count) AS number_of_buildings,   SUM(T3.nri_eal) AS expected_annual_loss,   CASE WHEN SUM(T3.nri_eal) > 1000000000 THEN 1 ELSE 0 END AS federal_disaster_declaration_request FROM HP_TOR_001 AS T1 INNER JOIN hex_county_state_zip_crosswalk AS T4 ON T1.hex_id = T4.hex_id INNER JOIN EX_BLD_001 AS T2 ON T4.hex_id = T2.hex_id INNER JOIN VUL_003 AS T3 ON T1.hex_id = T3.hex_id WHERE T1.nri_tornado IN (   SELECT T3.nri_tornado   FROM (     SELECT T2.nri_tornado, RANK() OVER (ORDER BY T2.nri_tornado DESC) AS rank     FROM HP_TOR_001 AS T2   ) AS T3   WHERE T3.rank <= 0.1 * (SELECT COUNT(*) FROM HP_TOR_001) ) AND T4.County = 'Potter County'"
+    },
+    {
+      "id": "draft_m24",
+      "tier": "M",
+      "category": "multi_component",
+      "question": "Flooding in Dallas County. Which disadvantaged communities face the highest risk of extended power outages, combining grid vulnerability with low household income? How many areas need prioritized backup power support?",
+      "system_answer": "The CHESS baseline produced the following SQL but it failed to execute:\n\n```sql\nSELECT COUNT(T1.hex_id) FROM ( SELECT T1.hex_id, T1.nri_eal_HWAV + T1.nri_eal_WNTW + T1.nri_eal_SWND + T1.nri_eal_TRND + T1.nri_ealb_HWAV + T1.nri_ealb_WNTW + T1.nri_ealb_SWND + T1.nri_ealb_TRND AS risk_score FROM VUL_003 AS T1 INNER JOIN VUL_001 AS T2 ON T1.hex_id = T2.hex_id WHERE T2.inv_median_income < 0.5 AND T1.nri_eal_HWAV + T1.nri_eal_WNTW + T1.nri_eal_SWND + T1.nri_eal_TRND + T1.nri_ealb_HWAV + T1.nri_ealb_WNTW + T1.nri_ealb_SWND + T1.nri_ealb_TRND > 100000 ) AS T1 ORDER BY T1.risk_score DESC LIMIT 1\n```\n\nError: BinderException: Binder Error: column \"risk_score\" must appear in the GROUP BY clause or must be part of an aggregate function.\nEither add it to the GROUP BY list, or use \"ANY_VALUE(risk_score)\" if the exact value of \"risk_score\" is not important.\n\nLINE 1: ... T1.nri_ealb_SWND + T1.nri_ealb_TRND > 100000 ) AS T1 ORDER BY T1.risk_score DESC LIMIT 1\n                                                                          ^\n\nSTRUCTURED FACTS:\n",
+      "judge_score": 1,
+      "judge_score_raw": 0.5,
+      "fact_score": 0.5,
+      "reasoning_score": 0,
+      "extracted_claims": {
+        "entities": [
+          "dallas"
+        ],
+        "ordered_entities": [],
+        "numeric_claims": [],
+        "boolean_claims": [
+          {
+            "name": "community_solar_mentioned",
+            "value": true
+          }
+        ],
+        "causal_relation_tokens": [],
+        "causal_claims": [],
+        "recommendations": [],
+        "pipeline_state": {
+          "criticality": 0,
+          "cluster": "",
+          "query_type": "",
+          "area_of_interest": "",
+          "hazard_type": "",
+          "data_availability_warnings": []
+        }
+      },
+      "fact_checks_passed": [
+        {
+          "id": "bool_draft_m24",
+          "kind": "boolean_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 1.0,
+          "weighted_score": 0.5,
+          "passed": true,
+          "details": {
+            "name": "community_solar_mentioned",
+            "expected": true,
+            "actual": true
+          }
+        }
+      ],
+      "fact_checks_failed": [
+        {
+          "id": "routing_cluster",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 1.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "cluster",
+            "expected": "infrastructure_mitigation",
+            "actual": null
+          }
+        },
+        {
+          "id": "num1_draft_m24",
+          "kind": "numeric_value_match",
+          "evaluator": "deterministic",
+          "weight": 1.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "subject": "dallas",
+            "metric": "psvi_low_income_dallas",
+            "expected": 165.0,
+            "actual": null
+          }
+        },
+        {
+          "id": "num2_draft_m24",
+          "kind": "numeric_value_match",
+          "evaluator": "deterministic",
+          "weight": 1.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "subject": "dallas",
+            "metric": "avg_psvi_dallas",
+            "expected": 74.29,
+            "actual": null
+          }
+        },
+        {
+          "id": "rec_draft_m24",
+          "kind": "recommendation_count",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "min_count": 2,
+            "actual_count": 0,
+            "recommendations": []
+          }
+        }
+      ],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "SELECT COUNT(T1.hex_id) FROM ( SELECT T1.hex_id, T1.nri_eal_HWAV + T1.nri_eal_WNTW + T1.nri_eal_SWND + T1.nri_eal_TRND + T1.nri_ealb_HWAV + T1.nri_ealb_WNTW + T1.nri_ealb_SWND + T1.nri_ealb_TRND AS risk_score FROM VUL_003 AS T1 INNER JOIN VUL_001 AS T2 ON T1.hex_id = T2.hex_id WHERE T2.inv_median_income < 0.5 AND T1.nri_eal_HWAV + T1.nri_eal_WNTW + T1.nri_eal_SWND + T1.nri_eal_TRND + T1.nri_ealb_HWAV + T1.nri_ealb_WNTW + T1.nri_ealb_SWND + T1.nri_ealb_TRND > 100000 ) AS T1 ORDER BY T1.risk_score DESC LIMIT 1"
+    },
+    {
+      "id": "draft_m25",
+      "tier": "M",
+      "category": "multi_component",
+      "question": "Active wildfire in Kerr County. Which fire and EMS stations are directly threatened by the fire? With the county's limited emergency infrastructure, assess the operational risk to first responders and recommend protective actions.",
+      "system_answer": "The CHESS baseline produced the following SQL but it failed to execute:\n\n```sql\nSELECT ( SELECT `T2`.`hifld_local_law_enforcement_n` FROM `hex_county_state_zip_crosswalk` AS `T1` INNER JOIN `HIFLD-EMERGENC-LOCAL_LAW-N` AS `T2` ON `T1`.`hex_id` = `T2`.`hex_id` WHERE `T1`.`County` = 'Kerr County' ) AS `operational_risk_to_first_responders`, ( SELECT `T2`.`psvi_score` FROM `hex_county_state_zip_crosswalk` AS `T1` INNER JOIN `VUL_004` AS `T2` ON `T1`.`hex_id` = `T2`.`hex_id` WHERE `T1`.`County` = 'Kerr County' ) AS `protective_actions`, ( SELECT `T2`.`hifld_local_law_enforcement_n` FROM `hex_county_state_zip_crosswalk` AS `T1` INNER JOIN `HIFLD-EMERGENC-LOCAL_LAW-N` AS `T2` ON `T1`.`hex_id` = `T2`.`hex_id` WHERE `T1`.`County` = 'Kerr County' ) AS `fire_and_ems_stations_threatened_by_fire`\n```\n\nError: ParserException: Parser Error: syntax error at or near \".\"\n\nLINE 1: SELECT ( SELECT `T2`.`hifld_local_law_enforcement_n` FROM `hex_county_state_zip...\n                            ^\n\nSTRUCTURED FACTS:\n",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0,
+      "extracted_claims": {
+        "entities": [],
+        "ordered_entities": [],
+        "numeric_claims": [],
+        "boolean_claims": [],
+        "causal_relation_tokens": [],
+        "causal_claims": [],
+        "recommendations": [],
+        "pipeline_state": {
+          "criticality": 0,
+          "cluster": "",
+          "query_type": "",
+          "area_of_interest": "",
+          "hazard_type": "",
+          "data_availability_warnings": []
+        }
+      },
+      "fact_checks_passed": [],
+      "fact_checks_failed": [
+        {
+          "id": "routing_cluster",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 1.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "cluster",
+            "expected": "life_safety_operations",
+            "actual": null
+          }
+        },
+        {
+          "id": "num1_draft_m25",
+          "kind": "numeric_value_match",
+          "evaluator": "deterministic",
+          "weight": 1.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "subject": "kerr",
+            "metric": "fire_ems_total_kerr",
+            "expected": 12.0,
+            "actual": null
+          }
+        },
+        {
+          "id": "num2_draft_m25",
+          "kind": "numeric_value_match",
+          "evaluator": "deterministic",
+          "weight": 1.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "subject": "kerr",
+            "metric": "fire_ems_fire_risk_kerr",
+            "expected": 12.0,
+            "actual": null
+          }
+        },
+        {
+          "id": "bool_draft_m25",
+          "kind": "boolean_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "name": "relocation_recommended",
+            "expected": true,
+            "actual": null
+          }
+        },
+        {
+          "id": "rec_draft_m25",
+          "kind": "recommendation_count",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "min_count": 2,
+            "actual_count": 0,
+            "recommendations": []
+          }
+        }
+      ],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "SELECT ( SELECT `T2`.`hifld_local_law_enforcement_n` FROM `hex_county_state_zip_crosswalk` AS `T1` INNER JOIN `HIFLD-EMERGENC-LOCAL_LAW-N` AS `T2` ON `T1`.`hex_id` = `T2`.`hex_id` WHERE `T1`.`County` = 'Kerr County' ) AS `operational_risk_to_first_responders`, ( SELECT `T2`.`psvi_score` FROM `hex_county_state_zip_crosswalk` AS `T1` INNER JOIN `VUL_004` AS `T2` ON `T1`.`hex_id` = `T2`.`hex_id` WHERE `T1`.`County` = 'Kerr County' ) AS `protective_actions`, ( SELECT `T2`.`hifld_local_law_enforcement_n` FROM `hex_county_state_zip_crosswalk` AS `T1` INNER JOIN `HIFLD-EMERGENC-LOCAL_LAW-N` AS `T2` ON `T1`.`hex_id` = `T2`.`hex_id` WHERE `T1`.`County` = 'Kerr County' ) AS `fire_and_ems_stations_threatened_by_fire`"
+    },
+    {
+      "id": "draft_d09",
+      "tier": "D",
+      "category": "data_availability",
+      "question": "Hurricane impact in Cameron County. Assess social vulnerability across all hexes \u2014 include those with missing SoVI data and report the coverage fraction.",
+      "system_answer": "The CHESS baseline produced the following SQL but it failed to execute:\n\n```sql\nSELECT `T1`.`sovi`, COUNT(`T1`.`sovi`) FROM `VUL_002` AS `T1` WHERE `T1`.`sovi` IN (SELECT `T1`.`sovi` FROM `VUL_002` AS `T1` WHERE `T1`.`sovi` IS NOT NULL UNION SELECT NULL) GROUP BY `T1`.`sovi`, CASE WHEN `T1`.`sovi` IS NOT NULL THEN 1 ELSE 0 END\n```\n\nError: ParserException: Parser Error: syntax error at or near \".\"\n\nLINE 1: SELECT `T1`.`sovi`, COUNT(`T1`.`sovi`) FROM `VUL_002` AS `T1` WHERE...\n                   ^\n\nSTRUCTURED FACTS:\n",
+      "judge_score": 3,
+      "judge_score_raw": 3.0,
+      "fact_score": 3.0,
+      "reasoning_score": 0,
+      "extracted_claims": {
+        "entities": [],
+        "ordered_entities": [],
+        "numeric_claims": [],
+        "boolean_claims": [
+          {
+            "name": "data_unavailability_disclosed",
+            "value": true
+          }
+        ],
+        "causal_relation_tokens": [],
+        "causal_claims": [],
+        "recommendations": [],
+        "pipeline_state": {
+          "criticality": 0,
+          "cluster": "",
+          "query_type": "",
+          "area_of_interest": "",
+          "hazard_type": "",
+          "data_availability_warnings": []
+        }
+      },
+      "fact_checks_passed": [
+        {
+          "id": "disclosed_draft_d09",
+          "kind": "boolean_match",
+          "evaluator": "deterministic",
+          "weight": 3.0,
+          "score_fraction": 1.0,
+          "weighted_score": 3.0,
+          "passed": true,
+          "details": {
+            "name": "data_unavailability_disclosed",
+            "expected": true,
+            "actual": true
+          }
+        }
+      ],
+      "fact_checks_failed": [
+        {
+          "id": "proxy_draft_d09",
+          "kind": "boolean_match",
+          "evaluator": "deterministic",
+          "weight": 1.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "name": "proxy_or_alternative_suggested",
+            "expected": true,
+            "actual": null
+          }
+        },
+        {
+          "id": "rec_draft_d09",
+          "kind": "recommendation_count",
+          "evaluator": "deterministic",
+          "weight": 1.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "min_count": 1,
+            "actual_count": 0,
+            "recommendations": []
+          }
+        }
+      ],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "SELECT `T1`.`sovi`, COUNT(`T1`.`sovi`) FROM `VUL_002` AS `T1` WHERE `T1`.`sovi` IN (SELECT `T1`.`sovi` FROM `VUL_002` AS `T1` WHERE `T1`.`sovi` IS NOT NULL UNION SELECT NULL) GROUP BY `T1`.`sovi`, CASE WHEN `T1`.`sovi` IS NOT NULL THEN 1 ELSE 0 END"
+    },
+    {
+      "id": "draft_d10",
+      "tier": "D",
+      "category": "data_availability",
+      "question": "Flooding in Webb County. Query power outage footprint data to estimate how many buildings have lost electricity due to the flood event.",
+      "system_answer": "The CHESS baseline produced the following SQL and executed it against the DuckDB:\n\n```sql\nSELECT COUNT(T1.building_count) FROM EX_BLD_001 AS T1 INNER JOIN crown_fire_probability AS T2 ON T1.hex_id = T2.hex_id INNER JOIN hex_county_state_zip_crosswalk AS T3 ON T1.hex_id = T3.hex_id WHERE T2.crown_fire_prob > 0 AND T3.County = 'Webb County' AND T1.building_count > 0\n```\n\nResult rows:\n  count(T1.building_count)=16\n\nSTRUCTURED FACTS:\n- subject: count(T1.building_count)  metric: count(T1.building_count)  value: 16",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0,
+      "extracted_claims": {
+        "entities": [],
+        "ordered_entities": [],
+        "numeric_claims": [
+          {
+            "subject": "count(T1.building_count)",
+            "metric": "count(T1.building_count)",
+            "value": 16.0
+          },
+          {
+            "subject": "count(T1.building_count)",
+            "metric": "count(T1.building_count)",
+            "value": 16
+          }
+        ],
+        "boolean_claims": [],
+        "causal_relation_tokens": [],
+        "causal_claims": [],
+        "recommendations": [],
+        "pipeline_state": {
+          "criticality": 0,
+          "cluster": "",
+          "query_type": "",
+          "area_of_interest": "",
+          "hazard_type": "",
+          "data_availability_warnings": []
+        }
+      },
+      "fact_checks_passed": [],
+      "fact_checks_failed": [
+        {
+          "id": "disclosed_draft_d10",
+          "kind": "boolean_match",
+          "evaluator": "deterministic",
+          "weight": 3.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "name": "data_unavailability_disclosed",
+            "expected": true,
+            "actual": null
+          }
+        },
+        {
+          "id": "proxy_draft_d10",
+          "kind": "boolean_match",
+          "evaluator": "deterministic",
+          "weight": 1.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "name": "proxy_or_alternative_suggested",
+            "expected": true,
+            "actual": null
+          }
+        },
+        {
+          "id": "rec_draft_d10",
+          "kind": "recommendation_count",
+          "evaluator": "deterministic",
+          "weight": 1.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "min_count": 1,
+            "actual_count": 0,
+            "recommendations": []
+          }
+        }
+      ],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "SELECT COUNT(T1.building_count) FROM EX_BLD_001 AS T1 INNER JOIN crown_fire_probability AS T2 ON T1.hex_id = T2.hex_id INNER JOIN hex_county_state_zip_crosswalk AS T3 ON T1.hex_id = T3.hex_id WHERE T2.crown_fire_prob > 0 AND T3.County = 'Webb County' AND T1.building_count > 0"
+    },
+    {
+      "id": "draft_r12",
+      "tier": "R",
+      "category": "routing_accuracy",
+      "question": "Active wildfire is burning in Kerr County. Map the highest-risk fire zones, identify transmission infrastructure in the fire path, and estimate how many buildings are in the threat area.",
+      "system_answer": "The CHESS baseline produced the following SQL but it failed to execute:\n\n```sql\nWITH highest_risk_fire_zones AS (SELECT `T1`.`hex_id` FROM `crown_fire_probability` AS `T1` INNER JOIN `hex_county_state_zip_crosswalk` AS `T2` ON `T1`.`hex_id` = `T2`.`hex_id` WHERE `T2`.`County` = 'Kerr County' AND `T1`.`crown_fire_prob` > (SELECT MAX(`crown_fire_prob`) FROM `crown_fire_probability`)), transmission_infrastructure AS (SELECT `T1`.`hifld_primary_roads_km` FROM `HIFLD-TRANSP-PRIMARY_RD-L` AS `T1` INNER JOIN `hex_county_state_zip_crosswalk` AS `T2` ON `T1`.`hex_id` = `T2`.`hex_id` WHERE `T2`.`County` = 'Kerr County'), building_count_in_threat_area AS (SELECT `T1`.`building_count` FROM `EX_BLD_001` AS `T1` INNER JOIN `hex_county_state_zip_crosswalk` AS `T2` ON `T1`.`hex_id` = `T2`.`hex_id` WHERE `T2`.`County` = 'Kerr County') SELECT (SELECT `hex_id` FROM highest_risk_fire_zones), (SELECT `hifld_primary_roads_km` FROM transmission_infrastructure), (SELECT `building_count` FROM building_count_in_threat_area)\n```\n\nError: ParserException: Parser Error: syntax error at or near \".\"\n\nLINE 1: WITH highest_risk_fire_zones AS (SELECT `T1`.`hex_id` FROM `crown_fire_probability` AS `T1` INNER JOIN...\n                                                    ^\n\nSTRUCTURED FACTS:\n",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0,
+      "extracted_claims": {
+        "entities": [
+          "kerr"
+        ],
+        "ordered_entities": [],
+        "numeric_claims": [],
+        "boolean_claims": [],
+        "causal_relation_tokens": [],
+        "causal_claims": [],
+        "recommendations": [],
+        "pipeline_state": {
+          "criticality": 0,
+          "cluster": "",
+          "query_type": "",
+          "area_of_interest": "",
+          "hazard_type": "",
+          "data_availability_warnings": []
+        }
+      },
+      "fact_checks_passed": [],
+      "fact_checks_failed": [
+        {
+          "id": "routing_criticality",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "criticality",
+            "expected": [
+              4
+            ],
+            "actual": null
+          }
+        },
+        {
+          "id": "routing_cluster",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "cluster",
+            "expected": "infrastructure_mitigation",
+            "actual": null
+          }
+        },
+        {
+          "id": "routing_query_type",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "query_type",
+            "expected": "wildfire_threat_zones",
+            "actual": null
+          }
+        },
+        {
+          "id": "num_draft_r12",
+          "kind": "numeric_value_match",
+          "evaluator": "deterministic",
+          "weight": 2.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "subject": "kerr",
+            "metric": "high_fire_hexes_kerr",
+            "expected": 674.0,
+            "actual": null
+          }
+        },
+        {
+          "id": "rec_draft_r12",
+          "kind": "recommendation_count",
+          "evaluator": "deterministic",
+          "weight": 1.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "min_count": 2,
+            "actual_count": 0,
+            "recommendations": []
+          }
+        }
+      ],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "WITH highest_risk_fire_zones AS (SELECT `T1`.`hex_id` FROM `crown_fire_probability` AS `T1` INNER JOIN `hex_county_state_zip_crosswalk` AS `T2` ON `T1`.`hex_id` = `T2`.`hex_id` WHERE `T2`.`County` = 'Kerr County' AND `T1`.`crown_fire_prob` > (SELECT MAX(`crown_fire_prob`) FROM `crown_fire_probability`)), transmission_infrastructure AS (SELECT `T1`.`hifld_primary_roads_km` FROM `HIFLD-TRANSP-PRIMARY_RD-L` AS `T1` INNER JOIN `hex_county_state_zip_crosswalk` AS `T2` ON `T1`.`hex_id` = `T2`.`hex_id` WHERE `T2`.`County` = 'Kerr County'), building_count_in_threat_area AS (SELECT `T1`.`building_count` FROM `EX_BLD_001` AS `T1` INNER JOIN `hex_county_state_zip_crosswalk` AS `T2` ON `T1`.`hex_id` = `T2`.`hex_id` WHERE `T2`.`County` = 'Kerr County') SELECT (SELECT `hex_id` FROM highest_risk_fire_zones), (SELECT `hifld_primary_roads_km` FROM transmission_infrastructure), (SELECT `building_count` FROM building_count_in_threat_area)"
+    },
+    {
+      "id": "draft_r13",
+      "tier": "R",
+      "category": "routing_accuracy",
+      "question": "Active flooding in Jefferson County. Assess which fire/EMS stations and EOCs are at risk of flood exposure and may lose operational capacity.",
+      "system_answer": "The CHESS baseline produced the following SQL but it failed to execute:\n\n```sql\nSELECT T1.hex_id, T1.hifld_fire_and_emergency_medical_service_stations_fire_stations_ems_stations_n FROM HIFLD-EMERGENC-FIRE_EMS-N AS T1 INNER JOIN hex_county_state_zip_crosswalk AS T2 ON T1.hex_id = T2.hex_id INNER JOIN VUL_003 AS T3 ON T1.hex_id = T3.hex_id WHERE T2.County = 'Jefferson County' AND T3.hex_id IN (   SELECT hex_id   FROM VUL_003   WHERE nri_ealb_VLCN > 0 OR nri_ealb_HWAV > 0 OR nri_ealb_CWAV > 0 OR nri_ealb_ISTM > 0 OR nri_ealb_RFLD > 0 OR nri_ealb_TRND > 0 OR nri_ealb_AVLN > 0 OR nri_ealb_LNDS > 0 OR nri_ealb_ERQK > 0 OR nri_ealb_WFIR > 0 OR nri_ealb_WNTW > 0 OR nri_ealb_TSUN > 0 OR nri_ealb_LTNG > 0 OR nri_ealb_HAIL > 0 OR nri_ealb_HRCN > 0 OR nri_ealb_SWND > 0 )\n```\n\nError: ParserException: Parser Error: syntax error at or near \"-\"\n\nLINE 1: ...al_service_stations_fire_stations_ems_stations_n FROM HIFLD-EMERGENC-FIRE_EMS-N AS T1 INNER JOIN hex_county_state_zip_...\n                                                                      ^\n\nSTRUCTURED FACTS:\n",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0,
+      "extracted_claims": {
+        "entities": [
+          "jefferson"
+        ],
+        "ordered_entities": [],
+        "numeric_claims": [],
+        "boolean_claims": [],
+        "causal_relation_tokens": [],
+        "causal_claims": [],
+        "recommendations": [],
+        "pipeline_state": {
+          "criticality": 0,
+          "cluster": "",
+          "query_type": "",
+          "area_of_interest": "",
+          "hazard_type": "",
+          "data_availability_warnings": []
+        }
+      },
+      "fact_checks_passed": [],
+      "fact_checks_failed": [
+        {
+          "id": "routing_criticality",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "criticality",
+            "expected": [
+              3,
+              4
+            ],
+            "actual": null
+          }
+        },
+        {
+          "id": "routing_cluster",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "cluster",
+            "expected": "life_safety_operations",
+            "actual": null
+          }
+        },
+        {
+          "id": "routing_query_type",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "query_type",
+            "expected": "responder_risk",
+            "actual": null
+          }
+        },
+        {
+          "id": "num_draft_r13",
+          "kind": "numeric_value_match",
+          "evaluator": "deterministic",
+          "weight": 2.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "subject": "jefferson",
+            "metric": "fire_ems_hexes_jefferson",
+            "expected": 29.0,
+            "actual": null
+          }
+        },
+        {
+          "id": "rec_draft_r13",
+          "kind": "recommendation_count",
+          "evaluator": "deterministic",
+          "weight": 1.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "min_count": 2,
+            "actual_count": 0,
+            "recommendations": []
+          }
+        }
+      ],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "SELECT T1.hex_id, T1.hifld_fire_and_emergency_medical_service_stations_fire_stations_ems_stations_n FROM HIFLD-EMERGENC-FIRE_EMS-N AS T1 INNER JOIN hex_county_state_zip_crosswalk AS T2 ON T1.hex_id = T2.hex_id INNER JOIN VUL_003 AS T3 ON T1.hex_id = T3.hex_id WHERE T2.County = 'Jefferson County' AND T3.hex_id IN (   SELECT hex_id   FROM VUL_003   WHERE nri_ealb_VLCN > 0 OR nri_ealb_HWAV > 0 OR nri_ealb_CWAV > 0 OR nri_ealb_ISTM > 0 OR nri_ealb_RFLD > 0 OR nri_ealb_TRND > 0 OR nri_ealb_AVLN > 0 OR nri_ealb_LNDS > 0 OR nri_ealb_ERQK > 0 OR nri_ealb_WFIR > 0 OR nri_ealb_WNTW > 0 OR nri_ealb_TSUN > 0 OR nri_ealb_LTNG > 0 OR nri_ealb_HAIL > 0 OR nri_ealb_HRCN > 0 OR nri_ealb_SWND > 0 )"
+    },
+    {
+      "id": "draft_r14",
+      "tier": "R",
+      "category": "routing_accuracy",
+      "question": "Hurricane making landfall in Cameron County. Identify hospitals at risk of flooding or coastal surge. Which hexes have hospital presence AND high flood risk?",
+      "system_answer": "The CHESS baseline produced the following SQL but it failed to execute:\n\n```sql\nSELECT T1.hex_id FROM HIFLD-HEALTH-HOSP-N AS T1 INNER JOIN HP_HUR_002 AS T2 ON T1.hex_id = T2.hex_id INNER JOIN HP_FLD_002 AS T3 ON T1.hex_id = T3.hex_id WHERE T1.hifld_health_hospitals_n > 0 AND T2.hurr_strike_rate_10y > 0 AND (T2.hurr_strike_rate_10y > 0 OR T3.nri_riverine_flood > 1000.0)\n```\n\nError: ParserException: Parser Error: syntax error at or near \"-\"\n\nLINE 1: SELECT T1.hex_id FROM HIFLD-HEALTH-HOSP-N AS T1 INNER JOIN HP_HUR_002 AS T2 ON T1.hex_id...\n                                   ^\n\nSTRUCTURED FACTS:\n",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0,
+      "extracted_claims": {
+        "entities": [
+          "cameron"
+        ],
+        "ordered_entities": [],
+        "numeric_claims": [],
+        "boolean_claims": [],
+        "causal_relation_tokens": [],
+        "causal_claims": [],
+        "recommendations": [],
+        "pipeline_state": {
+          "criticality": 0,
+          "cluster": "",
+          "query_type": "",
+          "area_of_interest": "",
+          "hazard_type": "",
+          "data_availability_warnings": []
+        }
+      },
+      "fact_checks_passed": [],
+      "fact_checks_failed": [
+        {
+          "id": "routing_criticality",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "criticality",
+            "expected": [
+              3,
+              4
+            ],
+            "actual": null
+          }
+        },
+        {
+          "id": "routing_cluster",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "cluster",
+            "expected": "life_safety_operations",
+            "actual": null
+          }
+        },
+        {
+          "id": "routing_query_type",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "query_type",
+            "expected": "medical_triage",
+            "actual": null
+          }
+        },
+        {
+          "id": "num_draft_r14",
+          "kind": "numeric_value_match",
+          "evaluator": "deterministic",
+          "weight": 2.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "subject": "cameron",
+            "metric": "hospital_hexes_cameron",
+            "expected": 8.0,
+            "actual": null
+          }
+        },
+        {
+          "id": "rec_draft_r14",
+          "kind": "recommendation_count",
+          "evaluator": "deterministic",
+          "weight": 1.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "min_count": 2,
+            "actual_count": 0,
+            "recommendations": []
+          }
+        }
+      ],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "SELECT T1.hex_id FROM HIFLD-HEALTH-HOSP-N AS T1 INNER JOIN HP_HUR_002 AS T2 ON T1.hex_id = T2.hex_id INNER JOIN HP_FLD_002 AS T3 ON T1.hex_id = T3.hex_id WHERE T1.hifld_health_hospitals_n > 0 AND T2.hurr_strike_rate_10y > 0 AND (T2.hurr_strike_rate_10y > 0 OR T3.nri_riverine_flood > 1000.0)"
+    },
+    {
+      "id": "draft_r15",
+      "tier": "R",
+      "category": "routing_accuracy",
+      "question": "Tornado warning in Denton County. Estimate the total building stock at risk and the expected annual loss from tornado damage in the highest-risk areas of the county.",
+      "system_answer": "The CHESS baseline produced the following SQL and executed it against the DuckDB:\n\n```sql\nSELECT T1.building_count, T2.hex_fc_max_hospital FROM EX_BLD_001 AS T1 INNER JOIN CRIT_LIFE_002 AS T2 ON T1.hex_id = T2.hex_id INNER JOIN hex_county_state_zip_crosswalk AS T3 ON T1.hex_id = T3.hex_id INNER JOIN HP_TOR_001 AS T4 ON T3.hex_id = T4.hex_id WHERE T3.County = 'Denton County'\n```\n\nResult rows:\n  building_count=21 | hex_fc_max_hospital=None\n  building_count=1 | hex_fc_max_hospital=None\n  building_count=22 | hex_fc_max_hospital=None\n  building_count=54 | hex_fc_max_hospital=None\n  building_count=331 | hex_fc_max_hospital=None\n  building_count=72 | hex_fc_max_hospital=None\n  building_count=680 | hex_fc_max_hospital=None\n  building_count=18 | hex_fc_max_hospital=None\n  building_count=509 | hex_fc_max_hospital=None\n  building_count=35 | hex_fc_max_hospital=None\n  building_count=24 | hex_fc_max_hospital=None\n  building_count=14 | hex_fc_max_hospital=None\n  building_count=74 | hex_fc_max_hospital=None\n  building_count=13 | hex_fc_max_hospital=None\n  building_count=1 | hex_fc_max_hospital=None\n  building_count=304 | hex_fc_max_hospital=None\n  building_count=22 | hex_fc_max_hospital=None\n  building_count=89 | hex_fc_max_hospital=None\n  building_count=4 | hex_fc_max_hospital=None\n  building_count=23 | hex_fc_max_hospital=None\n  ... (2980 more rows)\n\nSTRUCTURED FACTS:\n- subject: building_count  metric: building_count  value: 21\n- subject: building_count  metric: building_count  value: 1\n- subject: building_count  metric: building_count  value: 22\n- subject: building_count  metric: building_count  value: 54\n- subject: building_count  metric: building_count  value: 331\n- subject: building_count  metric: building_count  value: 72\n- subject: building_count  metric: building_count  value: 680\n- subject: building_count  metric: building_count  value: 18\n- subject: building_count  metric: building_count  value: 509\n- subject: building_count  metric: building_count  value: 35\n- subject: building_count  metric: building_count  value: 24\n- subject: building_count  metric: building_count  value: 14\n- subject: building_count  metric: building_count  value: 74\n- subject: building_count  metric: building_count  value: 13\n- subject: building_count  metric: building_count  value: 1\n- subject: building_count  metric: building_count  value: 304\n- subject: building_count  metric: building_count  value: 22\n- subject: building_count  metric: building_count  value: 89\n- subject: building_count  metric: building_count  value: 4\n- subject: building_count  metric: building_count  value: 23",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0,
+      "extracted_claims": {
+        "entities": [
+          "denton"
+        ],
+        "ordered_entities": [],
+        "numeric_claims": [
+          {
+            "subject": "building_count",
+            "metric": "building_count",
+            "value": 21.0
+          },
+          {
+            "subject": "building_count",
+            "metric": "building_count",
+            "value": 1.0
+          },
+          {
+            "subject": "building_count",
+            "metric": "building_count",
+            "value": 22.0
+          },
+          {
+            "subject": "building_count",
+            "metric": "building_count",
+            "value": 54.0
+          },
+          {
+            "subject": "building_count",
+            "metric": "building_count",
+            "value": 331.0
+          },
+          {
+            "subject": "building_count",
+            "metric": "building_count",
+            "value": 72.0
+          },
+          {
+            "subject": "building_count",
+            "metric": "building_count",
+            "value": 680.0
+          },
+          {
+            "subject": "building_count",
+            "metric": "building_count",
+            "value": 18.0
+          },
+          {
+            "subject": "building_count",
+            "metric": "building_count",
+            "value": 509.0
+          },
+          {
+            "subject": "building_count",
+            "metric": "building_count",
+            "value": 35.0
+          },
+          {
+            "subject": "building_count",
+            "metric": "building_count",
+            "value": 24.0
+          },
+          {
+            "subject": "building_count",
+            "metric": "building_count",
+            "value": 14.0
+          },
+          {
+            "subject": "building_count",
+            "metric": "building_count",
+            "value": 74.0
+          },
+          {
+            "subject": "building_count",
+            "metric": "building_count",
+            "value": 13.0
+          },
+          {
+            "subject": "building_count",
+            "metric": "building_count",
+            "value": 304.0
+          },
+          {
+            "subject": "building_count",
+            "metric": "building_count",
+            "value": 89.0
+          },
+          {
+            "subject": "building_count",
+            "metric": "building_count",
+            "value": 4.0
+          },
+          {
+            "subject": "building_count",
+            "metric": "building_count",
+            "value": 23.0
+          },
+          {
+            "subject": "denton",
+            "metric": "total_buildings_denton",
+            "value": 21
+          },
+          {
+            "subject": "denton",
+            "metric": "total_buildings_denton",
+            "value": 1
+          },
+          {
+            "subject": "denton",
+            "metric": "total_buildings_denton",
+            "value": 22
+          },
+          {
+            "subject": "denton",
+            "metric": "total_buildings_denton",
+            "value": 54
+          },
+          {
+            "subject": "denton",
+            "metric": "total_buildings_denton",
+            "value": 331
+          },
+          {
+            "subject": "denton",
+            "metric": "total_buildings_denton",
+            "value": 72
+          },
+          {
+            "subject": "denton",
+            "metric": "total_buildings_denton",
+            "value": 680
+          },
+          {
+            "subject": "denton",
+            "metric": "total_buildings_denton",
+            "value": 18
+          },
+          {
+            "subject": "denton",
+            "metric": "total_buildings_denton",
+            "value": 509
+          },
+          {
+            "subject": "denton",
+            "metric": "total_buildings_denton",
+            "value": 35
+          },
+          {
+            "subject": "denton",
+            "metric": "total_buildings_denton",
+            "value": 24
+          },
+          {
+            "subject": "denton",
+            "metric": "total_buildings_denton",
+            "value": 14
+          },
+          {
+            "subject": "denton",
+            "metric": "total_buildings_denton",
+            "value": 74
+          },
+          {
+            "subject": "denton",
+            "metric": "total_buildings_denton",
+            "value": 13
+          },
+          {
+            "subject": "denton",
+            "metric": "total_buildings_denton",
+            "value": 304
+          },
+          {
+            "subject": "denton",
+            "metric": "total_buildings_denton",
+            "value": 89
+          },
+          {
+            "subject": "denton",
+            "metric": "total_buildings_denton",
+            "value": 4
+          },
+          {
+            "subject": "denton",
+            "metric": "total_buildings_denton",
+            "value": 23
+          }
+        ],
+        "boolean_claims": [],
+        "causal_relation_tokens": [],
+        "causal_claims": [],
+        "recommendations": [],
+        "pipeline_state": {
+          "criticality": 0,
+          "cluster": "",
+          "query_type": "",
+          "area_of_interest": "",
+          "hazard_type": "",
+          "data_availability_warnings": []
+        }
+      },
+      "fact_checks_passed": [],
+      "fact_checks_failed": [
+        {
+          "id": "routing_criticality",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "criticality",
+            "expected": [
+              3,
+              4
+            ],
+            "actual": null
+          }
+        },
+        {
+          "id": "routing_cluster",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "cluster",
+            "expected": "damage_assessment_response",
+            "actual": null
+          }
+        },
+        {
+          "id": "routing_query_type",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "query_type",
+            "expected": "structural_damage",
+            "actual": null
+          }
+        },
+        {
+          "id": "num_draft_r15",
+          "kind": "numeric_value_match",
+          "evaluator": "deterministic",
+          "weight": 2.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "subject": "denton",
+            "metric": "total_buildings_denton",
+            "expected": 306109.0,
+            "actual": 21.0,
+            "tolerance": 5000.0,
+            "delta": 306088.0
+          }
+        },
+        {
+          "id": "rec_draft_r15",
+          "kind": "recommendation_count",
+          "evaluator": "deterministic",
+          "weight": 1.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "min_count": 2,
+            "actual_count": 0,
+            "recommendations": []
+          }
+        }
+      ],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "SELECT T1.building_count, T2.hex_fc_max_hospital FROM EX_BLD_001 AS T1 INNER JOIN CRIT_LIFE_002 AS T2 ON T1.hex_id = T2.hex_id INNER JOIN hex_county_state_zip_crosswalk AS T3 ON T1.hex_id = T3.hex_id INNER JOIN HP_TOR_001 AS T4 ON T3.hex_id = T4.hex_id WHERE T3.County = 'Denton County'"
+    },
+    {
+      "id": "draft_r19",
+      "tier": "R",
+      "category": "routing_accuracy",
+      "question": "Hurricane impact in Hidalgo County. Which vulnerable communities have lost access to groceries, pharmacies, and fuel? Identify resource deserts where high-vulnerability populations have no nearby essential supplies.",
+      "system_answer": "The CHESS baseline produced the following SQL and executed it against the DuckDB:\n\n```sql\nSELECT T1.hex_id FROM VUL_001 AS T1 INNER JOIN CRIT_LIFE_001 AS T2 ON T1.hex_id = T2.hex_id INNER JOIN EX_LIFE_001 AS T3 ON T1.hex_id = T3.hex_id INNER JOIN EX_LIFE_003 AS T4 ON T1.hex_id = T4.hex_id WHERE T2.hex_fc_rac_hospital > 0.1 AND (T3.groc_per1k = 0.0 OR T4.fuel_per10k IS NULL)\n```\n\nResult rows:\n  hex_id=88488b8335fffff\n  hex_id=88488b8339fffff\n  hex_id=8826d875b3fffff\n  hex_id=8826dca4e7fffff\n\nSTRUCTURED FACTS:",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0,
+      "extracted_claims": {
+        "entities": [
+          "hidalgo"
+        ],
+        "ordered_entities": [],
+        "numeric_claims": [],
+        "boolean_claims": [],
+        "causal_relation_tokens": [],
+        "causal_claims": [],
+        "recommendations": [],
+        "pipeline_state": {
+          "criticality": 0,
+          "cluster": "",
+          "query_type": "",
+          "area_of_interest": "",
+          "hazard_type": "",
+          "data_availability_warnings": []
+        }
+      },
+      "fact_checks_passed": [],
+      "fact_checks_failed": [
+        {
+          "id": "routing_criticality",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "criticality",
+            "expected": [
+              3,
+              4
+            ],
+            "actual": null
+          }
+        },
+        {
+          "id": "routing_cluster",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "cluster",
+            "expected": "life_safety_operations",
+            "actual": null
+          }
+        },
+        {
+          "id": "routing_query_type",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "query_type",
+            "expected": "resource_access",
+            "actual": null
+          }
+        },
+        {
+          "id": "num_draft_r19",
+          "kind": "numeric_value_match",
+          "evaluator": "deterministic",
+          "weight": 2.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "subject": "hidalgo",
+            "metric": "high_sovi_hexes_hidalgo",
+            "expected": 2546.0,
+            "actual": null
+          }
+        },
+        {
+          "id": "rec_draft_r19",
+          "kind": "recommendation_count",
+          "evaluator": "deterministic",
+          "weight": 1.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "min_count": 2,
+            "actual_count": 0,
+            "recommendations": []
+          }
+        }
+      ],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "SELECT T1.hex_id FROM VUL_001 AS T1 INNER JOIN CRIT_LIFE_001 AS T2 ON T1.hex_id = T2.hex_id INNER JOIN EX_LIFE_001 AS T3 ON T1.hex_id = T3.hex_id INNER JOIN EX_LIFE_003 AS T4 ON T1.hex_id = T4.hex_id WHERE T2.hex_fc_rac_hospital > 0.1 AND (T3.groc_per1k = 0.0 OR T4.fuel_per10k IS NULL)"
+    },
+    {
+      "id": "draft_r20",
+      "tier": "R",
+      "category": "routing_accuracy",
+      "question": "Active flooding in Brazoria County. Identify the highest-priority zones for swift-water rescue, combining flood exposure with social vulnerability. Report average population density in flood-exposed areas.",
+      "system_answer": "The CHESS baseline produced the following SQL and executed it against the DuckDB:\n\n```sql\nWITH flood_exposed_areas AS (   SELECT T1.hex_id, T1.population_7km, T3.nri_coastal_flood   FROM EX_POP_001 AS T1   INNER JOIN hex_county_state_zip_crosswalk AS T2 ON T1.hex_id = T2.hex_id   INNER JOIN HP_FLD_002 AS T3 ON T1.hex_id = T3.hex_id   WHERE T2.County = 'Brazoria County' AND T3.nri_coastal_flood > 0 ) SELECT AVG(T1.population_7km) AS average_population_density, T2.psvi_score, T3.nri_coastal_flood FROM flood_exposed_areas AS T1 INNER JOIN VUL_004 AS T2 ON T1.hex_id = T2.hex_id INNER JOIN HP_FLD_002 AS T3 ON T1.hex_id = T3.hex_id GROUP BY T2.psvi_score, T3.nri_coastal_flood ORDER BY T3.nri_coastal_flood DESC, T2.psvi_score DESC\n```\n\nResult rows:\n  average_population_density=13740.594936708861 | psvi_score=66.29300841 | nri_coastal_flood=971079.796240814\n  average_population_density=2136.9174311926604 | psvi_score=0.0 | nri_coastal_flood=971079.796240814\n  average_population_density=3619.7578125 | psvi_score=66.29300841 | nri_coastal_flood=117206.39507657736\n  average_population_density=13382.084210526316 | psvi_score=66.14284445 | nri_coastal_flood=117206.39507657736\n  average_population_density=18350.666666666668 | psvi_score=0.0 | nri_coastal_flood=117206.39507657736\n  average_population_density=21595.972972972973 | psvi_score=66.29300841 | nri_coastal_flood=78049.38560791213\n  average_population_density=2674.358064516129 | psvi_score=65.35624144 | nri_coastal_flood=78049.38560791213\n  average_population_density=1374.0 | psvi_score=29.18345712 | nri_coastal_flood=78049.38560791213\n  average_population_density=1438.7857142857142 | psvi_score=0.0 | nri_coastal_flood=78049.38560791213\n  average_population_density=14647.681818181818 | psvi_score=66.29300841 | nri_coastal_flood=46530.14284264128\n  average_population_density=5256.6625 | psvi_score=0.0 | nri_coastal_flood=46530.14284264128\n  average_population_density=7133.707317073171 | psvi_score=69.06675845 | nri_coastal_flood=38262.79061127312\n  average_population_density=3408.75 | psvi_score=66.91727531 | nri_coastal_flood=38262.79061127312\n  average_population_density=7555.0 | psvi_score=66.77104866 | nri_coastal_flood=38262.79061127312\n  average_population_density=867.3235294117648 | psvi_score=66.29300841 | nri_coastal_flood=38262.79061127312\n  average_population_density=1845.2 | psvi_score=66.14284445 | nri_coastal_flood=38262.79061127312\n  average_population_density=3275.135802469136 | psvi_score=65.21931954 | nri_coastal_flood=38262.79061127312\n  average_population_density=4712.975903614458 | psvi_score=64.96020952 | nri_coastal_flood=38262.79061127312\n  average_population_density=9551.85 | psvi_score=64.57449207 | nri_coastal_flood=38262.79061127312\n  average_population_density=590.7121212121212 | psvi_score=0.0 | nri_coastal_flood=38262.79061127312\n  ... (94 more rows)\n\nSTRUCTURED FACTS:\n- subject: average_population_density  metric: average_population_density  value: 13740.594936708861\n- subject: psvi_score  metric: psvi_score  value: 66.29300841\n- subject: nri_coastal_flood  metric: nri_coastal_flood  value: 971079.796240814\n- subject: average_population_density  metric: average_population_density  value: 2136.9174311926604\n- subject: psvi_score  metric: psvi_score  value: 0.0\n- subject: nri_coastal_flood  metric: nri_coastal_flood  value: 971079.796240814\n- subject: average_population_density  metric: average_population_density  value: 3619.7578125\n- subject: psvi_score  metric: psvi_score  value: 66.29300841\n- subject: nri_coastal_flood  metric: nri_coastal_flood  value: 117206.39507657736\n- subject: average_population_density  metric: average_population_density  value: 13382.084210526316\n- subject: psvi_score  metric: psvi_score  value: 66.14284445\n- subject: nri_coastal_flood  metric: nri_coastal_flood  value: 117206.39507657736\n- subject: average_population_density  metric: average_population_density  value: 18350.666666666668\n- subject: psvi_score  metric: psvi_score  value: 0.0\n- subject: nri_coastal_flood  metric: nri_coastal_flood  value: 117206.39507657736\n- subject: average_population_density  metric: average_population_density  value: 21595.972972972973\n- subject: psvi_score  metric: psvi_score  value: 66.29300841\n- subject: nri_coastal_flood  metric: nri_coastal_flood  value: 78049.38560791213\n- subject: average_population_density  metric: average_population_density  value: 2674.358064516129\n- subject: psvi_score  metric: psvi_score  value: 65.35624144\n- subject: nri_coastal_flood  metric: nri_coastal_flood  value: 78049.38560791213\n- subject: average_population_density  metric: average_population_density  value: 1374.0\n- subject: psvi_score  metric: psvi_score  value: 29.18345712\n- subject: nri_coastal_flood  metric: nri_coastal_flood  value: 78049.38560791213\n- subject: average_population_density  metric: average_population_density  value: 1438.7857142857142\n- subject: psvi_score  metric: psvi_score  value: 0.0\n- subject: nri_coastal_flood  metric: nri_coastal_flood  value: 78049.38560791213\n- subject: average_population_density  metric: average_population_density  value: 14647.681818181818\n- subject: psvi_score  metric: psvi_score  value: 66.29300841\n- subject: nri_coastal_flood  metric: nri_coastal_flood  value: 46530.14284264128\n- subject: average_population_density  metric: average_population_density  value: 5256.6625\n- subject: psvi_score  metric: psvi_score  value: 0.0\n- subject: nri_coastal_flood  metric: nri_coastal_flood  value: 46530.14284264128\n- subject: average_population_density  metric: average_population_density  value: 7133.707317073171\n- subject: psvi_score  metric: psvi_score  value: 69.06675845\n- subject: nri_coastal_flood  metric: nri_coastal_flood  value: 38262.79061127312\n- subject: average_population_density  metric: average_population_density  value: 3408.75\n- subject: psvi_score  metric: psvi_score  value: 66.91727531\n- subject: nri_coastal_flood  metric: nri_coastal_flood  value: 38262.79061127312\n- subject: average_population_density  metric: average_population_density  value: 7555.0\n- subject: psvi_score  metric: psvi_score  value: 66.77104866\n- subject: nri_coastal_flood  metric: nri_coastal_flood  value: 38262.79061127312\n- subject: average_population_density  metric: average_population_density  value: 867.3235294117648\n- subject: psvi_score  metric: psvi_score  value: 66.29300841\n- subject: nri_coastal_flood  metric: nri_coastal_flood  value: 38262.79061127312\n- subject: average_population_density  metric: average_population_density  value: 1845.2\n- subject: psvi_score  metric: psvi_score  value: 66.14284445\n- subject: nri_coastal_flood  metric: nri_coastal_flood  value: 38262.79061127312\n- subject: average_population_density  metric: average_population_density  value: 3275.135802469136\n- subject: psvi_score  metric: psvi_score  value: 65.21931954\n- subject: nri_coastal_flood  metric: nri_coastal_flood  value: 38262.79061127312\n- subject: average_population_density  metric: average_population_density  value: 4712.975903614458\n- subject: psvi_score  metric: psvi_score  value: 64.96020952\n- subject: nri_coastal_flood  metric: nri_coastal_flood  value: 38262.79061127312\n- subject: average_population_density  metric: average_population_density  value: 9551.85\n- subject: psvi_score  metric: psvi_score  value: 64.57449207\n- subject: nri_coastal_flood  metric: nri_coastal_flood  value: 38262.79061127312\n- subject: average_population_density  metric: average_population_density  value: 590.7121212121212\n- subject: psvi_score  metric: psvi_score  value: 0.0\n- subject: nri_coastal_flood  metric: nri_coastal_flood  value: 38262.79061127312",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0,
+      "extracted_claims": {
+        "entities": [
+          "brazoria"
+        ],
+        "ordered_entities": [],
+        "numeric_claims": [
+          {
+            "subject": "average_population_density",
+            "metric": "average_population_density",
+            "value": 13740.594936708861
+          },
+          {
+            "subject": "psvi_score",
+            "metric": "psvi_score",
+            "value": 66.29300841
+          },
+          {
+            "subject": "nri_coastal_flood",
+            "metric": "nri_coastal_flood",
+            "value": 971079.796240814
+          },
+          {
+            "subject": "average_population_density",
+            "metric": "average_population_density",
+            "value": 2136.9174311926604
+          },
+          {
+            "subject": "psvi_score",
+            "metric": "psvi_score",
+            "value": 0.0
+          },
+          {
+            "subject": "average_population_density",
+            "metric": "average_population_density",
+            "value": 3619.7578125
+          },
+          {
+            "subject": "nri_coastal_flood",
+            "metric": "nri_coastal_flood",
+            "value": 117206.39507657736
+          },
+          {
+            "subject": "average_population_density",
+            "metric": "average_population_density",
+            "value": 13382.084210526316
+          },
+          {
+            "subject": "psvi_score",
+            "metric": "psvi_score",
+            "value": 66.14284445
+          },
+          {
+            "subject": "average_population_density",
+            "metric": "average_population_density",
+            "value": 18350.666666666668
+          },
+          {
+            "subject": "average_population_density",
+            "metric": "average_population_density",
+            "value": 21595.972972972973
+          },
+          {
+            "subject": "nri_coastal_flood",
+            "metric": "nri_coastal_flood",
+            "value": 78049.38560791213
+          },
+          {
+            "subject": "average_population_density",
+            "metric": "average_population_density",
+            "value": 2674.358064516129
+          },
+          {
+            "subject": "psvi_score",
+            "metric": "psvi_score",
+            "value": 65.35624144
+          },
+          {
+            "subject": "average_population_density",
+            "metric": "average_population_density",
+            "value": 1374.0
+          },
+          {
+            "subject": "psvi_score",
+            "metric": "psvi_score",
+            "value": 29.18345712
+          },
+          {
+            "subject": "average_population_density",
+            "metric": "average_population_density",
+            "value": 1438.7857142857142
+          },
+          {
+            "subject": "average_population_density",
+            "metric": "average_population_density",
+            "value": 14647.681818181818
+          },
+          {
+            "subject": "nri_coastal_flood",
+            "metric": "nri_coastal_flood",
+            "value": 46530.14284264128
+          },
+          {
+            "subject": "average_population_density",
+            "metric": "average_population_density",
+            "value": 5256.6625
+          },
+          {
+            "subject": "average_population_density",
+            "metric": "average_population_density",
+            "value": 7133.707317073171
+          },
+          {
+            "subject": "psvi_score",
+            "metric": "psvi_score",
+            "value": 69.06675845
+          },
+          {
+            "subject": "nri_coastal_flood",
+            "metric": "nri_coastal_flood",
+            "value": 38262.79061127312
+          },
+          {
+            "subject": "average_population_density",
+            "metric": "average_population_density",
+            "value": 3408.75
+          },
+          {
+            "subject": "psvi_score",
+            "metric": "psvi_score",
+            "value": 66.91727531
+          },
+          {
+            "subject": "average_population_density",
+            "metric": "average_population_density",
+            "value": 7555.0
+          },
+          {
+            "subject": "psvi_score",
+            "metric": "psvi_score",
+            "value": 66.77104866
+          },
+          {
+            "subject": "average_population_density",
+            "metric": "average_population_density",
+            "value": 867.3235294117648
+          },
+          {
+            "subject": "average_population_density",
+            "metric": "average_population_density",
+            "value": 1845.2
+          },
+          {
+            "subject": "average_population_density",
+            "metric": "average_population_density",
+            "value": 3275.135802469136
+          },
+          {
+            "subject": "psvi_score",
+            "metric": "psvi_score",
+            "value": 65.21931954
+          },
+          {
+            "subject": "average_population_density",
+            "metric": "average_population_density",
+            "value": 4712.975903614458
+          },
+          {
+            "subject": "psvi_score",
+            "metric": "psvi_score",
+            "value": 64.96020952
+          },
+          {
+            "subject": "average_population_density",
+            "metric": "average_population_density",
+            "value": 9551.85
+          },
+          {
+            "subject": "psvi_score",
+            "metric": "psvi_score",
+            "value": 64.57449207
+          },
+          {
+            "subject": "average_population_density",
+            "metric": "average_population_density",
+            "value": 590.7121212121212
+          },
+          {
+            "subject": "brazoria",
+            "metric": "sar_priority_brazoria",
+            "value": 13740.594936708861
+          }
+        ],
+        "boolean_claims": [],
+        "causal_relation_tokens": [],
+        "causal_claims": [],
+        "recommendations": [],
+        "pipeline_state": {
+          "criticality": 0,
+          "cluster": "",
+          "query_type": "",
+          "area_of_interest": "",
+          "hazard_type": "",
+          "data_availability_warnings": []
+        }
+      },
+      "fact_checks_passed": [],
+      "fact_checks_failed": [
+        {
+          "id": "routing_criticality",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "criticality",
+            "expected": [
+              3,
+              4
+            ],
+            "actual": null
+          }
+        },
+        {
+          "id": "routing_cluster",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "cluster",
+            "expected": "life_safety_operations",
+            "actual": null
+          }
+        },
+        {
+          "id": "routing_query_type",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "query_type",
+            "expected": "sar_priority",
+            "actual": null
+          }
+        },
+        {
+          "id": "num_draft_r20",
+          "kind": "numeric_value_match",
+          "evaluator": "deterministic",
+          "weight": 2.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "subject": "brazoria",
+            "metric": "sar_priority_brazoria",
+            "expected": 1426.0,
+            "actual": 13740.594936708861,
+            "tolerance": 50.0,
+            "delta": 12314.594936708861
+          }
+        },
+        {
+          "id": "rec_draft_r20",
+          "kind": "recommendation_count",
+          "evaluator": "deterministic",
+          "weight": 1.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "min_count": 2,
+            "actual_count": 0,
+            "recommendations": []
+          }
+        }
+      ],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "WITH flood_exposed_areas AS (   SELECT T1.hex_id, T1.population_7km, T3.nri_coastal_flood   FROM EX_POP_001 AS T1   INNER JOIN hex_county_state_zip_crosswalk AS T2 ON T1.hex_id = T2.hex_id   INNER JOIN HP_FLD_002 AS T3 ON T1.hex_id = T3.hex_id   WHERE T2.County = 'Brazoria County' AND T3.nri_coastal_flood > 0 ) SELECT AVG(T1.population_7km) AS average_population_density, T2.psvi_score, T3.nri_coastal_flood FROM flood_exposed_areas AS T1 INNER JOIN VUL_004 AS T2 ON T1.hex_id = T2.hex_id INNER JOIN HP_FLD_002 AS T3 ON T1.hex_id = T3.hex_id GROUP BY T2.psvi_score, T3.nri_coastal_flood ORDER BY T3.nri_coastal_flood DESC, T2.psvi_score DESC"
+    },
+    {
+      "id": "draft_r21",
+      "tier": "R",
+      "category": "routing_accuracy",
+      "question": "Major flooding in Harris County. Which infrastructure-dense areas face the greatest flood exposure? Identify substations and water treatment plants in high flood-risk zones.",
+      "system_answer": "The CHESS baseline produced the following SQL but it failed to execute:\n\n```sql\nWITH high_flood_risk_zones AS (SELECT hex_id FROM VUL_003 WHERE County = 'Harris County' AND nri_ealb_WFIR > (SELECT AVG(nri_ealb_WFIR) FROM VUL_003 WHERE County = 'Harris County')) SELECT T1.hifld_energy_substations_n, T1.hifld_water_wtp_n FROM HIFLD-ENERGY-SUBSTN-N AS T1 INNER JOIN HIFLD-WATER-WTP-N AS T2 ON T1.hex_id = T2.hex_id INNER JOIN high_flood_risk_zones AS T3 ON T1.hex_id = T3.hex_id WHERE T1.hifld_energy_substations_n > 5 AND T2.hifld_water_wtp_n > 2\n```\n\nError: ParserException: Parser Error: syntax error at or near \"-\"\n\nLINE 1: ... T1.hifld_energy_substations_n, T1.hifld_water_wtp_n FROM HIFLD-ENERGY-SUBSTN-N AS T1 INNER JOIN HIFLD-WATER-WTP-N AS T2...\n                                                                          ^\n\nSTRUCTURED FACTS:\n",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0,
+      "extracted_claims": {
+        "entities": [
+          "harris"
+        ],
+        "ordered_entities": [],
+        "numeric_claims": [],
+        "boolean_claims": [],
+        "causal_relation_tokens": [],
+        "causal_claims": [],
+        "recommendations": [],
+        "pipeline_state": {
+          "criticality": 0,
+          "cluster": "",
+          "query_type": "",
+          "area_of_interest": "",
+          "hazard_type": "",
+          "data_availability_warnings": []
+        }
+      },
+      "fact_checks_passed": [],
+      "fact_checks_failed": [
+        {
+          "id": "routing_criticality",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "criticality",
+            "expected": [
+              3,
+              4
+            ],
+            "actual": null
+          }
+        },
+        {
+          "id": "routing_cluster",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "cluster",
+            "expected": "infrastructure_mitigation",
+            "actual": null
+          }
+        },
+        {
+          "id": "routing_query_type",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "query_type",
+            "expected": "flood_impact_zones",
+            "actual": null
+          }
+        },
+        {
+          "id": "num_draft_r21",
+          "kind": "numeric_value_match",
+          "evaluator": "deterministic",
+          "weight": 2.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "subject": "harris",
+            "metric": "flood_high_risk_harris",
+            "expected": 4361.0,
+            "actual": null
+          }
+        },
+        {
+          "id": "rec_draft_r21",
+          "kind": "recommendation_count",
+          "evaluator": "deterministic",
+          "weight": 1.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "min_count": 2,
+            "actual_count": 0,
+            "recommendations": []
+          }
+        }
+      ],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "WITH high_flood_risk_zones AS (SELECT hex_id FROM VUL_003 WHERE County = 'Harris County' AND nri_ealb_WFIR > (SELECT AVG(nri_ealb_WFIR) FROM VUL_003 WHERE County = 'Harris County')) SELECT T1.hifld_energy_substations_n, T1.hifld_water_wtp_n FROM HIFLD-ENERGY-SUBSTN-N AS T1 INNER JOIN HIFLD-WATER-WTP-N AS T2 ON T1.hex_id = T2.hex_id INNER JOIN high_flood_risk_zones AS T3 ON T1.hex_id = T3.hex_id WHERE T1.hifld_energy_substations_n > 5 AND T2.hifld_water_wtp_n > 2"
+    },
+    {
+      "id": "draft_r22",
+      "tier": "R",
+      "category": "routing_accuracy",
+      "question": "Cat 3 hurricane approaching Nueces County. Identify viable evacuation corridors \u2014 roads not in high flood-risk zones. How many routes remain passable, and which populations need priority evacuation?",
+      "system_answer": "The CHESS baseline produced the following SQL and executed it against the DuckDB:\n\n```sql\nSELECT COUNT(T1.hex_id) FROM HP_FLD_002 AS T1 INNER JOIN hex_county_state_zip_crosswalk AS T2 ON T1.hex_id = T2.hex_id WHERE T2.County = 'Nueces County' AND T1.nri_riverine_flood + T1.nri_coastal_flood < 100000\n```\n\nResult rows:\n  count(T1.hex_id)=1910\n\nSTRUCTURED FACTS:\n- subject: count(T1.hex_id)  metric: count(T1.hex_id)  value: 1910",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0,
+      "extracted_claims": {
+        "entities": [
+          "nueces"
+        ],
+        "ordered_entities": [],
+        "numeric_claims": [
+          {
+            "subject": "count(T1.hex_id)",
+            "metric": "count(T1.hex_id)",
+            "value": 1910.0
+          },
+          {
+            "subject": "nueces",
+            "metric": "viable_corridors_nueces",
+            "value": 1910
+          }
+        ],
+        "boolean_claims": [],
+        "causal_relation_tokens": [],
+        "causal_claims": [],
+        "recommendations": [],
+        "pipeline_state": {
+          "criticality": 0,
+          "cluster": "",
+          "query_type": "",
+          "area_of_interest": "",
+          "hazard_type": "",
+          "data_availability_warnings": []
+        }
+      },
+      "fact_checks_passed": [],
+      "fact_checks_failed": [
+        {
+          "id": "routing_criticality",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "criticality",
+            "expected": [
+              3,
+              4
+            ],
+            "actual": null
+          }
+        },
+        {
+          "id": "routing_cluster",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "cluster",
+            "expected": "life_safety_operations",
+            "actual": null
+          }
+        },
+        {
+          "id": "routing_query_type",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "query_type",
+            "expected": "evacuation_routing",
+            "actual": null
+          }
+        },
+        {
+          "id": "num_draft_r22",
+          "kind": "numeric_value_match",
+          "evaluator": "deterministic",
+          "weight": 2.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "subject": "nueces",
+            "metric": "viable_corridors_nueces",
+            "expected": 3293.0,
+            "actual": 1910.0,
+            "tolerance": 100.0,
+            "delta": 1383.0
+          }
+        },
+        {
+          "id": "rec_draft_r22",
+          "kind": "recommendation_count",
+          "evaluator": "deterministic",
+          "weight": 1.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "min_count": 2,
+            "actual_count": 0,
+            "recommendations": []
+          }
+        }
+      ],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "SELECT COUNT(T1.hex_id) FROM HP_FLD_002 AS T1 INNER JOIN hex_county_state_zip_crosswalk AS T2 ON T1.hex_id = T2.hex_id WHERE T2.County = 'Nueces County' AND T1.nri_riverine_flood + T1.nri_coastal_flood < 100000"
+    },
+    {
+      "id": "draft_r23",
+      "tier": "R",
+      "category": "routing_accuracy",
+      "question": "Tornado warning in Tarrant County. Estimate the building stock at risk in the highest tornado exposure zones and quantify the expected economic losses.",
+      "system_answer": "The CHESS baseline produced the following SQL but it failed to execute:\n\n```sql\nSELECT T1.building_count, T2.nri_tornado, T3.hex_fc_max_grocery FROM EX_BLD_001 AS T1 INNER JOIN CRIT_LIFE_002 AS T2 ON T1.hex_id = T2.hex_id INNER JOIN hex_county_state_zip_crosswalk AS T3 ON T2.hex_id = T3.hex_id WHERE T3.County = 'Tarrant County' ORDER BY T2.nri_tornado DESC LIMIT 1\n```\n\nError: BinderException: Binder Error: Table \"T2\" does not have a column named \"nri_tornado\"\n\nCandidate bindings: : \"hex_id\"\n\nLINE 1: SELECT T1.building_count, T2.nri_tornado, T3.hex_fc_max_grocery FROM EX_BLD_001 AS...\n                                  ^\n\nSTRUCTURED FACTS:\n",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0,
+      "extracted_claims": {
+        "entities": [
+          "tarrant"
+        ],
+        "ordered_entities": [],
+        "numeric_claims": [],
+        "boolean_claims": [],
+        "causal_relation_tokens": [],
+        "causal_claims": [],
+        "recommendations": [],
+        "pipeline_state": {
+          "criticality": 0,
+          "cluster": "",
+          "query_type": "",
+          "area_of_interest": "",
+          "hazard_type": "",
+          "data_availability_warnings": []
+        }
+      },
+      "fact_checks_passed": [],
+      "fact_checks_failed": [
+        {
+          "id": "routing_criticality",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "criticality",
+            "expected": [
+              3,
+              4
+            ],
+            "actual": null
+          }
+        },
+        {
+          "id": "routing_cluster",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "cluster",
+            "expected": "damage_assessment_response",
+            "actual": null
+          }
+        },
+        {
+          "id": "routing_query_type",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "query_type",
+            "expected": "tornado_exposure",
+            "actual": null
+          }
+        },
+        {
+          "id": "num_draft_r23",
+          "kind": "numeric_value_match",
+          "evaluator": "deterministic",
+          "weight": 2.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "subject": "tarrant",
+            "metric": "tornado_high_risk_hexes_tarrant",
+            "expected": 2606.0,
+            "actual": null
+          }
+        },
+        {
+          "id": "rec_draft_r23",
+          "kind": "recommendation_count",
+          "evaluator": "deterministic",
+          "weight": 1.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "min_count": 2,
+            "actual_count": 0,
+            "recommendations": []
+          }
+        }
+      ],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "SELECT T1.building_count, T2.nri_tornado, T3.hex_fc_max_grocery FROM EX_BLD_001 AS T1 INNER JOIN CRIT_LIFE_002 AS T2 ON T1.hex_id = T2.hex_id INNER JOIN hex_county_state_zip_crosswalk AS T3 ON T2.hex_id = T3.hex_id WHERE T3.County = 'Tarrant County' ORDER BY T2.nri_tornado DESC LIMIT 1"
+    },
+    {
+      "id": "draft_r24",
+      "tier": "R",
+      "category": "routing_accuracy",
+      "question": "Flooding in Bexar County. Which hospitals face risk of road isolation due to flood-compromised access? Identify hospital locations in the highest flood-risk areas.",
+      "system_answer": "The CHESS baseline produced the following SQL and executed it against the DuckDB:\n\n```sql\nSELECT T1.hex_id FROM CRIT_LIFE_003 AS T1 INNER JOIN hex_county_state_zip_crosswalk AS T2 ON T1.hex_id = T2.hex_id WHERE T2.County = 'Bexar County' AND T1.conc_index_hospital > 0.5\n```\n\nResult rows:\n  hex_id=88489c1a99fffff\n  hex_id=88489c005dfffff\n  hex_id=88489c02c5fffff\n  hex_id=88489c02e7fffff\n  hex_id=88489c1adbfffff\n  hex_id=88489c1813fffff\n  hex_id=88489c0231fffff\n  hex_id=88489cc4a3fffff\n  hex_id=88489c0a81fffff\n  hex_id=88489cc4b3fffff\n  hex_id=88489c0239fffff\n  hex_id=88489c0233fffff\n  hex_id=88489c01a7fffff\n  hex_id=88489c1461fffff\n  hex_id=88489c1ad1fffff\n  hex_id=88489c0229fffff\n  hex_id=88489c0d49fffff\n  hex_id=88489c008bfffff\n  hex_id=88489c0f4bfffff\n  hex_id=88489c02e1fffff\n  ... (18 more rows)\n\nSTRUCTURED FACTS:",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0,
+      "extracted_claims": {
+        "entities": [
+          "bexar"
+        ],
+        "ordered_entities": [],
+        "numeric_claims": [
+          {
+            "subject": "bexar",
+            "metric": "hospital_hexes_bexar",
+            "value": 38
+          }
+        ],
+        "boolean_claims": [],
+        "causal_relation_tokens": [],
+        "causal_claims": [],
+        "recommendations": [],
+        "pipeline_state": {
+          "criticality": 0,
+          "cluster": "",
+          "query_type": "",
+          "area_of_interest": "",
+          "hazard_type": "",
+          "data_availability_warnings": []
+        }
+      },
+      "fact_checks_passed": [],
+      "fact_checks_failed": [
+        {
+          "id": "routing_criticality",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "criticality",
+            "expected": [
+              3,
+              4
+            ],
+            "actual": null
+          }
+        },
+        {
+          "id": "routing_cluster",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "cluster",
+            "expected": "life_safety_operations",
+            "actual": null
+          }
+        },
+        {
+          "id": "routing_query_type",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "query_type",
+            "expected": "healthcare_isolation",
+            "actual": null
+          }
+        },
+        {
+          "id": "num_draft_r24",
+          "kind": "numeric_value_match",
+          "evaluator": "deterministic",
+          "weight": 2.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "subject": "bexar",
+            "metric": "hospital_hexes_bexar",
+            "expected": 45.0,
+            "actual": 38.0,
+            "tolerance": 5.0,
+            "delta": 7.0
+          }
+        },
+        {
+          "id": "rec_draft_r24",
+          "kind": "recommendation_count",
+          "evaluator": "deterministic",
+          "weight": 1.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "min_count": 2,
+            "actual_count": 0,
+            "recommendations": []
+          }
+        }
+      ],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "SELECT T1.hex_id FROM CRIT_LIFE_003 AS T1 INNER JOIN hex_county_state_zip_crosswalk AS T2 ON T1.hex_id = T2.hex_id WHERE T2.County = 'Bexar County' AND T1.conc_index_hospital > 0.5"
+    },
+    {
+      "id": "draft_r26",
+      "tier": "R",
+      "category": "routing_accuracy",
+      "question": "Wildfire spreading in Bastrop County. How many power substations are in high fire-risk zones? Report total transmission infrastructure and recommend grid protection actions.",
+      "system_answer": "The CHESS baseline produced the following SQL but it failed to execute:\n\n```sql\nSELECT COUNT(T1.hifld_energy_substations_n) FROM HIFLD-ENERGY-SUBSTN-N AS T1 INNER JOIN hex_county_state_zip_crosswalk AS T2 ON T1.hex_id = T2.hex_id INNER JOIN CRIT_LIFE_004 AS T3 ON T2.hex_id = T3.hex_id WHERE T2.County = 'Bastrop County' AND (T3.hex_fc_top3_grocery > 0.5 OR T3.hex_fc_top3_hospital > 0.5)\n```\n\nError: ParserException: Parser Error: syntax error at or near \"-\"\n\nLINE 1: SELECT COUNT(T1.hifld_energy_substations_n) FROM HIFLD-ENERGY-SUBSTN-N AS T1 INNER JOIN hex_county_state_zip_cros...\n                                                              ^\n\nSTRUCTURED FACTS:\n",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0,
+      "extracted_claims": {
+        "entities": [
+          "bastrop"
+        ],
+        "ordered_entities": [],
+        "numeric_claims": [],
+        "boolean_claims": [],
+        "causal_relation_tokens": [],
+        "causal_claims": [],
+        "recommendations": [],
+        "pipeline_state": {
+          "criticality": 0,
+          "cluster": "",
+          "query_type": "",
+          "area_of_interest": "",
+          "hazard_type": "",
+          "data_availability_warnings": []
+        }
+      },
+      "fact_checks_passed": [],
+      "fact_checks_failed": [
+        {
+          "id": "routing_criticality",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "criticality",
+            "expected": [
+              4
+            ],
+            "actual": null
+          }
+        },
+        {
+          "id": "routing_cluster",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "cluster",
+            "expected": "infrastructure_mitigation",
+            "actual": null
+          }
+        },
+        {
+          "id": "routing_query_type",
+          "kind": "pipeline_state_match",
+          "evaluator": "deterministic",
+          "weight": 0.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "field": "query_type",
+            "expected": "power_grid_vulnerability",
+            "actual": null
+          }
+        },
+        {
+          "id": "num_draft_r26",
+          "kind": "numeric_value_match",
+          "evaluator": "deterministic",
+          "weight": 2.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "subject": "bastrop",
+            "metric": "substations_bastrop",
+            "expected": 1349.0,
+            "actual": null
+          }
+        },
+        {
+          "id": "rec_draft_r26",
+          "kind": "recommendation_count",
+          "evaluator": "deterministic",
+          "weight": 1.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "min_count": 2,
+            "actual_count": 0,
+            "recommendations": []
+          }
+        }
+      ],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "SELECT COUNT(T1.hifld_energy_substations_n) FROM HIFLD-ENERGY-SUBSTN-N AS T1 INNER JOIN hex_county_state_zip_crosswalk AS T2 ON T1.hex_id = T2.hex_id INNER JOIN CRIT_LIFE_004 AS T3 ON T2.hex_id = T3.hex_id WHERE T2.County = 'Bastrop County' AND (T3.hex_fc_top3_grocery > 0.5 OR T3.hex_fc_top3_hospital > 0.5)"
+    },
+    {
+      "id": "draft_k17",
+      "tier": "K",
+      "category": "kg_causal",
+      "question": "Urban flooding in Tarrant County. Explain how impervious surface cover and stormwater runoff amplify flood risk in an urbanized county. Use the knowledge graph, then quantify flood EAL for the most exposed areas.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_k18",
+      "tier": "K",
+      "category": "kg_causal",
+      "question": "Flooding in Wharton County. How does low elevation contribute to flood severity in low-lying areas? Identify the highest-priority SAR zones combining flood exposure and vulnerability.",
+      "system_answer": "The CHESS baseline produced the following SQL but it failed to execute:\n\n```sql\nWITH low_elevation_areas AS (SELECT hex_id FROM hex_county_state_zip_crosswalk WHERE County = 'Wharton County'), sar_zones AS (SELECT hex_id FROM hex_county_state_zip_crosswalk WHERE Zipcode IN (SELECT Zipcode FROM VUL_002 WHERE sovi > 50)), flood_severity_metrics AS (SELECT nri_eal FROM VUL_003 WHERE hex_id IN (SELECT hex_id FROM low_elevation_areas)) SELECT T4.hex_id FROM (SELECT T4.hex_id, T1.nri_eal + T2.sovi AS priority FROM VUL_003 AS T1 INNER JOIN VUL_002 AS T2 ON T1.hex_id = T2.hex_id INNER JOIN hex_county_state_zip_crosswalk AS T4 ON T1.hex_id = T4.hex_id) WHERE priority > 100 ORDER BY priority DESC LIMIT 10\n```\n\nError: BinderException: Binder Error: Referenced table \"T4\" not found!\nCandidate tables: \"unnamed_subquery\"\n\nLINE 1: ... hex_id IN (SELECT hex_id FROM low_elevation_areas)) SELECT T4.hex_id FROM (SELECT T4.hex_id, T1.nri_eal + T2.sovi AS...\n                                                                       ^\n\nSTRUCTURED FACTS:\n",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0,
+      "extracted_claims": {
+        "entities": [],
+        "ordered_entities": [],
+        "numeric_claims": [],
+        "boolean_claims": [],
+        "causal_relation_tokens": [],
+        "causal_claims": [],
+        "recommendations": [],
+        "pipeline_state": {
+          "criticality": 0,
+          "cluster": "",
+          "query_type": "",
+          "area_of_interest": "",
+          "hazard_type": "",
+          "data_availability_warnings": []
+        }
+      },
+      "fact_checks_passed": [],
+      "fact_checks_failed": [
+        {
+          "id": "causal_draft_k18",
+          "kind": "entity_set_match",
+          "evaluator": "deterministic",
+          "weight": 1.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "expected": [
+              "claims|INDICATES|flood_severity",
+              "drainage|REDUCES|flood_severity",
+              "elevation|INCREASES|drainage",
+              "elevation|INCREASES|flood_occurrence",
+              "elevation|REDUCES|flood_occurrence",
+              "elevation|REDUCES|flood_severity",
+              "foundation|INCREASES|flood_severity",
+              "foundation|REDUCES|flood_severity",
+              "rainfall|INCREASES|flood_severity",
+              "stream_dist|INCREASES|flood_severity",
+              "vulnerability|INCREASES|flood_severity"
+            ],
+            "actual": [],
+            "matched": []
+          }
+        },
+        {
+          "id": "num_draft_k18",
+          "kind": "numeric_value_match",
+          "evaluator": "deterministic",
+          "weight": 1.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "subject": "wharton",
+            "metric": "sar_priority_wharton",
+            "expected": 2146.0,
+            "actual": null
+          }
+        },
+        {
+          "id": "bool_draft_k18",
+          "kind": "boolean_match",
+          "evaluator": "deterministic",
+          "weight": 1.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "name": "elevation_flood_severity_chain",
+            "expected": true,
+            "actual": null
+          }
+        },
+        {
+          "id": "rec_draft_k18",
+          "kind": "recommendation_count",
+          "evaluator": "deterministic",
+          "weight": 1.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "min_count": 2,
+            "actual_count": 0,
+            "recommendations": []
+          }
+        }
+      ],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "WITH low_elevation_areas AS (SELECT hex_id FROM hex_county_state_zip_crosswalk WHERE County = 'Wharton County'), sar_zones AS (SELECT hex_id FROM hex_county_state_zip_crosswalk WHERE Zipcode IN (SELECT Zipcode FROM VUL_002 WHERE sovi > 50)), flood_severity_metrics AS (SELECT nri_eal FROM VUL_003 WHERE hex_id IN (SELECT hex_id FROM low_elevation_areas)) SELECT T4.hex_id FROM (SELECT T4.hex_id, T1.nri_eal + T2.sovi AS priority FROM VUL_003 AS T1 INNER JOIN VUL_002 AS T2 ON T1.hex_id = T2.hex_id INNER JOIN hex_county_state_zip_crosswalk AS T4 ON T1.hex_id = T4.hex_id) WHERE priority > 100 ORDER BY priority DESC LIMIT 10"
+    },
+    {
+      "id": "draft_k19",
+      "tier": "K",
+      "category": "kg_causal",
+      "question": "Catastrophic flooding in Harris County. Trace how flood occurrence leads to power disruption \u2014 explain the causal mechanism via the knowledge graph, then report substations in high flood-risk zones.",
+      "system_answer": "The CHESS baseline produced the following SQL but it failed to execute:\n\n```sql\nSELECT hifld_energy_substations_n, County FROM HIFLD-ENERGY-SUBSTN-N INNER JOIN hex_county_state_zip_crosswalk ON HIFLD-ENERGY-SUBSTN-N.hex_id = hex_county_state_zip_crosswalk.hex_id WHERE hifld_energy_substations_n > 0 AND hex_county_state_zip_crosswalk.County = 'Harris County'\n```\n\nError: ParserException: Parser Error: syntax error at or near \"-\"\n\nLINE 1: SELECT hifld_energy_substations_n, County FROM HIFLD-ENERGY-SUBSTN-N INNER JOIN hex_county_state_zip_crosswalk...\n                                                            ^\n\nSTRUCTURED FACTS:\n",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0,
+      "extracted_claims": {
+        "entities": [],
+        "ordered_entities": [],
+        "numeric_claims": [],
+        "boolean_claims": [
+          {
+            "name": "flood_power_disruption_chain",
+            "value": false
+          }
+        ],
+        "causal_relation_tokens": [],
+        "causal_claims": [],
+        "recommendations": [],
+        "pipeline_state": {
+          "criticality": 0,
+          "cluster": "",
+          "query_type": "",
+          "area_of_interest": "",
+          "hazard_type": "",
+          "data_availability_warnings": []
+        }
+      },
+      "fact_checks_passed": [],
+      "fact_checks_failed": [
+        {
+          "id": "causal_draft_k19",
+          "kind": "entity_set_match",
+          "evaluator": "deterministic",
+          "weight": 1.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "expected": [
+              "claims|INDICATES|flood_occurrence",
+              "drainage|REDUCES|flood_occurrence",
+              "elevation|INCREASES|flood_occurrence",
+              "elevation|REDUCES|flood_occurrence",
+              "flood_occurrence|INCREASES|power_disruption",
+              "hand|INCREASES|flood_occurrence",
+              "hand|REDUCES|flood_occurrence",
+              "impervious|INCREASES|flood_occurrence",
+              "power_disruption|REDUCES|hospital_operations",
+              "power_disruption|REDUCES|shelter_operations",
+              "rainfall|INCREASES|flood_occurrence",
+              "runoff|INCREASES|flood_occurrence",
+              "stream_dist|INCREASES|flood_occurrence",
+              "stream_dist|REDUCES|flood_occurrence"
+            ],
+            "actual": [],
+            "matched": []
+          }
+        },
+        {
+          "id": "num_draft_k19",
+          "kind": "numeric_value_match",
+          "evaluator": "deterministic",
+          "weight": 1.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "subject": "harris",
+            "metric": "substations_flood_harris_k",
+            "expected": 4101.0,
+            "actual": null
+          }
+        },
+        {
+          "id": "bool_draft_k19",
+          "kind": "boolean_match",
+          "evaluator": "deterministic",
+          "weight": 1.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "name": "flood_power_disruption_chain",
+            "expected": true,
+            "actual": false
+          }
+        },
+        {
+          "id": "rec_draft_k19",
+          "kind": "recommendation_count",
+          "evaluator": "deterministic",
+          "weight": 1.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "min_count": 2,
+            "actual_count": 0,
+            "recommendations": []
+          }
+        }
+      ],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "SELECT hifld_energy_substations_n, County FROM HIFLD-ENERGY-SUBSTN-N INNER JOIN hex_county_state_zip_crosswalk ON HIFLD-ENERGY-SUBSTN-N.hex_id = hex_county_state_zip_crosswalk.hex_id WHERE hifld_energy_substations_n > 0 AND hex_county_state_zip_crosswalk.County = 'Harris County'"
+    },
+    {
+      "id": "draft_k20",
+      "tier": "K",
+      "category": "kg_causal",
+      "question": "Flooding in Hidalgo County. How does social vulnerability reduce emergency response capacity? Query the knowledge graph for this causal relationship, then identify which fire/EMS stations face flood exposure.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_k21",
+      "tier": "K",
+      "category": "kg_causal",
+      "question": "Hurricane striking Galveston County. How does flooding impact hospital operations and medical system continuity? Use the knowledge graph to explain, then identify hospitals in high flood-risk zones.",
+      "system_answer": "The CHESS baseline produced the following SQL and executed it against the DuckDB:\n\n```sql\nSELECT nri_riverine_flood, hex_id FROM HP_FLD_002 WHERE hex_id IN (SELECT hex_id FROM CRIT_LIFE_002 WHERE hex_fc_max_hospital > 0.2 INTERSECT SELECT hex_id FROM hex_county_state_zip_crosswalk WHERE County = 'Galveston County')\n```\n\nResult rows:\n  nri_riverine_flood=867211.8662518989 | hex_id=88446c1031fffff\n  nri_riverine_flood=2088925.4461955067 | hex_id=88446cc411fffff\n  nri_riverine_flood=32354445.354365468 | hex_id=88446cc1ebfffff\n\nSTRUCTURED FACTS:\n- subject: nri_riverine_flood  metric: nri_riverine_flood  value: 867211.8662518989\n- subject: nri_riverine_flood  metric: nri_riverine_flood  value: 2088925.4461955067\n- subject: nri_riverine_flood  metric: nri_riverine_flood  value: 32354445.354365468",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0,
+      "extracted_claims": {
+        "entities": [
+          "galveston"
+        ],
+        "ordered_entities": [],
+        "numeric_claims": [
+          {
+            "subject": "nri_riverine_flood",
+            "metric": "nri_riverine_flood",
+            "value": 867211.8662518989
+          },
+          {
+            "subject": "nri_riverine_flood",
+            "metric": "nri_riverine_flood",
+            "value": 2088925.4461955067
+          },
+          {
+            "subject": "nri_riverine_flood",
+            "metric": "nri_riverine_flood",
+            "value": 32354445.354365468
+          }
+        ],
+        "boolean_claims": [],
+        "causal_relation_tokens": [],
+        "causal_claims": [],
+        "recommendations": [],
+        "pipeline_state": {
+          "criticality": 0,
+          "cluster": "",
+          "query_type": "",
+          "area_of_interest": "",
+          "hazard_type": "",
+          "data_availability_warnings": []
+        }
+      },
+      "fact_checks_passed": [],
+      "fact_checks_failed": [
+        {
+          "id": "causal_draft_k21",
+          "kind": "entity_set_match",
+          "evaluator": "deterministic",
+          "weight": 1.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "expected": [
+              "claims|INDICATES|flood_occurrence",
+              "drainage|REDUCES|flood_occurrence",
+              "elevation|INCREASES|flood_occurrence",
+              "elevation|REDUCES|flood_occurrence",
+              "flood_occurrence|INCREASES|power_disruption",
+              "hand|INCREASES|flood_occurrence",
+              "hand|REDUCES|flood_occurrence",
+              "impervious|INCREASES|flood_occurrence",
+              "power_disruption|REDUCES|hospital_operations",
+              "rainfall|INCREASES|flood_occurrence",
+              "runoff|INCREASES|flood_occurrence",
+              "stream_dist|INCREASES|flood_occurrence",
+              "stream_dist|REDUCES|flood_occurrence"
+            ],
+            "actual": [],
+            "matched": []
+          }
+        },
+        {
+          "id": "num_draft_k21",
+          "kind": "numeric_value_match",
+          "evaluator": "deterministic",
+          "weight": 1.5,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "subject": "galveston",
+            "metric": "hospital_flood_risk_galveston",
+            "expected": 4.0,
+            "actual": null
+          }
+        },
+        {
+          "id": "bool_draft_k21",
+          "kind": "boolean_match",
+          "evaluator": "deterministic",
+          "weight": 1.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "name": "flood_hospital_operations_chain",
+            "expected": true,
+            "actual": null
+          }
+        },
+        {
+          "id": "rec_draft_k21",
+          "kind": "recommendation_count",
+          "evaluator": "deterministic",
+          "weight": 1.0,
+          "score_fraction": 0.0,
+          "weighted_score": 0.0,
+          "passed": false,
+          "details": {
+            "min_count": 2,
+            "actual_count": 0,
+            "recommendations": []
+          }
+        }
+      ],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "SELECT nri_riverine_flood, hex_id FROM HP_FLD_002 WHERE hex_id IN (SELECT hex_id FROM CRIT_LIFE_002 WHERE hex_fc_max_hospital > 0.2 INTERSECT SELECT hex_id FROM hex_county_state_zip_crosswalk WHERE County = 'Galveston County')"
+    },
+    {
+      "id": "draft_k22",
+      "tier": "K",
+      "category": "kg_causal",
+      "question": "Flooding in Fort Bend County. Explain the 3-step causal chain from impervious surface to runoff to flood occurrence. Then identify water treatment plants at flood risk.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_k23",
+      "tier": "K",
+      "category": "kg_causal",
+      "question": "Hurricane flooding in Chambers County. How does flood severity translate into building damage and economic losses? Query the knowledge graph and then estimate flood EAL for the most exposed areas.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_k24",
+      "tier": "K",
+      "category": "kg_causal",
+      "question": "Flash flooding in Travis County. How does flood occurrence trigger power disruption and cascade into hospital operations? Query the knowledge graph for this multi-step chain, then report substations at flood risk.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_k25",
+      "tier": "K",
+      "category": "kg_causal",
+      "question": "Severe flooding in Montgomery County. How does runoff from the area's terrain amplify flood occurrence? Then identify priority SAR zones by combining flood exposure and social vulnerability.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_k26",
+      "tier": "K",
+      "category": "kg_causal",
+      "question": "Flooding in Bexar County. What role does flood severity play in determining structural damage levels? Use the knowledge graph to explain, then estimate total flood EAL for at-risk hexes.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_k27",
+      "tier": "K",
+      "category": "kg_causal",
+      "question": "Flash flooding in Collin County. How does flood occurrence disrupt road access and complicate evacuation? Identify viable evacuation corridors and count compromised routes.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_m29",
+      "tier": "M",
+      "category": "multi_component",
+      "question": "After a hurricane in Brazoria County, prioritize recovery efforts. Identify areas combining high flood exposure with low community resilience and low social vulnerability scores. Report fire/EMS resource availability.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_m30",
+      "tier": "M",
+      "category": "multi_component",
+      "question": "Flooding in Harris County. Which hospitals are at risk of flood isolation? Report road criticality for hospital access routes and viable evacuation corridors still open.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_m32",
+      "tier": "M",
+      "category": "multi_component",
+      "question": "Tornado damage in Collin County. Estimate total buildings at risk, the flood EAL for high-risk areas, and identify resource gaps in fire station coverage.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_m33",
+      "tier": "M",
+      "category": "multi_component",
+      "question": "Flooding in Hidalgo County. Triage the medical system under flood conditions: which hospitals are at flood risk, and identify SAR priority zones where patients may be stranded.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_m34",
+      "tier": "M",
+      "category": "multi_component",
+      "question": "Flooding in Wharton County. Quantify population exposure and identify vulnerable communities. Also assess water treatment plant risk in the flood zone.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_m35",
+      "tier": "M",
+      "category": "multi_component",
+      "question": "Flash flooding in Bell County. Identify infrastructure in high flood-risk zones and assess evacuation route viability. How many corridors remain open for emergency response?",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_m36",
+      "tier": "M",
+      "category": "multi_component",
+      "question": "Tornado warning in Lubbock County. Triage critical lifeline infrastructure \u2014 hospitals and substations in the highest-risk zones. Report the resource gap given available first responder capacity.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_m37",
+      "tier": "M",
+      "category": "multi_component",
+      "question": "Flooding in Bexar County. Estimate total buildings at risk, total flood EAL for high-risk hexes, and identify hospitals in the flood zone.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_m38",
+      "tier": "M",
+      "category": "multi_component",
+      "question": "Wildfire spreading in Travis County. Map the highest-risk fire zones and assess which evacuation corridors are threatened by fire. Report substations in the fire path.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_m39",
+      "tier": "M",
+      "category": "multi_component",
+      "question": "Flooding in Harris County. Identify communities with high power system vulnerability and low income that need prioritized backup power. Also report how many high-vulnerability hexes lack grocery access.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_m40",
+      "tier": "M",
+      "category": "multi_component",
+      "question": "Cat 4 hurricane making landfall in Nueces County. Identify surge-exposed infrastructure \u2014 substations and WTPs \u2014 and triage hospitals in the storm surge zone.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_m41",
+      "tier": "M",
+      "category": "multi_component",
+      "question": "Post-hurricane recovery in Chambers County. Prioritize recovery efforts by combining surge exposure with community resilience. Report viable shelter locations and recommend recovery sequencing.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_m42",
+      "tier": "M",
+      "category": "multi_component",
+      "question": "Tornado system in Tarrant County. What is the multi-hazard expected annual loss, with emphasis on tornado and flood? Identify clusters with both high EAL and low resilience.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_m44",
+      "tier": "M",
+      "category": "multi_component",
+      "question": "Wildfire spreading in Collin County. Identify the highest fire-risk zones and assess power grid vulnerability. Which substations are in the fire path, and what is the PSPS recommendation?",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_m45",
+      "tier": "M",
+      "category": "multi_component",
+      "question": "Tornado striking Lubbock County. Assess the emergency resource gap \u2014 fire stations, law enforcement, and shelters relative to the at-risk population. Is mutual aid required?",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_m46",
+      "tier": "M",
+      "category": "multi_component",
+      "question": "Flooding in Bell County. Quantify population exposure \u2014 average density and vulnerable groups. Report the emergency resource baseline: fire stations and community resilience.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_m47",
+      "tier": "M",
+      "category": "multi_component",
+      "question": "Hurricane hitting Brazoria County. Assess medical system vulnerability \u2014 hospitals at flood risk \u2014 and identify viable evacuation corridors for patient transport.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_d13",
+      "tier": "D",
+      "category": "data_availability",
+      "question": "Hurricane hitting Galveston County. Query real-time power outage data to estimate how many buildings have lost electrical service due to storm damage.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_d14",
+      "tier": "D",
+      "category": "data_availability",
+      "question": "Flooding in Harris County. Identify registered special needs residents and people requiring dependent care who may need assisted evacuation during the flood event.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_d15",
+      "tier": "D",
+      "category": "data_availability",
+      "question": "Hurricane in Brazoria County. How many residents are on life-sustaining power equipment AND how many facilities serve dependent care populations who cannot self-evacuate?",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_d17",
+      "tier": "D",
+      "category": "data_availability",
+      "question": "Hurricane in Nueces County. Query FEMA base flood elevation data and storm surge depth grids to assess which roads will be inundated, then estimate power outage extent.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_d18",
+      "tier": "D",
+      "category": "data_availability",
+      "question": "Flooding in Montgomery County. Query the inundation depth raster to identify which neighborhoods are under more than 2 feet of water and require immediate rescue.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_r29",
+      "tier": "R",
+      "category": "routing_accuracy",
+      "question": "Tornado has struck Bell County. Estimate structural damage exposure: how many building hexes are in high tornado-risk zones?",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_r30",
+      "tier": "R",
+      "category": "routing_accuracy",
+      "question": "Active wildfire near Midland County. How many hexes have high wildfire risk scores?",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_k30",
+      "tier": "K",
+      "category": "kg_causal",
+      "question": "Flooding in Tom Green County. How does flood severity translate to structural damage? Consult the knowledge graph, then estimate building exposure in high flood-risk zones.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_k31",
+      "tier": "K",
+      "category": "kg_causal",
+      "question": "Tornado touchdown in Lamar County. How does storm damage affect search-and-rescue priority? Use the knowledge graph, then identify high-population hexes in tornado risk zones.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_d27",
+      "tier": "D",
+      "category": "data_availability",
+      "question": "Hurricane approaching Uvalde County. How many registered dependent care facilities will need evacuation assistance?",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "draft_d28",
+      "tier": "D",
+      "category": "data_availability",
+      "question": "Flooding in Bell County. Report social vulnerability scores for every hex in the county. We need complete coverage for equitable aid distribution.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "incident_sw22",
+      "tier": "R",
+      "category": "wildfire_drought",
+      "question": "An active wildfire is sweeping the Texas Panhandle (Potter, Randall, Gray, Hemphill, Roberts, Wheeler), similar to the 2024 Smokehouse Creek fire. Assess wildfire risk and critical infrastructure exposure.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "incident_sw34",
+      "tier": "R",
+      "category": "tornado_corridor",
+      "question": "A tornado outbreak warning has been issued for North Texas (Dallas, Tarrant). Identify hospitals and healthcare facilities in significant tornado-risk zones.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "incident_sw65",
+      "tier": "K",
+      "category": "energy_grid_power",
+      "question": "Prolonged grid stress is underway statewide after extreme weather. Assess Texas hospital resilience to extended power outages: identify hospitals in high power-vulnerability zones.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "incident_sw67",
+      "tier": "K",
+      "category": "energy_grid_power",
+      "question": "Grid instability is hitting the Permian Basin during peak production. Assess power grid resilience across the basin (Midland, Ector, Martin, Dawson, Andrews, Winkler, Loving, Ward, Crane, Upton).",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "incident_sw69",
+      "tier": "K",
+      "category": "energy_grid_power",
+      "question": "A Category 4 hurricane is approaching the Texas coast. Assess hurricane risk to coastal Texas power generation infrastructure. Model simultaneous coastal-generation loss and downstream grid impact.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "incident_sw72",
+      "tier": "K",
+      "category": "equity_ej",
+      "question": "Multi-hazard conditions are escalating statewide. Identify Texas's most extreme environmental-justice-burden hexagons: simultaneously high hazard exposure, high social vulnerability, and health burden.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "incident_sw79",
+      "tier": "K",
+      "category": "equity_ej",
+      "question": "Disaster response is being mobilized statewide. Identify Texas counties where environmental justice concerns are amplified by low community resilience: high SoVI combined with low CRI.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "incident_sw42",
+      "tier": "M",
+      "category": "urban_infrastructure",
+      "question": "A Winter Storm Uri-repeat scenario is developing across DFW (Dallas, Tarrant, Collin, Denton). Model water-system resilience to freeze-driven grid loss and identify vulnerable treatment plants.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "incident_sw43",
+      "tier": "M",
+      "category": "urban_infrastructure",
+      "question": "San Antonio (Bexar County) is facing a compound flash-flood + extreme-heat + power-disruption scenario. Assess hospital infrastructure resilience and evaluate exposure.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "incident_sw51",
+      "tier": "M",
+      "category": "rural_border",
+      "question": "Hurricane-season onset threatens the Texas-Mexico border region (El Paso, Hudspeth, Culberson, Presidio, Brewster, Terrell, Val Verde). Assess disaster preparedness capacity across these rural counties.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "incident_sw89",
+      "tier": "M",
+      "category": "healthcare_resilience",
+      "question": "A prolonged grid outage is threatening rural Texas. Identify hospitals outside major metros that are in high power-vulnerability zones \u2014 facilities most at risk during extended outages.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "incident_sw92",
+      "tier": "D",
+      "category": "compound_scenarios",
+      "question": "A major hurricane making landfall near Houston is spawning multiple tornadoes as it moves inland through East Texas. Assess the compound hurricane + tornado impact across affected counties.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "incident_sw93",
+      "tier": "D",
+      "category": "compound_scenarios",
+      "question": "A Winter Storm Uri-like grid failure occurred in February. Now an early-season tropical storm is approaching in June of the same year. Model the compound sequential scenario.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "incident_sw98",
+      "tier": "D",
+      "category": "compound_scenarios",
+      "question": "A maximum-credible cascade scenario is unfolding: simultaneous loss of 3 major ERCOT transmission regions from a compound weather + cyber event. Model the cascade failure.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    },
+    {
+      "id": "incident_sw100",
+      "tier": "D",
+      "category": "compound_scenarios",
+      "question": "A comprehensive statewide compound-disaster event is in progress. Define the maximum-credible compound scenario and recommend top resilience investments across affected regions.",
+      "system_answer": "",
+      "judge_score": 1,
+      "judge_score_raw": 0.0,
+      "fact_score": 0.0,
+      "reasoning_score": 0.0,
+      "extracted_claims": {},
+      "fact_checks_passed": [],
+      "fact_checks_failed": [],
+      "reasoning_checks": [],
+      "routing_state": {
+        "criticality": 0,
+        "cluster": "",
+        "query_type": "",
+        "area_of_interest": "",
+        "hazard_type": "",
+        "data_availability_warnings": []
+      },
+      "chess_sql": "",
+      "skipped_reason": "no SQL produced"
+    }
+  ]
+}

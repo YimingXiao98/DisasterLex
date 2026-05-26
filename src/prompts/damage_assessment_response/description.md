@@ -1,0 +1,2 @@
+# Damage Assessment Response
+Focuses on post-event damage quantification, economic loss estimation, population impact assessment, environmental-justice burden analysis, resource gap analysis, and recovery planning after a disaster event. This cluster is for retrospective or analytical assessment of what was damaged, who is disproportionately burdened, and how to prioritize recovery — NOT for active life-safety operations, SAR, or real-time threat-to-life scenarios (use Life Safety Operations for those).

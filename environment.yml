@@ -1,0 +1,29 @@
+name: disasterlex
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+      - duckdb>=1.0.0
+      - neo4j>=5.0.0
+      - langchain>=1.0.0
+      - langchain-openai
+      - langgraph>=0.2.0
+      - openai
+      - pyyaml
+      - python-dotenv
+      - pydantic
+      - tavily-python
+      - sentence-transformers>=2.7.0
+      - numpy
+      - pandas
+      - matplotlib
+      - h3
+      # LightRAG (entity-relation graph baseline). Optional; only required
+      # if running `--ablation lightrag`.
+      - lightrag-hku
+      # DashScope (Qwen direct provider). Optional; only required if
+      # running with --pipeline-model qwen3.6-flash.
+      - dashscope

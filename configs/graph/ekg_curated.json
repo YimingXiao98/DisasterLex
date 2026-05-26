@@ -1,0 +1,2536 @@
+{
+  "description": "Curated EKG for deterministic scorer derived from disaster document extraction",
+  "provenance": "Rules grounded in disaster documents. Initial extraction from config/graph/ekg_tdis.json (Policy + H&H corpora). Added 2026-04-15: 6 coastal/nature-based edges and 4 new concepts (storm_surge, sea_level_rise, land_subsidence, wetland_restoration) from config/graph/ekg_tdis_new.json (WildfireTornado corpus, despite label). Phase A 2026-05-08: added 8 data-grounded concept nodes (expected_annual_loss, buildings, fire_ems, transmission_lines, primary_roads, local_law_enforcement, infrastructure_density, lifeline_access).",
+  "nodes": [
+    {
+      "id": "elevation",
+      "type": "feature",
+      "description": "Ground elevation of the property",
+      "properties": {
+        "thresholds": {
+          "low": "<20",
+          "moderate": "20-35",
+          "high": ">35"
+        }
+      }
+    },
+    {
+      "id": "hand",
+      "type": "feature",
+      "description": "Height Above Nearest Drainage",
+      "properties": {
+        "thresholds": {
+          "low": "<5.8",
+          "moderate": "5.8-8.8",
+          "high": ">8.8"
+        }
+      }
+    },
+    {
+      "id": "impervious",
+      "type": "feature",
+      "description": "Impervious surface cover percentage",
+      "properties": {
+        "thresholds": {
+          "low": "<33",
+          "moderate": "33-58",
+          "high": ">58"
+        }
+      }
+    },
+    {
+      "id": "stream_dist",
+      "type": "feature",
+      "description": "Distance to nearest stream/waterbody",
+      "properties": {
+        "thresholds": {
+          "close": "<2.5",
+          "moderate": "2.5-6",
+          "far": ">6"
+        }
+      }
+    },
+    {
+      "id": "rainfall",
+      "type": "feature",
+      "description": "Maximum rainfall intensity",
+      "properties": {
+        "thresholds": {
+          "low": "<5",
+          "moderate": "5-12",
+          "high": ">12"
+        }
+      }
+    },
+    {
+      "id": "foundation",
+      "type": "feature",
+      "description": "Foundation/first floor height",
+      "properties": {
+        "thresholds": {
+          "low": "<0.55",
+          "moderate": "0.55-0.65",
+          "high": ">0.65"
+        }
+      }
+    },
+    {
+      "id": "far",
+      "type": "feature",
+      "description": "Floor area ratio",
+      "properties": {
+        "thresholds": {
+          "low": "<0.06",
+          "moderate": "0.06-0.15",
+          "high": ">0.15"
+        }
+      }
+    },
+    {
+      "id": "claims",
+      "type": "feature",
+      "description": "Historical flood insurance claims (50yr)",
+      "properties": {
+        "thresholds": {
+          "low": "<29",
+          "moderate": "29-57",
+          "high": ">57"
+        }
+      }
+    },
+    {
+      "id": "roughness",
+      "type": "feature",
+      "description": "Surface roughness (Manning n)",
+      "properties": {
+        "thresholds": {
+          "low": "<0.06",
+          "moderate": "0.06-0.10",
+          "high": ">0.10"
+        }
+      }
+    },
+    {
+      "id": "runoff",
+      "type": "intermediate",
+      "description": "Runoff potential"
+    },
+    {
+      "id": "drainage",
+      "type": "intermediate",
+      "description": "Drainage capacity"
+    },
+    {
+      "id": "vulnerability",
+      "type": "intermediate",
+      "description": "Structural vulnerability"
+    },
+    {
+      "id": "flood_occurrence",
+      "type": "outcome",
+      "description": "Likelihood of flooding"
+    },
+    {
+      "id": "flood_severity",
+      "type": "outcome",
+      "description": "Severity of flood damage"
+    },
+    {
+      "id": "community_resilience",
+      "type": "domain",
+      "description": "Community resilience and recovery capacity"
+    },
+    {
+      "id": "hurricane",
+      "type": "domain",
+      "description": "Hurricane and tropical storm hazard"
+    },
+    {
+      "id": "wildfire",
+      "type": "domain",
+      "description": "Wildfire and crown fire hazard"
+    },
+    {
+      "id": "earthquake",
+      "type": "domain",
+      "description": "Earthquake and seismic hazard"
+    },
+    {
+      "id": "tornado",
+      "type": "domain",
+      "description": "Tornado hazard"
+    },
+    {
+      "id": "geography",
+      "type": "domain",
+      "description": "Geographic location (county, state, zip code)"
+    },
+    {
+      "id": "shelters",
+      "type": "domain",
+      "description": "Emergency shelter locations and capacity"
+    },
+    {
+      "id": "population",
+      "type": "domain",
+      "description": "Population exposure and nearby residents"
+    },
+    {
+      "id": "hospitals",
+      "type": "domain",
+      "description": "Hospital facility locations"
+    },
+    {
+      "id": "local_eoc",
+      "type": "domain",
+      "description": "Local emergency operations center locations"
+    },
+    {
+      "id": "state_eoc",
+      "type": "domain",
+      "description": "State emergency operations center locations"
+    },
+    {
+      "id": "substations",
+      "type": "domain",
+      "description": "Electrical substation locations"
+    },
+    {
+      "id": "power_plants",
+      "type": "domain",
+      "description": "Power generation plant locations"
+    },
+    {
+      "id": "power_infrastructure",
+      "type": "domain",
+      "description": "Power infrastructure used to maintain grid service"
+    },
+    {
+      "id": "emergency_infrastructure",
+      "type": "domain",
+      "description": "Emergency facilities such as shelters, hospitals, and EOCs"
+    },
+    {
+      "id": "power_disruption",
+      "type": "intermediate",
+      "description": "Loss of electrical service during a disaster"
+    },
+    {
+      "id": "hospital_operations",
+      "type": "intermediate",
+      "description": "Ability of hospitals to maintain critical operations"
+    },
+    {
+      "id": "shelter_operations",
+      "type": "intermediate",
+      "description": "Ability of shelters to operate during an emergency"
+    },
+    {
+      "id": "emergency_response_capacity",
+      "type": "intermediate",
+      "description": "Capacity of a community to coordinate emergency response"
+    },
+    {
+      "id": "water_infrastructure",
+      "type": "domain",
+      "description": "Water treatment and distribution infrastructure including water treatment plants (WTPs)",
+      "properties": {}
+    },
+    {
+      "id": "storm_surge",
+      "type": "feature",
+      "description": "Coastal storm surge height during tropical storm events",
+      "properties": {
+        "thresholds": {
+          "low": "<1m",
+          "moderate": "1-3m",
+          "high": ">3m"
+        }
+      }
+    },
+    {
+      "id": "sea_level_rise",
+      "type": "feature",
+      "description": "Long-term and projected sea level rise driving compound flood risk in coastal areas",
+      "properties": {
+        "thresholds": {
+          "low": "baseline",
+          "high": "projected future SLR"
+        }
+      }
+    },
+    {
+      "id": "land_subsidence",
+      "type": "feature",
+      "description": "Ground subsidence, especially along the Gulf Coast (Houston, Galveston), compounding relative sea level rise",
+      "properties": {
+        "thresholds": {
+          "low": "stable",
+          "high": "measurable downward trend"
+        }
+      }
+    },
+    {
+      "id": "wetland_restoration",
+      "type": "intervention",
+      "description": "Nature-based flood mitigation through restoration of coastal wetlands and natural drainage systems",
+      "properties": {
+        "thresholds": {
+          "absent": "not implemented",
+          "implemented": "active restoration"
+        }
+      }
+    },
+    {
+      "id": "flood-related_infrastructure",
+      "type": "intermediate",
+      "description": "constructing and maintaining flood-related infrastructure like dams and levees",
+      "synonyms": [
+        "flood-related infrastructure"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "surge_gates",
+      "type": "intervention",
+      "description": "2 surge gates on the west perimeter of Galveston Bay... to reduce surge volumes that push into neighborhoods around the critical industrial facilities.",
+      "synonyms": [
+        "surge gates"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "hurricane_harvey",
+      "type": "intermediate",
+      "description": "Hurricane Harvey in 2017 brought unprecedented devastation to Texas, with nearly 4.5 feet of rain, 130-mile-per-hour winds, and widespread riverine and urban...",
+      "synonyms": [
+        "hurricane harvey"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "coastal_road_elevation",
+      "type": "feature",
+      "description": "Elevate coastal roads to better protect public during evacuation and to protect the roads from flood damage, where feasible.",
+      "synonyms": [
+        "coastal road elevation"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "levees",
+      "type": "intervention",
+      "description": "This action proposes constructing new levees and improving existing ones to reduce the potential impacts of future flood events by reducing the likelihood of...",
+      "synonyms": [
+        "levees"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "sediment_accumulation",
+      "type": "intermediate",
+      "description": "The accumulation of sediment in Lake Corpus Christi is a long-term concern.",
+      "synonyms": [
+        "sediment accumulation"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "retention_pond_system",
+      "type": "intermediate",
+      "description": "Create a retention pond system from existing caliche pits and connect the pits to the Hidalgo County Drainage District No. 1 MDS.",
+      "synonyms": [
+        "retention pond system"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "retention/detention",
+      "type": "intermediate",
+      "description": "Construct a large retention/detention pond in the northwest part of town to hold water during heavy rain events.",
+      "synonyms": [
+        "retention/detention"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "regional_drainage_improvements",
+      "type": "intermediate",
+      "description": "regional drainage improvements to the streams must be studied and implemented before Harris County can obtain a benefit from roadway drainage improvements.",
+      "synonyms": [
+        "regional drainage improvements"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "road_improvements",
+      "type": "intermediate",
+      "description": "study to improve the road and remove it from being flooded during heavy rains.",
+      "synonyms": [
+        "road improvements"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "flood_protection",
+      "type": "intervention",
+      "description": "upgrade crossing so that it provides a safe evacuation route during large storm events.",
+      "synonyms": [
+        "flood protection"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "detention_storage",
+      "type": "intermediate",
+      "description": "Retrofit dam to improve detention of flood & storm water runoff, new 137.3 ac wetlands complex added of storage capacity & conversion of fields to tallgrass...",
+      "synonyms": [
+        "detention storage"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "culvert_drain_improvements",
+      "type": "intermediate",
+      "description": "Proposed alternatives to reduce roadway overtopping's during the 100-year ultimate storm such as culvert, ditch and storm drain improvements.",
+      "synonyms": [
+        "culvert drain improvements"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "roadway_improvements",
+      "type": "intermediate",
+      "description": "Proposed roadway improvements for access to IH10 during flood events.",
+      "synonyms": [
+        "roadway improvements"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "flood_insurance",
+      "type": "intermediate",
+      "description": "Educate residents on NFIP program and importance of purchasing flood insurance.",
+      "synonyms": [
+        "flood insurance"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "barrier_installation",
+      "type": "intermediate",
+      "description": "Barrier installation keeps the public from entering high-water areas during flooding events.",
+      "synonyms": [
+        "barrier installation"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "topography",
+      "type": "intermediate",
+      "description": "due to the flat Houston topography, the floodplain drains to the sea relatively slowly compared to these large precipitation rates.",
+      "synonyms": [
+        "topography"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "inundation",
+      "type": "intermediate",
+      "description": "inundated properties within the SFHA experiencing an additional price discount of approximately 10.8% post-Harvey",
+      "synonyms": [
+        "inundation"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "property_value",
+      "type": "intermediate",
+      "description": "inundated properties within the SFHA experiencing an additional price discount of approximately 10.8% post-Harvey",
+      "synonyms": [
+        "property value"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "hazard_score",
+      "type": "feature",
+      "description": "a unit increase (i. e. , shifting from the lowest to the highest modeled exceedance probability) is associated with an additional 37% decline in sale price p...",
+      "synonyms": [
+        "hazard score"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "sfha_designation",
+      "type": "intermediate",
+      "description": "properties located within an SFHA that Harvey inundated experienced an additional price penalty of approximately 10.8% post-event",
+      "synonyms": [
+        "sfha designation"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "floodplain_location",
+      "type": "intermediate",
+      "description": "the road segments located in the 100- and 500-year floodplain, which are identified as high- and moderate-risk road segments by the definition of FEMA, are a...",
+      "synonyms": [
+        "floodplain location"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "extreme_weather_events",
+      "type": "intermediate",
+      "description": "result in the largest oil and chemical spills during extreme weather events, which have been increasing in intensity.",
+      "synonyms": [
+        "extreme weather events"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "oil_and_chemical_spills",
+      "type": "intermediate",
+      "description": "result in the largest oil and chemical spills during extreme weather events, which have been increasing in intensity.",
+      "synonyms": [
+        "oil and chemical spills"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "forest_areas",
+      "type": "intermediate",
+      "description": "the condition that forest areas are changed into urban built-up areas can contribute to the likelihood of flood events.",
+      "synonyms": [
+        "forest areas"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "human_influence_on_precipitation",
+      "type": "intermediate",
+      "description": "the degree of human influence on the flood in this neighborhood increases at a superlinear rate with the human influence on Harvey\u2019s total precipitation.",
+      "synonyms": [
+        "human influence on precipitation"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "terrain_flatness",
+      "type": "intermediate",
+      "description": "The flatter terrain in this neighborhood resulted in shallower floodwater than in South Houston and Pasadena.",
+      "synonyms": [
+        "terrain flatness"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "flood_volume",
+      "type": "intermediate",
+      "description": "for rainfall amounts less than observed, the flood volume and area scale at similar rates in Deer Park as they do for the Greater Houston area",
+      "synonyms": [
+        "flood volume"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "proximity_to_industrial_facilities",
+      "type": "intermediate",
+      "description": "vulnerable populations... are more likely to live closer to the industrial and toxic facilities",
+      "synonyms": [
+        "proximity to industrial facilities"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "pollutant_dispersion_risk",
+      "type": "intermediate",
+      "description": "vulnerable populations... are more likely to live closer to the industrial and toxic facilities",
+      "synonyms": [
+        "pollutant dispersion risk"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "coastal_ecosystems",
+      "type": "intermediate",
+      "description": "Coastal ecosystems like coral reefs, oyster reefs, mangroves and salt marshes protect the coast by reducing wave energy, trapping sediments, and attenuating...",
+      "synonyms": [
+        "coastal ecosystems"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "low_income",
+      "type": "intermediate",
+      "description": "specific drivers\u2014such as low income and racial/ethnic minority status\u2014and disproportionate barriers to securing federal recovery assistance.",
+      "synonyms": [
+        "low income"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "hazard_probability_score",
+      "type": "feature",
+      "description": "implies that for a property inundated by Harvey, a full one-unit increase in its hazard score...",
+      "synonyms": [
+        "hazard probability score"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "unstable_air_mass",
+      "type": "intermediate",
+      "description": "The air mass had become increasingly unstable during the day.",
+      "synonyms": [
+        "unstable air mass"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "precipitation_deficit",
+      "type": "intermediate",
+      "description": "likely driven by combined precipitation deficit and warming",
+      "synonyms": [
+        "precipitation deficit"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "above-ground_power_lines",
+      "type": "intermediate",
+      "description": "power lines, which are strung above-ground on poles and are often damaged during high wind events, creating extensive power outages.",
+      "synonyms": [
+        "above-ground power lines"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "utility_failures",
+      "type": "outcome",
+      "description": "these utilities can fail during extreme flooding events.",
+      "synonyms": [
+        "utility failures"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "wave_height",
+      "type": "feature",
+      "description": "a higher occurrence of ocean waves and storm surge during historical compound flooding events compared to cluster 1",
+      "synonyms": [
+        "wave height"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "road_segment_criticality",
+      "type": "intermediate",
+      "description": "Determining the criticality of road segments during flooding events is important for planning and prioritization in response to disruptive impacts of flooding.",
+      "synonyms": [
+        "road segment criticality"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "disaster_impacts",
+      "type": "intermediate",
+      "description": "Determining the criticality of road segments during flooding events is important for planning and prioritization in response to disruptive impacts of flooding.",
+      "synonyms": [
+        "disaster impacts"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "flood_exposure",
+      "type": "intermediate",
+      "description": "VLM, especially when coupled with sea level rise (SLR) and extreme events like storm surge or heavy precipitation... can amplify hazards through enhanced flo...",
+      "synonyms": [
+        "flood exposure"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "subsidence",
+      "type": "intermediate",
+      "description": "Houston is subsiding rapidly, but at different rates throughout the city, potentially worsening exposure to flooding.",
+      "synonyms": [
+        "subsidence"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "slr_unaddressed",
+      "type": "intermediate",
+      "description": "This research underscores the likelihood that SLR, if left unaddressed, will likely disrupt critical energy infrastructure.",
+      "synonyms": [
+        "slr unaddressed"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "population_growth",
+      "type": "intermediate",
+      "description": "the economic damages triggered by these natural and technological disasters in the state are likely to increase as a consequence of population growth and its...",
+      "synonyms": [
+        "population growth"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "land_cover_change",
+      "type": "intermediate",
+      "description": "this increased physical vulnerability is likely to be related to land cover change over the last decade",
+      "synonyms": [
+        "land cover change"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "physical_vulnerability",
+      "type": "intermediate",
+      "description": "this increased physical vulnerability is likely to be related to land cover change over the last decade",
+      "synonyms": [
+        "physical vulnerability"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "floodplain",
+      "type": "intermediate",
+      "description": "approximately 878,100 buildings within the 1 percent (100-year) annual chance floodplain",
+      "synonyms": [
+        "floodplain"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "base_flood_elevation",
+      "type": "feature",
+      "description": "Establish BFE\u2019s and convert Zone A to Zone AE via a LOMR.",
+      "synonyms": [
+        "base flood elevation"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "land_conservation",
+      "type": "intervention",
+      "description": "Permanently protecting land from development provides natural flood mitigation benefits",
+      "synonyms": [
+        "land conservation"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "channel_improvements",
+      "type": "intermediate",
+      "description": "Channel improvements to reduce residential/commercial flooding near SH142.",
+      "synonyms": [
+        "channel improvements"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "detention_capacity",
+      "type": "intermediate",
+      "description": "This site would be able to store a large volume of water and greatly reduce the peak from the Peach Creek watershed.",
+      "synonyms": [
+        "detention capacity"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "culvert_size",
+      "type": "intermediate",
+      "description": "Replace culverts with larger box culverts & parallel wings; MLK Blvd to Mexico St",
+      "synonyms": [
+        "culvert size"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "urbanization",
+      "type": "intermediate",
+      "description": "urbanization leads to a decrease in the spatial extent areas assigned for water-body, forest, and grass, and also lead to an increase in the spatial extent a...",
+      "synonyms": [
+        "urbanization"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "future_condition_flood_hazard",
+      "type": "intermediate",
+      "description": "the projected future condition 1 percent (100-year) annual chance floodplain is estimated to increase by 11 percent over the existing flood hazard area.",
+      "synonyms": [
+        "future condition flood hazard"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "population_density",
+      "type": "intermediate",
+      "description": "followed by population density and the ratio of developed lands with medium intensity",
+      "synonyms": [
+        "population density"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "climate_change",
+      "type": "intermediate",
+      "description": "In the United States (US), climate change and the rise in sea-levels will impact many economic sectors.",
+      "synonyms": [
+        "climate change"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "sea_surface_temperature",
+      "type": "intermediate",
+      "description": "Similar studies based on projected future climate have found an increase in hurricane intensity and related hazards with increased average SST.",
+      "synonyms": [
+        "sea surface temperature"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "hurricane_intensity",
+      "type": "intermediate",
+      "description": "Similar studies based on projected future climate have found an increase in hurricane intensity and related hazards with increased average SST.",
+      "synonyms": [
+        "hurricane intensity"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "river_discharge",
+      "type": "intermediate",
+      "description": "precipitation, river discharge, and soil moisture (i. e. , hydrological processes) have contributed to compound flooding more frequently than both storm surg...",
+      "synonyms": [
+        "river discharge"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "soil_moisture",
+      "type": "feature",
+      "description": "precipitation, river discharge, and soil moisture (i. e. , hydrological processes) have contributed to compound flooding more frequently than both storm surg...",
+      "synonyms": [
+        "soil moisture"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "stream_distance",
+      "type": "feature",
+      "description": "...neither distance to the nearest coast nor distance to the nearest stream was strongly associated with flooding.",
+      "synonyms": [
+        "stream distance"
+      ],
+      "properties": {
+        "auto_imported": true
+      }
+    },
+    {
+      "id": "expected_annual_loss",
+      "type": "outcome",
+      "description": "FEMA NRI Expected Annual Loss (EAL) \u2014 anticipated dollar losses per year from a hazard, broken down by hazard type (tornado, riverine flood, hurricane, wildfire, etc.) and asset class in VUL_003."
+    },
+    {
+      "id": "buildings",
+      "type": "exposure",
+      "description": "Per-hex building stock \u2014 raw building count (EX_BLD_001) and home-value weighted economic exposure in USD (EX_BLD_002.hEE)."
+    },
+    {
+      "id": "fire_ems",
+      "type": "response_asset",
+      "description": "Fire stations and emergency medical service stations \u2014 first-responder infrastructure (HIFLD-EMERGENC-FIRE_EMS-N)."
+    },
+    {
+      "id": "transmission_lines",
+      "type": "infrastructure",
+      "description": "High-voltage (230kV+) electrical transmission line km per hex (HIFLD-ENERGY-TXKM-230P)."
+    },
+    {
+      "id": "primary_roads",
+      "type": "infrastructure",
+      "description": "Primary road network km per hex (HIFLD-TRANSP-PRIMARY_RD-L)."
+    },
+    {
+      "id": "local_law_enforcement",
+      "type": "response_asset",
+      "description": "Local police / sheriff facility count per hex (HIFLD-EMERGENC-LOCAL_LAW-N)."
+    },
+    {
+      "id": "infrastructure_density",
+      "type": "exposure",
+      "description": "Weighted critical infrastructure density index 0-1 (EX_INF_001.CID)."
+    },
+    {
+      "id": "lifeline_access",
+      "type": "exposure",
+      "description": "Per-capita lifeline services \u2014 grocery (EX_LIFE_001), pharmacy (EX_LIFE_002), fuel (EX_LIFE_003), hospital count (EX_LIFE_004). Use AVG for per-capita rates."
+    }
+  ],
+  "edges": [
+    {
+      "source": "elevation",
+      "target": "flood_occurrence",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.8,
+        "tdis_count": 3,
+        "evidence": "Raise elevations and improve drainage for certain roads and streets within Region",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis"
+      }
+    },
+    {
+      "source": "elevation",
+      "target": "flood_occurrence",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "low",
+        "weight": 0.8,
+        "tdis_count": 3,
+        "evidence": "Inverse of TDIS high-elevation rule"
+      }
+    },
+    {
+      "source": "elevation",
+      "target": "flood_severity",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.8,
+        "tdis_count": 3,
+        "evidence": "Evaluate alternatives to elevate Shady Shores Rd to reduce future loss due to flooding.",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis"
+      }
+    },
+    {
+      "source": "elevation",
+      "target": "drainage",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.6,
+        "tdis_count": 0,
+        "evidence": "Engineering: higher elevation improves gravity drainage"
+      }
+    },
+    {
+      "source": "hand",
+      "target": "flood_occurrence",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.9,
+        "tdis_count": 0,
+        "evidence": "Engineering: high HAND = well above drainage network"
+      }
+    },
+    {
+      "source": "hand",
+      "target": "flood_occurrence",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "low",
+        "weight": 0.9,
+        "tdis_count": 0,
+        "evidence": "Engineering: low HAND = near drainage water level"
+      }
+    },
+    {
+      "source": "hand",
+      "target": "drainage",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.8,
+        "tdis_count": 0,
+        "evidence": "Engineering: high HAND = better gravity drainage"
+      }
+    },
+    {
+      "source": "hand",
+      "target": "drainage",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "low",
+        "weight": 0.7,
+        "tdis_count": 0,
+        "evidence": "Engineering: low HAND = poor gravity drainage"
+      }
+    },
+    {
+      "source": "impervious",
+      "target": "runoff",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.8,
+        "tdis_count": 2,
+        "evidence": "TDIS: impervious surfaces inhibit infiltration and increase runoff"
+      }
+    },
+    {
+      "source": "impervious",
+      "target": "runoff",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "low",
+        "weight": 0.6,
+        "tdis_count": 0,
+        "evidence": "Inverse: low impervious allows more infiltration"
+      }
+    },
+    {
+      "source": "impervious",
+      "target": "flood_occurrence",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.7,
+        "tdis_count": 2,
+        "evidence": "increases in the proportion of impermeable surfaces as the result of population growth and development",
+        "doc_source": "The Effect of Land Cover Change on Flooding in Texas",
+        "source": "tdis"
+      }
+    },
+    {
+      "source": "stream_dist",
+      "target": "flood_occurrence",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "close",
+        "weight": 0.8,
+        "tdis_count": 1,
+        "evidence": "TDIS+Engineering: proximity to rivers increases flood risk"
+      }
+    },
+    {
+      "source": "stream_dist",
+      "target": "flood_occurrence",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "far",
+        "weight": 0.7,
+        "tdis_count": 0,
+        "evidence": "Engineering: far from stream reduces flood exposure"
+      }
+    },
+    {
+      "source": "stream_dist",
+      "target": "flood_severity",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "close",
+        "weight": 0.7,
+        "tdis_count": 0,
+        "evidence": "Engineering: close properties experience greater flood depth"
+      }
+    },
+    {
+      "source": "rainfall",
+      "target": "flood_occurrence",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.8,
+        "tdis_count": 9,
+        "evidence": "the accumulation of unprecedented rainfall in southeastern Texas.",
+        "doc_source": "Application of machine learning for integrated flood risk as",
+        "source": "tdis"
+      }
+    },
+    {
+      "source": "rainfall",
+      "target": "flood_severity",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.7,
+        "tdis_count": 3,
+        "evidence": "causing approximately 125 billion dollars in physical damage in the state.",
+        "doc_source": "Application of machine learning for integrated flood risk as",
+        "source": "tdis"
+      }
+    },
+    {
+      "source": "rainfall",
+      "target": "runoff",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.9,
+        "tdis_count": 2,
+        "evidence": "Monthly rainfall totals ranged from 0.26 inch (6.60 millimeters) in February to 6.84 inches (173.74 millimeters) in December.",
+        "doc_source": "Hydrologic data for Little Elm Creek Trinity River Basin Tex",
+        "source": "tdis"
+      }
+    },
+    {
+      "source": "foundation",
+      "target": "flood_severity",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.85,
+        "tdis_count": 2,
+        "evidence": "TDIS: elevated foundation above BFE reduces flood damage"
+      }
+    },
+    {
+      "source": "foundation",
+      "target": "flood_severity",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "low",
+        "weight": 0.8,
+        "tdis_count": 0,
+        "evidence": "Engineering: low foundation increases water entry risk"
+      }
+    },
+    {
+      "source": "foundation",
+      "target": "vulnerability",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.8,
+        "tdis_count": 1,
+        "evidence": "TDIS: elevation reduces structural vulnerability"
+      }
+    },
+    {
+      "source": "foundation",
+      "target": "vulnerability",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "low",
+        "weight": 0.8,
+        "tdis_count": 0,
+        "evidence": "Engineering: low foundation increases structural vulnerability"
+      }
+    },
+    {
+      "source": "claims",
+      "target": "flood_occurrence",
+      "type": "INDICATES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.85,
+        "tdis_count": 0,
+        "evidence": "Engineering: high claims history indicates flood-prone location"
+      }
+    },
+    {
+      "source": "claims",
+      "target": "flood_occurrence",
+      "type": "INDICATES",
+      "properties": {
+        "condition": "low",
+        "weight": 0.6,
+        "tdis_count": 0,
+        "evidence": "Engineering: low claims suggests less flood-prone",
+        "indicates_risk_reducing": true
+      }
+    },
+    {
+      "source": "claims",
+      "target": "flood_severity",
+      "type": "INDICATES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.7,
+        "tdis_count": 0,
+        "evidence": "Engineering: repeated claims indicate severe flood exposure"
+      }
+    },
+    {
+      "source": "far",
+      "target": "vulnerability",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.5,
+        "tdis_count": 0,
+        "evidence": "Engineering: larger structures have more value at risk"
+      }
+    },
+    {
+      "source": "roughness",
+      "target": "runoff",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.5,
+        "tdis_count": 0,
+        "evidence": "Engineering: high Manning n slows flow, reduces runoff"
+      }
+    },
+    {
+      "source": "roughness",
+      "target": "runoff",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "low",
+        "weight": 0.5,
+        "tdis_count": 0,
+        "evidence": "Engineering: low Manning n increases flow velocity"
+      }
+    },
+    {
+      "source": "runoff",
+      "target": "flood_occurrence",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.7,
+        "tdis_count": 3,
+        "evidence": "TDIS: excess runoff increases flooding"
+      }
+    },
+    {
+      "source": "drainage",
+      "target": "flood_occurrence",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.8,
+        "tdis_count": 14,
+        "evidence": "The project provides for increasing drainage pipes size and adding curb inlets to improve flow of stormwater.",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis"
+      }
+    },
+    {
+      "source": "drainage",
+      "target": "flood_severity",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.7,
+        "tdis_count": 6,
+        "evidence": "Proposed storm drainage upgrades to system draining to JC-9.",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis"
+      }
+    },
+    {
+      "source": "vulnerability",
+      "target": "flood_severity",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.8,
+        "tdis_count": 1,
+        "evidence": "TDIS: structural vulnerability increases damage severity"
+      }
+    },
+    {
+      "source": "flood_occurrence",
+      "target": "power_disruption",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.7,
+        "tdis_count": 0,
+        "evidence": "Operational inference: flooding can damage substations and interrupt grid service"
+      }
+    },
+    {
+      "source": "power_disruption",
+      "target": "hospital_operations",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.8,
+        "tdis_count": 0,
+        "evidence": "Operational inference: hospitals depend on grid power for critical systems"
+      }
+    },
+    {
+      "source": "power_disruption",
+      "target": "shelter_operations",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.7,
+        "tdis_count": 0,
+        "evidence": "Operational inference: shelters need power for HVAC, lighting, and communications"
+      }
+    },
+    {
+      "source": "community_resilience",
+      "target": "emergency_response_capacity",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "low",
+        "weight": 0.7,
+        "tdis_count": 0,
+        "evidence": "Operational inference: low community resilience limits emergency response and recovery capacity"
+      }
+    },
+    {
+      "source": "drainage",
+      "target": "flood_occurrence",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "improved",
+        "weight": 0.7,
+        "tdis_count": 6,
+        "evidence": "As a result of a roadside ditch capacity evaluation, it was determined that 23 miles of ditch and 669 driveway culverts are negatively impacting conveyance capacity and need to be regraded.",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "indicates_risk_reducing": false
+      }
+    },
+    {
+      "source": "drainage",
+      "target": "flood_severity",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "improved",
+        "weight": 0.7,
+        "tdis_count": 5,
+        "evidence": "Project planning for proposed project for five regional drainage solutions within the City.",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "indicates_risk_reducing": false
+      }
+    },
+    {
+      "source": "storm_surge",
+      "target": "flood_occurrence",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.85,
+        "tdis_count": 4,
+        "evidence": "TDIS (WildfireTornado corpus): coastal processes such as storm surge and ocean waves contribute considerably to compound flood events",
+        "doc_source": "Impact of changes in sea surface temperature due to climate ",
+        "source": "tdis"
+      }
+    },
+    {
+      "source": "storm_surge",
+      "target": "flood_severity",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.75,
+        "tdis_count": 2,
+        "evidence": "the combined effect of more extreme hurricane winds and increased risk of inundation from storm surges exacerbated by the sea level rise (SLR) will result in severe losses for coastal communities in the future.",
+        "doc_source": "Impact of changes in sea surface temperature due to climate ",
+        "source": "tdis"
+      }
+    },
+    {
+      "source": "sea_level_rise",
+      "target": "flood_occurrence",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.8,
+        "tdis_count": 6,
+        "evidence": "As sea level rises, tropical cyclones will pose a greater risk of extreme flooding and are likely to inflict the greatest damages on highly populated shorelines.",
+        "doc_source": "Comparing the cost effectiveness of nature-based and coastal",
+        "source": "tdis"
+      }
+    },
+    {
+      "source": "sea_level_rise",
+      "target": "flood_severity",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.7,
+        "tdis_count": 2,
+        "evidence": "TDIS: by 2050, more than $100B of coastal property in the US is likely to be below sea level if current trends continue"
+      }
+    },
+    {
+      "source": "land_subsidence",
+      "target": "flood_occurrence",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.7,
+        "tdis_count": 3,
+        "evidence": "TDIS: the combined influence of coastal storms, rising sea levels, urban development, and land subsidence increases flood risk in coastal areas; Gulf Coast Texas is particularly affected"
+      }
+    },
+    {
+      "source": "wetland_restoration",
+      "target": "flood_occurrence",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "implemented",
+        "weight": 0.6,
+        "tdis_count": 2,
+        "evidence": "TDIS: wetland restoration and green infrastructure provide nature-based flood mitigation, reducing downstream flood occurrence"
+      }
+    },
+    {
+      "source": "drainage",
+      "target": "flood_occurrence",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "low",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "Enhance Drainage Systems In Hidalgo Add Additional Storm Sewer Line...To Help Drainage.",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "flood-related_infrastructure",
+      "target": "flood_occurrence",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "constructed and maintained",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "constructing and maintaining flood-related infrastructure like dams and levees",
+        "doc_source": "SFP-2024",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "surge_gates",
+      "target": "flood_occurrence",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "2 surge gates on the west perimeter of Galveston Bay... to reduce surge volumes that push into neighborhoods around the critical industrial facilities.",
+        "doc_source": "Coastal-Texas-Brochure103023",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "hurricane_harvey",
+      "target": "flood_severity",
+      "type": "INDICATES",
+      "properties": {
+        "condition": "unprecedented",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "Hurricane Harvey in 2017 brought unprecedented devastation to Texas, with nearly 4.5 feet of rain, 130-mile-per-hour winds, and widespread riverine and urban flooding.",
+        "doc_source": "SFP-2024",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "coastal_road_elevation",
+      "target": "flood_severity",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "when elevated",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "Elevate coastal roads to better protect public during evacuation and to protect the roads from flood damage, where feasible.",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "levees",
+      "target": "flood_occurrence",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "future",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "This action proposes constructing new levees and improving existing ones to reduce the potential impacts of future flood events by reducing the likelihood of levee failure.",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "sediment_accumulation",
+      "target": "flood_severity",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "The accumulation of sediment in Lake Corpus Christi is a long-term concern.",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "retention_pond_system",
+      "target": "flood_occurrence",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "established",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "Create a retention pond system from existing caliche pits and connect the pits to the Hidalgo County Drainage District No. 1 MDS.",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "foundation",
+      "target": "flood_occurrence",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "Elevate flood prone structures throughout unincorporated Travis County.",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "retention/detention",
+      "target": "flood_occurrence",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "during heavy rain events",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "Construct a large retention/detention pond in the northwest part of town to hold water during heavy rain events.",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "regional_drainage_improvements",
+      "target": "flood_occurrence",
+      "type": "REQUIRES",
+      "properties": {
+        "condition": "before implementation",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "regional drainage improvements to the streams must be studied and implemented before Harris County can obtain a benefit from roadway drainage improvements.",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "road_improvements",
+      "target": "flood_occurrence",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "during heavy rains",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "study to improve the road and remove it from being flooded during heavy rains.",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "flood_protection",
+      "target": "flood_occurrence",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "safe evacuation route",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "upgrade crossing so that it provides a safe evacuation route during large storm events.",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "detention_storage",
+      "target": "flood_severity",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "improved",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "Retrofit dam to improve detention of flood & storm water runoff, new 137.3 ac wetlands complex added of storage capacity & conversion of fields to tallgrass prairies to add approximately 856 ac-ft of total storage during rainfall events.",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "culvert_drain_improvements",
+      "target": "flood_severity",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "during the 100-year ultimate storm",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "Proposed alternatives to reduce roadway overtopping's during the 100-year ultimate storm such as culvert, ditch and storm drain improvements.",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "roadway_improvements",
+      "target": "flood_occurrence",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "during_flood_events",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "Proposed roadway improvements for access to IH10 during flood events.",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "flood_insurance",
+      "target": "flood_severity",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "purchasing",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "Educate residents on NFIP program and importance of purchasing flood insurance.",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "barrier_installation",
+      "target": "flood_occurrence",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "high-water areas",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "Barrier installation keeps the public from entering high-water areas during flooding events.",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "topography",
+      "target": "drainage",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "flat",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "due to the flat Houston topography, the floodplain drains to the sea relatively slowly compared to these large precipitation rates.",
+        "doc_source": "Attributable human-induced changes in the magnitude of flood",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "inundation",
+      "target": "property_value",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "within_sfha",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "inundated properties within the SFHA experiencing an additional price discount of approximately 10.8% post-Harvey",
+        "doc_source": "Flood Risk Discounts Evidence from Housing Market in Harris ",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "rainfall",
+      "target": "flood_occurrence",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "exceeded 95th percentile",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "precipitation exceeded its 95th percentile value during 119 out of the 155 total compound events",
+        "doc_source": "Multivariate compound events drive historical floods and ass",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "rainfall",
+      "target": "runoff",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "extreme",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "leading to rapid surface runoff during extreme precipitation events",
+        "doc_source": "Multivariate compound events drive historical floods and ass",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "hazard_score",
+      "target": "flood_severity",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "unit increase",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "a unit increase (i. e. , shifting from the lowest to the highest modeled exceedance probability) is associated with an additional 37% decline in sale price post-Harvey for flooded homes.",
+        "doc_source": "Flood Risk Discounts Evidence from Housing Market in Harris ",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "hazard_score",
+      "target": "flood_severity",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "0.1 increase",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "a 0.1 increase in the hazard score (a 10% point increase in exceedance probability) is associated with an additional 3.7% decline in post-Harvey sale prices for flooded homes.",
+        "doc_source": "Flood Risk Discounts Evidence from Housing Market in Harris ",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "sfha_designation",
+      "target": "flood_severity",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "inundated",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "properties located within an SFHA that Harvey inundated experienced an additional price penalty of approximately 10.8% post-event",
+        "doc_source": "Flood Risk Discounts Evidence from Housing Market in Harris ",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "floodplain_location",
+      "target": "flood_occurrence",
+      "type": "INDICATES",
+      "properties": {
+        "condition": "in_100_and_500_year_floodplain",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "the road segments located in the 100- and 500-year floodplain, which are identified as high- and moderate-risk road segments by the definition of FEMA, are assigned to levels 1 and 2",
+        "doc_source": "Quantitative Measures for Integrating Resilience into Transp",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "extreme_weather_events",
+      "target": "oil_and_chemical_spills",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "increasing",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "result in the largest oil and chemical spills during extreme weather events, which have been increasing in intensity.",
+        "doc_source": "Satellite-based vertical land motion for infrastructure moni",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "forest_areas",
+      "target": "flood_occurrence",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "transformed_into_built-up_areas",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "the condition that forest areas are changed into urban built-up areas can contribute to the likelihood of flood events.",
+        "doc_source": "The Effect of Land Cover Change on Flooding in Texas",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "human_influence_on_precipitation",
+      "target": "flood_severity",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "the degree of human influence on the flood in this neighborhood increases at a superlinear rate with the human influence on Harvey\u2019s total precipitation.",
+        "doc_source": "Attributable human-induced changes in the magnitude of flood",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "terrain_flatness",
+      "target": "flood_severity",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "flat",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "The flatter terrain in this neighborhood resulted in shallower floodwater than in South Houston and Pasadena.",
+        "doc_source": "Attributable human-induced changes in the magnitude of flood",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "rainfall",
+      "target": "flood_volume",
+      "type": "SCALES",
+      "properties": {
+        "condition": "less than observed",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "for rainfall amounts less than observed, the flood volume and area scale at similar rates in Deer Park as they do for the Greater Houston area",
+        "doc_source": "Attributable human-induced changes in the magnitude of flood",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "proximity_to_industrial_facilities",
+      "target": "pollutant_dispersion_risk",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "close",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "vulnerable populations... are more likely to live closer to the industrial and toxic facilities",
+        "doc_source": "Collision of Environmental Injustice and Sea Level Rise Asse",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "coastal_ecosystems",
+      "target": "flood_severity",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "Coastal ecosystems like coral reefs, oyster reefs, mangroves and salt marshes protect the coast by reducing wave energy, trapping sediments, and attenuating storm surge.",
+        "doc_source": "Comparing the cost effectiveness of nature-based and coastal",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "low_income",
+      "target": "flood_severity",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "specific drivers\u2014such as low income and racial/ethnic minority status\u2014and disproportionate barriers to securing federal recovery assistance.",
+        "doc_source": "Disaster Preparedness and Housing Vulnerability Community Pe",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "hurricane_harvey",
+      "target": "flood_occurrence",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "inundation",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "36% of the properties sold in our sample were inundated by Harvey-related flooding",
+        "doc_source": "Flood Risk Discounts Evidence from Housing Market in Harris ",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "hazard_probability_score",
+      "target": "flood_severity",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "full one-unit increase",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "implies that for a property inundated by Harvey, a full one-unit increase in its hazard score...",
+        "doc_source": "Flood Risk Discounts Evidence from Housing Market in Harris ",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "unstable_air_mass",
+      "target": "flood_occurrence",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "increasingly unstable",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "The air mass had become increasingly unstable during the day.",
+        "doc_source": "Floods in south-central Oklahoma and north-central Texas Oct",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "precipitation_deficit",
+      "target": "flood_occurrence",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "likely driven by combined precipitation deficit and warming",
+        "doc_source": "Future hydro-climate extremes in the cypress creek watershed",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "above-ground_power_lines",
+      "target": "flood_occurrence",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high wind events",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "power lines, which are strung above-ground on poles and are often damaged during high wind events, creating extensive power outages.",
+        "doc_source": "Hospital Preparedness Mitigation and Response to Hurricane H",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "utility_failures",
+      "target": "flood_occurrence",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "extreme flooding events",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "these utilities can fail during extreme flooding events.",
+        "doc_source": "Hospital Preparedness Mitigation and Response to Hurricane H",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "sea_level_rise",
+      "target": "flood_severity",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "below sea level",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "It is estimated that by 2050, more than $100 billion worth of coastal property in the US is likely to be below sea level if current trends continue.",
+        "doc_source": "Impact of changes in sea surface temperature due to climate ",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "wave_height",
+      "target": "flood_occurrence",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "a higher occurrence of ocean waves and storm surge during historical compound flooding events compared to cluster 1",
+        "doc_source": "Multivariate compound events drive historical floods and ass",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "road_segment_criticality",
+      "target": "disaster_impacts",
+      "type": "INDICATES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "Determining the criticality of road segments during flooding events is important for planning and prioritization in response to disruptive impacts of flooding.",
+        "doc_source": "Quantitative Measures for Integrating Resilience into Transp",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "elevation",
+      "target": "flood_exposure",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "VLM, especially when coupled with sea level rise (SLR) and extreme events like storm surge or heavy precipitation... can amplify hazards through enhanced flood exposure.",
+        "doc_source": "Satellite-based vertical land motion for infrastructure moni",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "sea_level_rise",
+      "target": "flood_exposure",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "VLM, especially when coupled with sea level rise (SLR) and extreme events like storm surge or heavy precipitation... can amplify hazards through enhanced flood exposure.",
+        "doc_source": "Satellite-based vertical land motion for infrastructure moni",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "subsidence",
+      "target": "flood_exposure",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "rapid",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "Houston is subsiding rapidly, but at different rates throughout the city, potentially worsening exposure to flooding.",
+        "doc_source": "Satellite-based vertical land motion for infrastructure moni",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "slr_unaddressed",
+      "target": "flood_occurrence",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "left unaddressed",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "This research underscores the likelihood that SLR, if left unaddressed, will likely disrupt critical energy infrastructure.",
+        "doc_source": "Sea-Level Rise and Coastal Inundation A Case Study of the Gu",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "population_growth",
+      "target": "flood_severity",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "the economic damages triggered by these natural and technological disasters in the state are likely to increase as a consequence of population growth and its concentration",
+        "doc_source": "The Effect of Land Cover Change on Flooding in Texas",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "land_cover_change",
+      "target": "physical_vulnerability",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "recent",
+        "weight": 0.85,
+        "tdis_count": 1,
+        "evidence": "this increased physical vulnerability is likely to be related to land cover change over the last decade",
+        "doc_source": "The Effect of Land Cover Change on Flooding in Texas",
+        "source": "tdis",
+        "specific": true
+      }
+    },
+    {
+      "source": "floodplain",
+      "target": "flood_occurrence",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "1 percent (100-year) annual chance",
+        "weight": 0.7,
+        "tdis_count": 3,
+        "evidence": "approximately 878,100 buildings within the 1 percent (100-year) annual chance floodplain",
+        "doc_source": "SFP-2024",
+        "source": "tdis",
+        "specific": false
+      }
+    },
+    {
+      "source": "base_flood_elevation",
+      "target": "flood_occurrence",
+      "type": "INDICATES",
+      "properties": {
+        "condition": "established",
+        "weight": 0.7,
+        "tdis_count": 3,
+        "evidence": "Establish BFE\u2019s and convert Zone A to Zone AE via a LOMR.",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "specific": false
+      }
+    },
+    {
+      "source": "land_conservation",
+      "target": "flood_occurrence",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.7,
+        "tdis_count": 3,
+        "evidence": "Permanently protecting land from development provides natural flood mitigation benefits",
+        "doc_source": "NBS-to-Flooding-in-the-Hill-Country",
+        "source": "tdis",
+        "specific": false
+      }
+    },
+    {
+      "source": "flood_protection",
+      "target": "flood_occurrence",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "improved",
+        "weight": 0.7,
+        "tdis_count": 3,
+        "evidence": "improve the current levee system to provide protection from category 5 storm.",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "specific": false
+      }
+    },
+    {
+      "source": "drainage",
+      "target": "flood_occurrence",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "inadequate",
+        "weight": 0.7,
+        "tdis_count": 2,
+        "evidence": "Current system is inadequate to carry storm water runoff.",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "specific": false
+      }
+    },
+    {
+      "source": "channel_improvements",
+      "target": "flood_occurrence",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "implemented",
+        "weight": 0.7,
+        "tdis_count": 2,
+        "evidence": "Channel improvements to reduce residential/commercial flooding near SH142.",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "specific": false
+      }
+    },
+    {
+      "source": "detention_capacity",
+      "target": "flood_occurrence",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.7,
+        "tdis_count": 2,
+        "evidence": "This site would be able to store a large volume of water and greatly reduce the peak from the Peach Creek watershed.",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "specific": false
+      }
+    },
+    {
+      "source": "culvert_size",
+      "target": "flood_occurrence",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "larger",
+        "weight": 0.7,
+        "tdis_count": 2,
+        "evidence": "Replace culverts with larger box culverts & parallel wings; MLK Blvd to Mexico St",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "specific": false
+      }
+    },
+    {
+      "source": "drainage",
+      "target": "flood_severity",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "implemented",
+        "weight": 0.7,
+        "tdis_count": 2,
+        "evidence": "Project for design and construction of storm drainage and paving improvements in the Richmond Plaza Area to reduce risk and structural flooding.",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "specific": false
+      }
+    },
+    {
+      "source": "elevation",
+      "target": "flood_occurrence",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "above_bfe",
+        "weight": 0.7,
+        "tdis_count": 2,
+        "evidence": "Raise electrical components of sewage lift stations above the Base Flood Elevation (BFE).",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "specific": false
+      }
+    },
+    {
+      "source": "detention_storage",
+      "target": "flood_occurrence",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "implemented",
+        "weight": 0.7,
+        "tdis_count": 2,
+        "evidence": "implement diversion, detention or channel modifications to Cotton Bayou",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "specific": false
+      }
+    },
+    {
+      "source": "base_flood_elevation",
+      "target": "flood_occurrence",
+      "type": "REQUIRES",
+      "properties": {
+        "condition": "no-rise",
+        "weight": 0.7,
+        "tdis_count": 2,
+        "evidence": "adopt a 'no-rise' in BFE in the 100-year floodplain",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "specific": false
+      }
+    },
+    {
+      "source": "detention_storage",
+      "target": "flood_occurrence",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "low",
+        "weight": 0.7,
+        "tdis_count": 2,
+        "evidence": "to provide drainage solutions to reduce flooding within the subdivision due to existing hydrological flow patterns",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "specific": false
+      }
+    },
+    {
+      "source": "drainage",
+      "target": "flood_occurrence",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "greater",
+        "weight": 0.7,
+        "tdis_count": 2,
+        "evidence": "Allow for greater conveyance of water by replacing the outlet gate to the South Main Drain and replacing 10' X 10' RCB along Cesar Chavez and Dirt Road with new material.",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "specific": false
+      }
+    },
+    {
+      "source": "urbanization",
+      "target": "flood_occurrence",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.7,
+        "tdis_count": 2,
+        "evidence": "urbanization leads to a decrease in the spatial extent areas assigned for water-body, forest, and grass, and also lead to an increase in the spatial extent assigned for impervious built-up area, which, in turn, is expected to contribute to flooding.",
+        "doc_source": "The Effect of Land Cover Change on Flooding in Texas",
+        "source": "tdis",
+        "specific": false
+      }
+    },
+    {
+      "source": "flood_protection",
+      "target": "flood_severity",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.7,
+        "tdis_count": 2,
+        "evidence": "Build up dunes to protect against tidal surge.",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "specific": false
+      }
+    },
+    {
+      "source": "flood_protection",
+      "target": "flood_occurrence",
+      "type": "REDUCES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.7,
+        "tdis_count": 2,
+        "evidence": "Implement a Hazardous Roadway Overtopping Mitigation (HROM) Program to prioritize hazardous roadway overtopping.",
+        "doc_source": "2024_State_Flood_Plan_Volume_II",
+        "source": "tdis",
+        "specific": false
+      }
+    },
+    {
+      "source": "future_condition_flood_hazard",
+      "target": "flood_occurrence",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "projected",
+        "weight": 0.7,
+        "tdis_count": 2,
+        "evidence": "the projected future condition 1 percent (100-year) annual chance floodplain is estimated to increase by 11 percent over the existing flood hazard area.",
+        "doc_source": "SFP-2024",
+        "source": "tdis",
+        "specific": false
+      }
+    },
+    {
+      "source": "population_density",
+      "target": "flood_severity",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.7,
+        "tdis_count": 2,
+        "evidence": "followed by population density and the ratio of developed lands with medium intensity",
+        "doc_source": "Application of machine learning for integrated flood risk as",
+        "source": "tdis",
+        "specific": false
+      }
+    },
+    {
+      "source": "climate_change",
+      "target": "flood_occurrence",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.7,
+        "tdis_count": 2,
+        "evidence": "In the United States (US), climate change and the rise in sea-levels will impact many economic sectors.",
+        "doc_source": "Attributable human-induced changes in the magnitude of flood",
+        "source": "tdis",
+        "specific": false
+      }
+    },
+    {
+      "source": "sea_surface_temperature",
+      "target": "hurricane_intensity",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.7,
+        "tdis_count": 2,
+        "evidence": "Similar studies based on projected future climate have found an increase in hurricane intensity and related hazards with increased average SST.",
+        "doc_source": "Impact of changes in sea surface temperature due to climate ",
+        "source": "tdis",
+        "specific": false
+      }
+    },
+    {
+      "source": "river_discharge",
+      "target": "flood_occurrence",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.7,
+        "tdis_count": 2,
+        "evidence": "precipitation, river discharge, and soil moisture (i. e. , hydrological processes) have contributed to compound flooding more frequently than both storm surges and waves",
+        "doc_source": "Multivariate compound events drive historical floods and ass",
+        "source": "tdis",
+        "specific": false
+      }
+    },
+    {
+      "source": "soil_moisture",
+      "target": "flood_occurrence",
+      "type": "INCREASES",
+      "properties": {
+        "condition": "high",
+        "weight": 0.7,
+        "tdis_count": 2,
+        "evidence": "precipitation, river discharge, and soil moisture (i. e. , hydrological processes) have contributed to compound flooding more frequently than both storm surges and waves",
+        "doc_source": "Multivariate compound events drive historical floods and ass",
+        "source": "tdis",
+        "specific": false
+      }
+    },
+    {
+      "source": "elevation",
+      "target": "flood_occurrence",
+      "type": "INDICATES",
+      "properties": {
+        "condition": "low",
+        "weight": 0.7,
+        "tdis_count": 2,
+        "evidence": "...consider sites in developed land, closer to shorelines, and at lower elevations to be more vulnerable...",
+        "doc_source": "Preparing for the Future Impacts of Megastorms on Archaeolog",
+        "source": "tdis",
+        "specific": false
+      }
+    },
+    {
+      "source": "stream_distance",
+      "target": "flood_occurrence",
+      "type": "INDICATES",
+      "properties": {
+        "condition": "close",
+        "weight": 0.7,
+        "tdis_count": 2,
+        "evidence": "...neither distance to the nearest coast nor distance to the nearest stream was strongly associated with flooding.",
+        "doc_source": "Preparing for the Future Impacts of Megastorms on Archaeolog",
+        "source": "tdis",
+        "specific": false
+      }
+    }
+  ]
+}

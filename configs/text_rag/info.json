@@ -1,0 +1,6 @@
+{
+  "model": "sentence-transformers/all-MiniLM-L6-v2",
+  "count": 2577,
+  "dim": 384,
+  "sources": ["configs/text_rag/chunks.jsonl"]
+}

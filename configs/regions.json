@@ -1,0 +1,59 @@
+{
+  "description": "Named multi-county geographic regions in Texas. Used to inject the canonical member-county list as factual context whenever a user query references a named region. Regions are objective geography (e.g., the Texas Panhandle is a defined cultural-geographic region, the Permian Basin is a defined oil-and-gas basin). The county lists are documentation, not query-routing rules.",
+  "version": "1.0",
+  "regions": {
+    "texas_panhandle": {
+      "aliases": ["texas panhandle", "the panhandle"],
+      "description": "Northern-most Texas counties, prone to wildfire and severe weather.",
+      "counties": [
+        "Potter County", "Randall County", "Gray County", "Hemphill County",
+        "Roberts County", "Wheeler County", "Donley County", "Collingsworth County"
+      ]
+    },
+    "permian_basin": {
+      "aliases": ["permian basin", "permian"],
+      "description": "Texas oil-and-gas producing basin in West Texas; ERCOT-dependent industrial corridor.",
+      "counties": [
+        "Midland County", "Ector County", "Martin County", "Dawson County",
+        "Andrews County", "Winkler County", "Loving County", "Ward County",
+        "Crane County", "Upton County", "Reagan County"
+      ]
+    },
+    "tx_mexico_border": {
+      "aliases": ["texas-mexico border", "tx-mexico border", "border region", "tx border", "rio grande border"],
+      "description": "Texas counties along the U.S.-Mexico border from El Paso to Cameron.",
+      "counties": [
+        "El Paso County", "Hudspeth County", "Culberson County", "Jeff Davis County",
+        "Presidio County", "Brewster County", "Terrell County", "Val Verde County",
+        "Kinney County", "Maverick County", "Webb County", "Zapata County",
+        "Starr County", "Hidalgo County", "Cameron County"
+      ]
+    },
+    "dallas_tarrant": {
+      "aliases": ["dallas-tarrant", "north texas metroplex", "dfw metroplex", "dfw region"],
+      "description": "Core Dallas-Fort Worth metroplex (Dallas County + Tarrant County).",
+      "counties": ["Dallas County", "Tarrant County"]
+    },
+    "tx_major_metros": {
+      "aliases": ["major texas metros", "texas top-5 metros", "five major metros", "outside major metros"],
+      "description": "Five largest Texas metropolitan counties (used for 'outside major metros' filtering).",
+      "counties": [
+        "Harris County", "Dallas County", "Bexar County",
+        "Travis County", "Tarrant County"
+      ]
+    },
+    "gulf_coast_generation": {
+      "aliases": [
+        "texas gulf coast", "gulf coast", "tx gulf coast",
+        "coastal texas", "texas coast", "coastal generation",
+        "coastal-generation"
+      ],
+      "description": "Texas Gulf-coast counties hosting major thermal and nuclear generation assets.",
+      "counties": [
+        "Harris County", "Galveston County", "Brazoria County", "Matagorda County",
+        "Calhoun County", "Victoria County", "Aransas County",
+        "Nueces County", "San Patricio County"
+      ]
+    }
+  }
+}

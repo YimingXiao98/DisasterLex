@@ -1,0 +1,4375 @@
+{
+  "tables": [
+    {
+      "id": "CRIT_LIFE_001",
+      "name": "Crit Life 001",
+      "category": "critical_life",
+      "row_count": 827648,
+      "column_count": 3,
+      "columns": [
+        "hex_fc_rac_hospital",
+        "hex_fc_rac_grocery"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "CRIT_LIFE_001",
+      "description": "Lifeline Functional Criticality (RAC method) \u2014 criticality scores for hospital and grocery store access per hex"
+    },
+    {
+      "id": "CRIT_LIFE_002",
+      "name": "Crit Life 002",
+      "category": "critical_life",
+      "row_count": 827648,
+      "column_count": 3,
+      "columns": [
+        "hex_fc_max_grocery",
+        "hex_fc_max_hospital"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "CRIT_LIFE_002",
+      "description": "Lifeline Functional Criticality (Max Facility) \u2014 maximum criticality score for nearest hospital and grocery store per hex"
+    },
+    {
+      "id": "CRIT_LIFE_003",
+      "name": "Crit Life 003",
+      "category": "critical_life",
+      "row_count": 827648,
+      "column_count": 3,
+      "columns": [
+        "conc_index_grocery",
+        "conc_index_hospital"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "CRIT_LIFE_003",
+      "description": "Lifeline Functional Criticality (Concentration Index) \u2014 spatial concentration of hospitals and grocery stores per hex"
+    },
+    {
+      "id": "CRIT_LIFE_004",
+      "name": "Crit Life 004",
+      "category": "critical_life",
+      "row_count": 827648,
+      "column_count": 3,
+      "columns": [
+        "hex_fc_top3_grocery",
+        "hex_fc_top3_hospital"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "CRIT_LIFE_004",
+      "description": "Lifeline Functional Criticality (Top-3 Weighted) \u2014 weighted criticality score for top-3 nearest hospitals and grocery stores per hex"
+    },
+    {
+      "id": "CR_001",
+      "name": "Cr 001",
+      "category": "community_resilience",
+      "row_count": 827648,
+      "column_count": 3,
+      "columns": [
+        "nri_cri_value",
+        "nri_cri_score"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "CR_001",
+      "description": "FEMA NRI Community Resilience Index \u2014 measures a community ability to prepare for, absorb, and recover from disasters"
+    },
+    {
+      "id": "EX_BLD_001",
+      "name": "Ex Bld 001",
+      "category": "exposure_building",
+      "row_count": 827648,
+      "column_count": 2,
+      "columns": [
+        "building_count"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "EX_BLD_001",
+      "description": "Building exposure \u2014 count of buildings within each hex cell"
+    },
+    {
+      "id": "EX_BLD_002",
+      "name": "Ex Bld 002",
+      "category": "exposure_building",
+      "row_count": 827648,
+      "column_count": 2,
+      "columns": [
+        "hEE"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "EX_BLD_002",
+      "description": "Building exposure \u2014 home-value weighted economic exposure (hEE) per hex"
+    },
+    {
+      "id": "EX_INF_001",
+      "name": "Ex Inf 001",
+      "category": "exposure_infrastructure",
+      "row_count": 827648,
+      "column_count": 2,
+      "columns": [
+        "CID"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "EX_INF_001",
+      "description": "Infrastructure exposure \u2014 weighted critical infrastructure density index (CID) per hex"
+    },
+    {
+      "id": "EX_LIFE_001",
+      "name": "Ex Life 001",
+      "category": "exposure_life",
+      "row_count": 827648,
+      "column_count": 2,
+      "columns": [
+        "groc_per1k"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "EX_LIFE_001",
+      "description": "Life exposure \u2014 number of grocery stores per 1,000 residents per hex"
+    },
+    {
+      "id": "EX_LIFE_002",
+      "name": "Ex Life 002",
+      "category": "exposure_life",
+      "row_count": 827648,
+      "column_count": 2,
+      "columns": [
+        "pharm_per10k"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "EX_LIFE_002",
+      "description": "Life exposure \u2014 number of pharmacies per 10,000 residents per hex"
+    },
+    {
+      "id": "EX_LIFE_003",
+      "name": "Ex Life 003",
+      "category": "exposure_life",
+      "row_count": 827648,
+      "column_count": 2,
+      "columns": [
+        "fuel_per10k"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "EX_LIFE_003",
+      "description": "Life exposure \u2014 number of fuel stations per 10,000 residents per hex"
+    },
+    {
+      "id": "EX_LIFE_004",
+      "name": "Ex Life 004",
+      "category": "exposure_life",
+      "row_count": 827648,
+      "column_count": 2,
+      "columns": [
+        "hosp_n"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "EX_LIFE_004",
+      "description": "Life exposure \u2014 hospital count per hex (hosp_n > 0 means a hospital is present)"
+    },
+    {
+      "id": "EX_POP_001",
+      "name": "Ex Pop 001",
+      "category": "exposure_population",
+      "row_count": 827648,
+      "column_count": 2,
+      "columns": [
+        "population_7km",
+        "population_per_hex"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "EX_POP_001",
+      "description": "Population exposure \u2014 both population_per_hex (non-overlapping, use for SUMs) and population_7km (7 km radius buffer, use only for AVG/per-hex density)"
+    },
+    {
+      "id": "HIFLD-EMERGENC-FIRE_EMS-N",
+      "name": "Hifld Emergenc Fire Ems N",
+      "category": "hifld_emergency",
+      "row_count": 827648,
+      "column_count": 2,
+      "columns": [
+        "hifld_fire_and_emergency_medical_service_stations_fire_stations_ems_stations_n"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "\"HIFLD-EMERGENC-FIRE_EMS-N\"",
+      "description": "HIFLD Emergency Services \u2014 count of fire stations and EMS facilities per hex"
+    },
+    {
+      "id": "HIFLD-EMERGENC-LOCAL_EOC-N",
+      "name": "Hifld Emergenc Local Eoc N",
+      "category": "hifld_emergency",
+      "row_count": 827648,
+      "column_count": 2,
+      "columns": [
+        "hifld_local_emergency_operations_center_local_eoc_n"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "\"HIFLD-EMERGENC-LOCAL_EOC-N\"",
+      "description": "HIFLD Emergency Services \u2014 count of local Emergency Operations Centers (EOC) per hex"
+    },
+    {
+      "id": "HIFLD-EMERGENC-LOCAL_LAW-N",
+      "name": "Hifld Emergenc Local Law N",
+      "category": "hifld_emergency",
+      "row_count": 827648,
+      "column_count": 2,
+      "columns": [
+        "hifld_local_law_enforcement_n"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "\"HIFLD-EMERGENC-LOCAL_LAW-N\"",
+      "description": "HIFLD Emergency Services \u2014 count of local law enforcement facilities per hex"
+    },
+    {
+      "id": "HIFLD-EMERGENC-SHELTER-N",
+      "name": "Hifld Emergenc Shelter N",
+      "category": "hifld_emergency",
+      "row_count": 827648,
+      "column_count": 2,
+      "columns": [
+        "hifld_national_shelter_system_facilities_shelter_locations_n"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "\"HIFLD-EMERGENC-SHELTER-N\"",
+      "description": "HIFLD Emergency Services \u2014 count of emergency shelter locations per hex"
+    },
+    {
+      "id": "HIFLD-EMERGENC-STATE_EOC-N",
+      "name": "Hifld Emergenc State Eoc N",
+      "category": "hifld_emergency",
+      "row_count": 827648,
+      "column_count": 2,
+      "columns": [
+        "hifld_state_emergency_operations_centers_n"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "\"HIFLD-EMERGENC-STATE_EOC-N\"",
+      "description": "HIFLD Emergency Services \u2014 count of state Emergency Operations Centers per hex"
+    },
+    {
+      "id": "HIFLD-ENERGY-PLANTS-N",
+      "name": "Hifld Energy Plants N",
+      "category": "hifld_energy",
+      "row_count": 827648,
+      "column_count": 3,
+      "columns": [
+        "geometry",
+        "hifld_energy_plants_n"
+      ],
+      "has_geometry": true,
+      "sql_quoted_name": "\"HIFLD-ENERGY-PLANTS-N\"",
+      "description": "HIFLD Energy Infrastructure \u2014 count of power plants per hex (includes geometry)"
+    },
+    {
+      "id": "HIFLD-ENERGY-SUBSTN-N",
+      "name": "Hifld Energy Substn N",
+      "category": "hifld_energy",
+      "row_count": 827648,
+      "column_count": 2,
+      "columns": [
+        "hifld_energy_substations_n"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "\"HIFLD-ENERGY-SUBSTN-N\"",
+      "description": "HIFLD Energy Infrastructure \u2014 count of electrical substations per hex"
+    },
+    {
+      "id": "HIFLD-ENERGY-TXKM-230P",
+      "name": "Hifld Energy Txkm 230P",
+      "category": "hifld_energy",
+      "row_count": 827648,
+      "column_count": 2,
+      "columns": [
+        "hifld_energy_tx_km_230p"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "\"HIFLD-ENERGY-TXKM-230P\"",
+      "description": "HIFLD Energy Infrastructure \u2014 total length (km) of high-voltage transmission lines (230kV+) per hex"
+    },
+    {
+      "id": "HIFLD-HEALTH-HOSP-N",
+      "name": "Hifld Health Hosp N",
+      "category": "hifld_health",
+      "row_count": 827648,
+      "column_count": 2,
+      "columns": [
+        "hifld_health_hospitals_n"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "\"HIFLD-HEALTH-HOSP-N\"",
+      "description": "HIFLD Health Infrastructure \u2014 count of hospitals per hex"
+    },
+    {
+      "id": "HIFLD-TRANSP-PRIMARY_RD-L",
+      "name": "Hifld Transp Primary Rd L",
+      "category": "hifld_transport",
+      "row_count": 827648,
+      "column_count": 2,
+      "columns": [
+        "hifld_primary_roads_km"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "\"HIFLD-TRANSP-PRIMARY_RD-L\"",
+      "description": "HIFLD Transportation \u2014 total length (km) of primary roads per hex"
+    },
+    {
+      "id": "HIFLD-WATER-WTP-N",
+      "name": "Hifld Water Wtp N",
+      "category": "hifld_water",
+      "row_count": 827648,
+      "column_count": 2,
+      "columns": [
+        "hifld_water_wtp_n"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "\"HIFLD-WATER-WTP-N\"",
+      "description": "HIFLD Water Infrastructure \u2014 count of water treatment plants per hex"
+    },
+    {
+      "id": "HP_FLD_002",
+      "name": "Hp Fld 002",
+      "category": "hazard_flood",
+      "row_count": 827648,
+      "column_count": 5,
+      "columns": [
+        "nri_coastal_flood_value",
+        "nri_coastal_flood_score",
+        "nri_riverine_flood_value",
+        "nri_riverine_flood_score"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "HP_FLD_002",
+      "description": "FEMA NRI Flood Hazard \u2014 coastal and riverine flood EAL ($) and risk score (0-100 percentile) per hex"
+    },
+    {
+      "id": "HP_HUR_001",
+      "name": "Hp Hur 001",
+      "category": "hazard_hurricane",
+      "row_count": 827648,
+      "column_count": 2,
+      "columns": [
+        "hurr_strike_rate_10y"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "HP_HUR_001",
+      "description": "Hurricane Hazard \u2014 hurricane strike rate over a 10-year period per hex"
+    },
+    {
+      "id": "HP_HUR_002",
+      "name": "Hp Hur 002",
+      "category": "hazard_hurricane",
+      "row_count": 827648,
+      "column_count": 2,
+      "columns": [
+        "ve_ae_fraction"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "HP_HUR_002",
+      "description": "Coastal surge susceptibility \u2014 fraction of hex area within FEMA VE/AE coastal high-hazard flood zones"
+    },
+    {
+      "id": "HP_TOR_001",
+      "name": "Hp Tor 001",
+      "category": "hazard_tornado",
+      "row_count": 827648,
+      "column_count": 3,
+      "columns": [
+        "nri_tornado_value",
+        "nri_tornado_score"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "HP_TOR_001",
+      "description": "FEMA NRI Tornado Hazard \u2014 tornado EAL ($) and risk score (0-100 percentile) per hex"
+    },
+    {
+      "id": "HP_WFIR_001",
+      "name": "Hp Wfir 001",
+      "category": "hazard_wildfire",
+      "row_count": 827648,
+      "column_count": 3,
+      "columns": [
+        "nri_wildfire_value",
+        "nri_wildfire_score"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "HP_WFIR_001",
+      "description": "FEMA NRI Wildfire Hazard \u2014 wildfire EAL ($) and risk score (0-100 percentile) per hex"
+    },
+    {
+      "id": "TRANS-ROAD-CRIT-INDEX",
+      "name": "Trans Road Crit Index",
+      "category": "transportation",
+      "row_count": 827648,
+      "column_count": 2,
+      "columns": [
+        "road_crit_index"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "\"TRANS-ROAD-CRIT-INDEX\"",
+      "description": "Transportation \u2014 road criticality index measuring structural importance of the road network per hex"
+    },
+    {
+      "id": "VUL_001",
+      "name": "Vul 001",
+      "category": "vulnerability",
+      "row_count": 827648,
+      "column_count": 2,
+      "columns": [
+        "median_income"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "VUL_001",
+      "description": "Socioeconomic Vulnerability \u2014 median household income per hex (raw dollars; lower = more vulnerable)"
+    },
+    {
+      "id": "VUL_002",
+      "name": "Vul 002",
+      "category": "vulnerability",
+      "row_count": 827648,
+      "column_count": 2,
+      "columns": [
+        "sovi"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "VUL_002",
+      "description": "Social Vulnerability Index (SoVI) \u2014 composite measure of social vulnerability to disasters; -999 = missing data"
+    },
+    {
+      "id": "VUL_003",
+      "name": "Vul 003",
+      "category": "vulnerability",
+      "row_count": 827648,
+      "column_count": 64,
+      "columns": [
+        "nri_eal",
+        "nri_ealb_AVLN",
+        "nri_ealpe_AVLN",
+        "nri_eal_AVLN",
+        "nri_ealb_CFLD",
+        "nri_ealpe_CFLD",
+        "nri_eal_CFLD",
+        "nri_ealb_CWAV",
+        "nri_ealpe_CWAV",
+        "nri_eala_CWAV",
+        "nri_eal_CWAV",
+        "nri_eala_DRGT",
+        "nri_eal_DRGT",
+        "nri_ealb_ERQK",
+        "nri_ealpe_ERQK",
+        "nri_eal_ERQK",
+        "nri_ealb_HAIL",
+        "nri_ealpe_HAIL",
+        "nri_eala_HAIL",
+        "nri_eal_HAIL",
+        "nri_ealb_HWAV",
+        "nri_ealpe_HWAV",
+        "nri_eala_HWAV",
+        "nri_eal_HWAV",
+        "nri_ealb_HRCN",
+        "nri_ealpe_HRCN",
+        "nri_eala_HRCN",
+        "nri_eal_HRCN",
+        "nri_ealb_ISTM",
+        "nri_ealpe_ISTM",
+        "nri_eal_ISTM",
+        "nri_ealb_LNDS",
+        "nri_ealpe_LNDS",
+        "nri_eal_LNDS",
+        "nri_ealb_LTNG",
+        "nri_ealpe_LTNG",
+        "nri_eal_LTNG",
+        "nri_ealb_RFLD",
+        "nri_ealpe_RFLD",
+        "nri_eala_RFLD",
+        "nri_eal_RFLD",
+        "nri_ealb_SWND",
+        "nri_ealpe_SWND",
+        "nri_eala_SWND",
+        "nri_eal_SWND",
+        "nri_ealb_TRND",
+        "nri_ealpe_TRND",
+        "nri_eala_TRND",
+        "nri_eal_TRND",
+        "nri_ealb_TSUN",
+        "nri_ealpe_TSUN",
+        "nri_eal_TSUN",
+        "nri_ealb_VLCN",
+        "nri_ealpe_VLCN",
+        "nri_eal_VLCN",
+        "nri_ealb_WFIR",
+        "nri_ealpe_WFIR",
+        "nri_eala_WFIR",
+        "nri_eal_WFIR",
+        "nri_ealb_WNTW",
+        "nri_ealpe_WNTW",
+        "nri_eala_WNTW",
+        "nri_eal_WNTW"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "VUL_003",
+      "description": "FEMA NRI Expected Annual Loss \u2014 total and per-hazard expected annual loss (buildings, population, agriculture) across 18 hazard types"
+    },
+    {
+      "id": "VUL_004",
+      "name": "Vul 004",
+      "category": "vulnerability",
+      "row_count": 827648,
+      "column_count": 2,
+      "columns": [
+        "psvi_score"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "VUL_004",
+      "description": "Power System Vulnerability Index (PSVI) \u2014 vulnerability of the power grid infrastructure per hex"
+    },
+    {
+      "id": "crown_fire_probability",
+      "name": "Crown Fire Probability",
+      "category": "hazard_wildfire",
+      "row_count": 827648,
+      "column_count": 2,
+      "columns": [
+        "crown_fire_prob"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "crown_fire_probability",
+      "description": "Wildfire Hazard \u2014 probability of crown fire occurrence per hex"
+    },
+    {
+      "id": "hex_county_state_zip_crosswalk",
+      "name": "Hex County State Zip Crosswalk",
+      "category": "crosswalk",
+      "row_count": 827648,
+      "column_count": 6,
+      "columns": [
+        "County",
+        "State",
+        "Zipcode",
+        "hex_id_l7",
+        "hex_id_l6"
+      ],
+      "has_geometry": false,
+      "sql_quoted_name": "hex_county_state_zip_crosswalk",
+      "description": "Geographic crosswalk \u2014 maps H3 hex IDs to county, state, ZIP code, and parent hex resolutions (L6/L7)"
+    }
+  ],
+  "columns": [
+    {
+      "id": "CRIT_LIFE_001.hex_id",
+      "table_name": "CRIT_LIFE_001",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "CRIT_LIFE_001.hex_fc_rac_hospital",
+      "table_name": "CRIT_LIFE_001",
+      "column_name": "hex_fc_rac_hospital",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.9992,
+      "description": "Lifeline functional criticality score for hospital access (RAC method)"
+    },
+    {
+      "id": "CRIT_LIFE_001.hex_fc_rac_grocery",
+      "table_name": "CRIT_LIFE_001",
+      "column_name": "hex_fc_rac_grocery",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.998,
+      "description": "Lifeline functional criticality score for grocery store access (RAC method)"
+    },
+    {
+      "id": "CRIT_LIFE_002.hex_id",
+      "table_name": "CRIT_LIFE_002",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "CRIT_LIFE_002.hex_fc_max_grocery",
+      "table_name": "CRIT_LIFE_002",
+      "column_name": "hex_fc_max_grocery",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.998,
+      "description": "Lifeline functional criticality score for nearest grocery store (max facility method)"
+    },
+    {
+      "id": "CRIT_LIFE_002.hex_fc_max_hospital",
+      "table_name": "CRIT_LIFE_002",
+      "column_name": "hex_fc_max_hospital",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.9992,
+      "description": "Lifeline functional criticality score for nearest hospital (max facility method)"
+    },
+    {
+      "id": "CRIT_LIFE_003.hex_id",
+      "table_name": "CRIT_LIFE_003",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "CRIT_LIFE_003.conc_index_grocery",
+      "table_name": "CRIT_LIFE_003",
+      "column_name": "conc_index_grocery",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.998,
+      "description": "Lifeline functional criticality \u2014 spatial concentration index for grocery stores"
+    },
+    {
+      "id": "CRIT_LIFE_003.conc_index_hospital",
+      "table_name": "CRIT_LIFE_003",
+      "column_name": "conc_index_hospital",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.9992,
+      "description": "Lifeline functional criticality \u2014 spatial concentration index for hospitals"
+    },
+    {
+      "id": "CRIT_LIFE_004.hex_id",
+      "table_name": "CRIT_LIFE_004",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "CRIT_LIFE_004.hex_fc_top3_grocery",
+      "table_name": "CRIT_LIFE_004",
+      "column_name": "hex_fc_top3_grocery",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.998,
+      "description": "Lifeline functional criticality score for top-3 nearest grocery stores (weighted)"
+    },
+    {
+      "id": "CRIT_LIFE_004.hex_fc_top3_hospital",
+      "table_name": "CRIT_LIFE_004",
+      "column_name": "hex_fc_top3_hospital",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.9992,
+      "description": "Lifeline functional criticality score for top-3 nearest hospitals (weighted)"
+    },
+    {
+      "id": "CR_001.hex_id",
+      "table_name": "CR_001",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "CR_001.nri_cri_value",
+      "table_name": "CR_001",
+      "column_name": "nri_cri_value",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Community Resilience Index raw value (unscaled composite)"
+    },
+    {
+      "id": "CR_001.nri_cri_score",
+      "table_name": "CR_001",
+      "column_name": "nri_cri_score",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Community Resilience Index normalized score (0\u2013100)"
+    },
+    {
+      "id": "EX_BLD_001.hex_id",
+      "table_name": "EX_BLD_001",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "EX_BLD_001.building_count",
+      "table_name": "EX_BLD_001",
+      "column_name": "building_count",
+      "dtype": "BIGINT",
+      "is_join_key": false,
+      "null_fraction": 0.0,
+      "description": "Number of buildings within the hex cell"
+    },
+    {
+      "id": "EX_BLD_002.hex_id",
+      "table_name": "EX_BLD_002",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "EX_BLD_002.hEE",
+      "table_name": "EX_BLD_002",
+      "column_name": "hEE",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0317,
+      "description": "Home-value weighted economic exposure of buildings in USD"
+    },
+    {
+      "id": "EX_INF_001.hex_id",
+      "table_name": "EX_INF_001",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "EX_INF_001.CID",
+      "table_name": "EX_INF_001",
+      "column_name": "CID",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0,
+      "description": "Weighted critical infrastructure density index (0\u20131)"
+    },
+    {
+      "id": "EX_LIFE_001.hex_id",
+      "table_name": "EX_LIFE_001",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "EX_LIFE_001.groc_per1k",
+      "table_name": "EX_LIFE_001",
+      "column_name": "groc_per1k",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0,
+      "description": "Grocery stores per 1,000 residents"
+    },
+    {
+      "id": "EX_LIFE_002.hex_id",
+      "table_name": "EX_LIFE_002",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "EX_LIFE_002.pharm_per10k",
+      "table_name": "EX_LIFE_002",
+      "column_name": "pharm_per10k",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0,
+      "description": "Pharmacies per 10,000 residents"
+    },
+    {
+      "id": "EX_LIFE_003.hex_id",
+      "table_name": "EX_LIFE_003",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "EX_LIFE_003.fuel_per10k",
+      "table_name": "EX_LIFE_003",
+      "column_name": "fuel_per10k",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0,
+      "description": "Fuel/gas stations per 10,000 residents"
+    },
+    {
+      "id": "EX_LIFE_004.hex_id",
+      "table_name": "EX_LIFE_004",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "EX_LIFE_004.hosp_n",
+      "table_name": "EX_LIFE_004",
+      "column_name": "hosp_n",
+      "dtype": "BIGINT",
+      "is_join_key": false,
+      "null_fraction": 0.0,
+      "description": "Number of hospitals in hex (hosp_n > 0 means a hospital is present)"
+    },
+    {
+      "id": "EX_POP_001.hex_id",
+      "table_name": "EX_POP_001",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "EX_POP_001.population_7km",
+      "table_name": "EX_POP_001",
+      "column_name": "population_7km",
+      "dtype": "BIGINT",
+      "is_join_key": false,
+      "null_fraction": 0.0,
+      "description": "Total population within a 7 km radius of the hex centroid"
+    },
+    {
+      "id": "HIFLD-EMERGENC-FIRE_EMS-N.hex_id",
+      "table_name": "HIFLD-EMERGENC-FIRE_EMS-N",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "HIFLD-EMERGENC-FIRE_EMS-N.hifld_fire_and_emergency_medical_service_stations_fire_stations_ems_stations_n",
+      "table_name": "HIFLD-EMERGENC-FIRE_EMS-N",
+      "column_name": "hifld_fire_and_emergency_medical_service_stations_fire_stations_ems_stations_n",
+      "dtype": "BIGINT",
+      "is_join_key": false,
+      "null_fraction": 0.0,
+      "description": "Count of fire stations and EMS facilities within the hex"
+    },
+    {
+      "id": "HIFLD-EMERGENC-LOCAL_EOC-N.hex_id",
+      "table_name": "HIFLD-EMERGENC-LOCAL_EOC-N",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "HIFLD-EMERGENC-LOCAL_EOC-N.hifld_local_emergency_operations_center_local_eoc_n",
+      "table_name": "HIFLD-EMERGENC-LOCAL_EOC-N",
+      "column_name": "hifld_local_emergency_operations_center_local_eoc_n",
+      "dtype": "BIGINT",
+      "is_join_key": false,
+      "null_fraction": 0.0,
+      "description": "Count of local Emergency Operations Centers within the hex"
+    },
+    {
+      "id": "HIFLD-EMERGENC-LOCAL_LAW-N.hex_id",
+      "table_name": "HIFLD-EMERGENC-LOCAL_LAW-N",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "HIFLD-EMERGENC-LOCAL_LAW-N.hifld_local_law_enforcement_n",
+      "table_name": "HIFLD-EMERGENC-LOCAL_LAW-N",
+      "column_name": "hifld_local_law_enforcement_n",
+      "dtype": "BIGINT",
+      "is_join_key": false,
+      "null_fraction": 0.0,
+      "description": "Count of local law enforcement facilities within the hex"
+    },
+    {
+      "id": "HIFLD-EMERGENC-SHELTER-N.hex_id",
+      "table_name": "HIFLD-EMERGENC-SHELTER-N",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "HIFLD-EMERGENC-SHELTER-N.hifld_national_shelter_system_facilities_shelter_locations_n",
+      "table_name": "HIFLD-EMERGENC-SHELTER-N",
+      "column_name": "hifld_national_shelter_system_facilities_shelter_locations_n",
+      "dtype": "BIGINT",
+      "is_join_key": false,
+      "null_fraction": 0.0,
+      "description": "Count of emergency shelter locations within the hex"
+    },
+    {
+      "id": "HIFLD-EMERGENC-STATE_EOC-N.hex_id",
+      "table_name": "HIFLD-EMERGENC-STATE_EOC-N",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "HIFLD-EMERGENC-STATE_EOC-N.hifld_state_emergency_operations_centers_n",
+      "table_name": "HIFLD-EMERGENC-STATE_EOC-N",
+      "column_name": "hifld_state_emergency_operations_centers_n",
+      "dtype": "BIGINT",
+      "is_join_key": false,
+      "null_fraction": 0.0,
+      "description": "Count of state Emergency Operations Centers within the hex"
+    },
+    {
+      "id": "HIFLD-ENERGY-PLANTS-N.hex_id",
+      "table_name": "HIFLD-ENERGY-PLANTS-N",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "HIFLD-ENERGY-PLANTS-N.geometry",
+      "table_name": "HIFLD-ENERGY-PLANTS-N",
+      "column_name": "geometry",
+      "dtype": "BLOB",
+      "is_join_key": false,
+      "null_fraction": 0.0,
+      "description": "Spatial geometry of the hex cell (WKT format)"
+    },
+    {
+      "id": "HIFLD-ENERGY-PLANTS-N.hifld_energy_plants_n",
+      "table_name": "HIFLD-ENERGY-PLANTS-N",
+      "column_name": "hifld_energy_plants_n",
+      "dtype": "BIGINT",
+      "is_join_key": false,
+      "null_fraction": 0.0,
+      "description": "Count of power plants within the hex"
+    },
+    {
+      "id": "HIFLD-ENERGY-SUBSTN-N.hex_id",
+      "table_name": "HIFLD-ENERGY-SUBSTN-N",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "HIFLD-ENERGY-SUBSTN-N.hifld_energy_substations_n",
+      "table_name": "HIFLD-ENERGY-SUBSTN-N",
+      "column_name": "hifld_energy_substations_n",
+      "dtype": "BIGINT",
+      "is_join_key": false,
+      "null_fraction": 0.0,
+      "description": "Count of electrical substations within the hex"
+    },
+    {
+      "id": "HIFLD-ENERGY-TXKM-230P.hex_id",
+      "table_name": "HIFLD-ENERGY-TXKM-230P",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "HIFLD-ENERGY-TXKM-230P.hifld_energy_tx_km_230p",
+      "table_name": "HIFLD-ENERGY-TXKM-230P",
+      "column_name": "hifld_energy_tx_km_230p",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0,
+      "description": "Total length (km) of high-voltage (230kV+) transmission lines within the hex"
+    },
+    {
+      "id": "HIFLD-HEALTH-HOSP-N.hex_id",
+      "table_name": "HIFLD-HEALTH-HOSP-N",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "HIFLD-HEALTH-HOSP-N.hifld_health_hospitals_n",
+      "table_name": "HIFLD-HEALTH-HOSP-N",
+      "column_name": "hifld_health_hospitals_n",
+      "dtype": "BIGINT",
+      "is_join_key": false,
+      "null_fraction": 0.0,
+      "description": "Count of hospitals within the hex"
+    },
+    {
+      "id": "HIFLD-TRANSP-PRIMARY_RD-L.hex_id",
+      "table_name": "HIFLD-TRANSP-PRIMARY_RD-L",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "HIFLD-TRANSP-PRIMARY_RD-L.hifld_primary_roads_km",
+      "table_name": "HIFLD-TRANSP-PRIMARY_RD-L",
+      "column_name": "hifld_primary_roads_km",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0,
+      "description": "Total length (km) of primary roads within the hex"
+    },
+    {
+      "id": "HIFLD-WATER-WTP-N.hex_id",
+      "table_name": "HIFLD-WATER-WTP-N",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "HIFLD-WATER-WTP-N.hifld_water_wtp_n",
+      "table_name": "HIFLD-WATER-WTP-N",
+      "column_name": "hifld_water_wtp_n",
+      "dtype": "BIGINT",
+      "is_join_key": false,
+      "null_fraction": 0.0,
+      "description": "Count of water treatment plants within the hex"
+    },
+    {
+      "id": "HP_FLD_002.hex_id",
+      "table_name": "HP_FLD_002",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "HP_FLD_002.nri_coastal_flood_value",
+      "table_name": "HP_FLD_002",
+      "column_name": "nri_coastal_flood_value",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.9125,
+      "description": "FEMA NRI coastal flood expected annual loss in dollars"
+    },
+    {
+      "id": "HP_FLD_002.nri_coastal_flood_score",
+      "table_name": "HP_FLD_002",
+      "column_name": "nri_coastal_flood_score",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.9125,
+      "description": "FEMA NRI coastal flood risk score (0-100 percentile)"
+    },
+    {
+      "id": "HP_FLD_002.nri_riverine_flood_value",
+      "table_name": "HP_FLD_002",
+      "column_name": "nri_riverine_flood_value",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI riverine flood expected annual loss in dollars"
+    },
+    {
+      "id": "HP_FLD_002.nri_riverine_flood_score",
+      "table_name": "HP_FLD_002",
+      "column_name": "nri_riverine_flood_score",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI riverine flood risk score (0-100 percentile)"
+    },
+    {
+      "id": "HP_HUR_001.hex_id",
+      "table_name": "HP_HUR_001",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "HP_HUR_001.hurr_strike_rate_10y",
+      "table_name": "HP_HUR_001",
+      "column_name": "hurr_strike_rate_10y",
+      "dtype": "BIGINT",
+      "is_join_key": false,
+      "null_fraction": 0.0,
+      "description": "Hurricane strike rate \u2014 expected number of hurricane strikes over a 10-year period"
+    },
+    {
+      "id": "HP_HUR_002.hex_id",
+      "table_name": "HP_HUR_002",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "HP_HUR_002.ve_ae_fraction",
+      "table_name": "HP_HUR_002",
+      "column_name": "ve_ae_fraction",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0,
+      "description": "Fraction of hex area within FEMA VE (coastal high hazard) or AE (100-year flood) zones \u2014 proxy for coastal surge susceptibility"
+    },
+    {
+      "id": "HP_TOR_001.hex_id",
+      "table_name": "HP_TOR_001",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "HP_TOR_001.nri_tornado_value",
+      "table_name": "HP_TOR_001",
+      "column_name": "nri_tornado_value",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI tornado expected annual loss in dollars"
+    },
+    {
+      "id": "HP_TOR_001.nri_tornado_score",
+      "table_name": "HP_TOR_001",
+      "column_name": "nri_tornado_score",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI tornado risk score (0-100 percentile)"
+    },
+    {
+      "id": "HP_WFIR_001.hex_id",
+      "table_name": "HP_WFIR_001",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "HP_WFIR_001.nri_wildfire_value",
+      "table_name": "HP_WFIR_001",
+      "column_name": "nri_wildfire_value",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI wildfire expected annual loss in dollars"
+    },
+    {
+      "id": "HP_WFIR_001.nri_wildfire_score",
+      "table_name": "HP_WFIR_001",
+      "column_name": "nri_wildfire_score",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI wildfire risk score (0-100 percentile)"
+    },
+    {
+      "id": "TRANS-ROAD-CRIT-INDEX.hex_id",
+      "table_name": "TRANS-ROAD-CRIT-INDEX",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "TRANS-ROAD-CRIT-INDEX.road_crit_index",
+      "table_name": "TRANS-ROAD-CRIT-INDEX",
+      "column_name": "road_crit_index",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0,
+      "description": "Road criticality index \u2014 measures structural importance of the road network to regional connectivity"
+    },
+    {
+      "id": "VUL_001.hex_id",
+      "table_name": "VUL_001",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "VUL_001.median_income",
+      "table_name": "VUL_001",
+      "column_name": "median_income",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0,
+      "description": "Median household income in raw dollars (e.g., 65000). LOWER = more economically vulnerable. There is no inv_median_income column."
+    },
+    {
+      "id": "VUL_002.hex_id",
+      "table_name": "VUL_002",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "VUL_002.sovi",
+      "table_name": "VUL_002",
+      "column_name": "sovi",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0098,
+      "description": "Social Vulnerability Index (SoVI) score \u2014 composite of demographic and socioeconomic vulnerability factors; -999 = missing"
+    },
+    {
+      "id": "VUL_003.hex_id",
+      "table_name": "VUL_003",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "VUL_003.nri_eal",
+      "table_name": "VUL_003",
+      "column_name": "nri_eal",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI total Expected Annual Loss across all hazard types (USD)"
+    },
+    {
+      "id": "VUL_003.nri_ealb_AVLN",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealb_AVLN",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 1.0,
+      "description": "FEMA NRI Expected Annual Loss \u2014 buildings (avalanche)"
+    },
+    {
+      "id": "VUL_003.nri_ealpe_AVLN",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealpe_AVLN",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 1.0,
+      "description": "FEMA NRI Expected Annual Loss \u2014 population equivalence (avalanche)"
+    },
+    {
+      "id": "VUL_003.nri_eal_AVLN",
+      "table_name": "VUL_003",
+      "column_name": "nri_eal_AVLN",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 1.0,
+      "description": "FEMA NRI Expected Annual Loss \u2014 total (avalanche)"
+    },
+    {
+      "id": "VUL_003.nri_ealb_CFLD",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealb_CFLD",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.9125,
+      "description": "FEMA NRI Expected Annual Loss \u2014 buildings (coastal flood)"
+    },
+    {
+      "id": "VUL_003.nri_ealpe_CFLD",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealpe_CFLD",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.9125,
+      "description": "FEMA NRI Expected Annual Loss \u2014 population equivalence (coastal flood)"
+    },
+    {
+      "id": "VUL_003.nri_eal_CFLD",
+      "table_name": "VUL_003",
+      "column_name": "nri_eal_CFLD",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.9125,
+      "description": "FEMA NRI Expected Annual Loss \u2014 total (coastal flood)"
+    },
+    {
+      "id": "VUL_003.nri_ealb_CWAV",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealb_CWAV",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 buildings (cold wave)"
+    },
+    {
+      "id": "VUL_003.nri_ealpe_CWAV",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealpe_CWAV",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 population equivalence (cold wave)"
+    },
+    {
+      "id": "VUL_003.nri_eala_CWAV",
+      "table_name": "VUL_003",
+      "column_name": "nri_eala_CWAV",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 agriculture (cold wave)"
+    },
+    {
+      "id": "VUL_003.nri_eal_CWAV",
+      "table_name": "VUL_003",
+      "column_name": "nri_eal_CWAV",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 total (cold wave)"
+    },
+    {
+      "id": "VUL_003.nri_eala_DRGT",
+      "table_name": "VUL_003",
+      "column_name": "nri_eala_DRGT",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 agriculture (drought)"
+    },
+    {
+      "id": "VUL_003.nri_eal_DRGT",
+      "table_name": "VUL_003",
+      "column_name": "nri_eal_DRGT",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 total (drought)"
+    },
+    {
+      "id": "VUL_003.nri_ealb_ERQK",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealb_ERQK",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 buildings (earthquake)"
+    },
+    {
+      "id": "VUL_003.nri_ealpe_ERQK",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealpe_ERQK",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 population equivalence (earthquake)"
+    },
+    {
+      "id": "VUL_003.nri_eal_ERQK",
+      "table_name": "VUL_003",
+      "column_name": "nri_eal_ERQK",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 total (earthquake)"
+    },
+    {
+      "id": "VUL_003.nri_ealb_HAIL",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealb_HAIL",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 buildings (hail)"
+    },
+    {
+      "id": "VUL_003.nri_ealpe_HAIL",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealpe_HAIL",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 population equivalence (hail)"
+    },
+    {
+      "id": "VUL_003.nri_eala_HAIL",
+      "table_name": "VUL_003",
+      "column_name": "nri_eala_HAIL",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 agriculture (hail)"
+    },
+    {
+      "id": "VUL_003.nri_eal_HAIL",
+      "table_name": "VUL_003",
+      "column_name": "nri_eal_HAIL",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 total (hail)"
+    },
+    {
+      "id": "VUL_003.nri_ealb_HWAV",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealb_HWAV",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 buildings (heat wave)"
+    },
+    {
+      "id": "VUL_003.nri_ealpe_HWAV",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealpe_HWAV",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 population equivalence (heat wave)"
+    },
+    {
+      "id": "VUL_003.nri_eala_HWAV",
+      "table_name": "VUL_003",
+      "column_name": "nri_eala_HWAV",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 agriculture (heat wave)"
+    },
+    {
+      "id": "VUL_003.nri_eal_HWAV",
+      "table_name": "VUL_003",
+      "column_name": "nri_eal_HWAV",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 total (heat wave)"
+    },
+    {
+      "id": "VUL_003.nri_ealb_HRCN",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealb_HRCN",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0588,
+      "description": "FEMA NRI Expected Annual Loss \u2014 buildings (hurricane)"
+    },
+    {
+      "id": "VUL_003.nri_ealpe_HRCN",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealpe_HRCN",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0588,
+      "description": "FEMA NRI Expected Annual Loss \u2014 population equivalence (hurricane)"
+    },
+    {
+      "id": "VUL_003.nri_eala_HRCN",
+      "table_name": "VUL_003",
+      "column_name": "nri_eala_HRCN",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0588,
+      "description": "FEMA NRI Expected Annual Loss \u2014 agriculture (hurricane)"
+    },
+    {
+      "id": "VUL_003.nri_eal_HRCN",
+      "table_name": "VUL_003",
+      "column_name": "nri_eal_HRCN",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0588,
+      "description": "FEMA NRI Expected Annual Loss \u2014 total (hurricane)"
+    },
+    {
+      "id": "VUL_003.nri_ealb_ISTM",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealb_ISTM",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 buildings (ice storm)"
+    },
+    {
+      "id": "VUL_003.nri_ealpe_ISTM",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealpe_ISTM",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 population equivalence (ice storm)"
+    },
+    {
+      "id": "VUL_003.nri_eal_ISTM",
+      "table_name": "VUL_003",
+      "column_name": "nri_eal_ISTM",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 total (ice storm)"
+    },
+    {
+      "id": "VUL_003.nri_ealb_LNDS",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealb_LNDS",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 buildings (landslide)"
+    },
+    {
+      "id": "VUL_003.nri_ealpe_LNDS",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealpe_LNDS",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 population equivalence (landslide)"
+    },
+    {
+      "id": "VUL_003.nri_eal_LNDS",
+      "table_name": "VUL_003",
+      "column_name": "nri_eal_LNDS",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 total (landslide)"
+    },
+    {
+      "id": "VUL_003.nri_ealb_LTNG",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealb_LTNG",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 buildings (lightning)"
+    },
+    {
+      "id": "VUL_003.nri_ealpe_LTNG",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealpe_LTNG",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 population equivalence (lightning)"
+    },
+    {
+      "id": "VUL_003.nri_eal_LTNG",
+      "table_name": "VUL_003",
+      "column_name": "nri_eal_LTNG",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 total (lightning)"
+    },
+    {
+      "id": "VUL_003.nri_ealb_RFLD",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealb_RFLD",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 buildings (riverine flood)"
+    },
+    {
+      "id": "VUL_003.nri_ealpe_RFLD",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealpe_RFLD",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 population equivalence (riverine flood)"
+    },
+    {
+      "id": "VUL_003.nri_eala_RFLD",
+      "table_name": "VUL_003",
+      "column_name": "nri_eala_RFLD",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 agriculture (riverine flood)"
+    },
+    {
+      "id": "VUL_003.nri_eal_RFLD",
+      "table_name": "VUL_003",
+      "column_name": "nri_eal_RFLD",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 total (riverine flood)"
+    },
+    {
+      "id": "VUL_003.nri_ealb_SWND",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealb_SWND",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 buildings (strong wind)"
+    },
+    {
+      "id": "VUL_003.nri_ealpe_SWND",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealpe_SWND",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 population equivalence (strong wind)"
+    },
+    {
+      "id": "VUL_003.nri_eala_SWND",
+      "table_name": "VUL_003",
+      "column_name": "nri_eala_SWND",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 agriculture (strong wind)"
+    },
+    {
+      "id": "VUL_003.nri_eal_SWND",
+      "table_name": "VUL_003",
+      "column_name": "nri_eal_SWND",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 total (strong wind)"
+    },
+    {
+      "id": "VUL_003.nri_ealb_TRND",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealb_TRND",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 buildings (tornado)"
+    },
+    {
+      "id": "VUL_003.nri_ealpe_TRND",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealpe_TRND",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 population equivalence (tornado)"
+    },
+    {
+      "id": "VUL_003.nri_eala_TRND",
+      "table_name": "VUL_003",
+      "column_name": "nri_eala_TRND",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 agriculture (tornado)"
+    },
+    {
+      "id": "VUL_003.nri_eal_TRND",
+      "table_name": "VUL_003",
+      "column_name": "nri_eal_TRND",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 total (tornado)"
+    },
+    {
+      "id": "VUL_003.nri_ealb_TSUN",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealb_TSUN",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 1.0,
+      "description": "FEMA NRI Expected Annual Loss \u2014 buildings (tsunami)"
+    },
+    {
+      "id": "VUL_003.nri_ealpe_TSUN",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealpe_TSUN",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 1.0,
+      "description": "FEMA NRI Expected Annual Loss \u2014 population equivalence (tsunami)"
+    },
+    {
+      "id": "VUL_003.nri_eal_TSUN",
+      "table_name": "VUL_003",
+      "column_name": "nri_eal_TSUN",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 1.0,
+      "description": "FEMA NRI Expected Annual Loss \u2014 total (tsunami)"
+    },
+    {
+      "id": "VUL_003.nri_ealb_VLCN",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealb_VLCN",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 1.0,
+      "description": "FEMA NRI Expected Annual Loss \u2014 buildings (volcanic activity)"
+    },
+    {
+      "id": "VUL_003.nri_ealpe_VLCN",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealpe_VLCN",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 1.0,
+      "description": "FEMA NRI Expected Annual Loss \u2014 population equivalence (volcanic activity)"
+    },
+    {
+      "id": "VUL_003.nri_eal_VLCN",
+      "table_name": "VUL_003",
+      "column_name": "nri_eal_VLCN",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 1.0,
+      "description": "FEMA NRI Expected Annual Loss \u2014 total (volcanic activity)"
+    },
+    {
+      "id": "VUL_003.nri_ealb_WFIR",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealb_WFIR",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 buildings (wildfire)"
+    },
+    {
+      "id": "VUL_003.nri_ealpe_WFIR",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealpe_WFIR",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 population equivalence (wildfire)"
+    },
+    {
+      "id": "VUL_003.nri_eala_WFIR",
+      "table_name": "VUL_003",
+      "column_name": "nri_eala_WFIR",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 agriculture (wildfire)"
+    },
+    {
+      "id": "VUL_003.nri_eal_WFIR",
+      "table_name": "VUL_003",
+      "column_name": "nri_eal_WFIR",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 total (wildfire)"
+    },
+    {
+      "id": "VUL_003.nri_ealb_WNTW",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealb_WNTW",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 buildings (winter weather)"
+    },
+    {
+      "id": "VUL_003.nri_ealpe_WNTW",
+      "table_name": "VUL_003",
+      "column_name": "nri_ealpe_WNTW",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 population equivalence (winter weather)"
+    },
+    {
+      "id": "VUL_003.nri_eala_WNTW",
+      "table_name": "VUL_003",
+      "column_name": "nri_eala_WNTW",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 agriculture (winter weather)"
+    },
+    {
+      "id": "VUL_003.nri_eal_WNTW",
+      "table_name": "VUL_003",
+      "column_name": "nri_eal_WNTW",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0049,
+      "description": "FEMA NRI Expected Annual Loss \u2014 total (winter weather)"
+    },
+    {
+      "id": "VUL_004.hex_id",
+      "table_name": "VUL_004",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "VUL_004.psvi_score",
+      "table_name": "VUL_004",
+      "column_name": "psvi_score",
+      "dtype": "DOUBLE",
+      "is_join_key": false,
+      "null_fraction": 0.0,
+      "description": "Power System Vulnerability Index (PSVI) score \u2014 vulnerability of local power grid infrastructure"
+    },
+    {
+      "id": "crown_fire_probability.hex_id",
+      "table_name": "crown_fire_probability",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "crown_fire_probability.crown_fire_prob",
+      "table_name": "crown_fire_probability",
+      "column_name": "crown_fire_prob",
+      "dtype": "FLOAT",
+      "is_join_key": false,
+      "null_fraction": 0.0016,
+      "description": "Probability of crown fire occurrence based on vegetation, slope, and fuel load"
+    },
+    {
+      "id": "hex_county_state_zip_crosswalk.hex_id",
+      "table_name": "hex_county_state_zip_crosswalk",
+      "column_name": "hex_id",
+      "dtype": "VARCHAR",
+      "is_join_key": true,
+      "null_fraction": 0.0,
+      "description": "H3 hexagonal grid cell identifier (primary key, resolution 8)"
+    },
+    {
+      "id": "hex_county_state_zip_crosswalk.County",
+      "table_name": "hex_county_state_zip_crosswalk",
+      "column_name": "County",
+      "dtype": "VARCHAR",
+      "is_join_key": false,
+      "null_fraction": 0.0,
+      "description": "County name for the hex cell"
+    },
+    {
+      "id": "hex_county_state_zip_crosswalk.State",
+      "table_name": "hex_county_state_zip_crosswalk",
+      "column_name": "State",
+      "dtype": "VARCHAR",
+      "is_join_key": false,
+      "null_fraction": 0.0,
+      "description": "State name for the hex cell"
+    },
+    {
+      "id": "hex_county_state_zip_crosswalk.Zipcode",
+      "table_name": "hex_county_state_zip_crosswalk",
+      "column_name": "Zipcode",
+      "dtype": "VARCHAR",
+      "is_join_key": false,
+      "null_fraction": 0.1411,
+      "description": "ZIP code for the hex cell centroid"
+    },
+    {
+      "id": "hex_county_state_zip_crosswalk.hex_id_l7",
+      "table_name": "hex_county_state_zip_crosswalk",
+      "column_name": "hex_id_l7",
+      "dtype": "VARCHAR",
+      "is_join_key": false,
+      "null_fraction": 0.0,
+      "description": "Parent H3 hex ID at resolution 7 (coarser scale)"
+    },
+    {
+      "id": "hex_county_state_zip_crosswalk.hex_id_l6",
+      "table_name": "hex_county_state_zip_crosswalk",
+      "column_name": "hex_id_l6",
+      "dtype": "VARCHAR",
+      "is_join_key": false,
+      "null_fraction": 0.0,
+      "description": "Parent H3 hex ID at resolution 6 (coarsest scale)"
+    },
+    {
+      "id": "EX_POP_001.population_per_hex",
+      "table_name": "EX_POP_001",
+      "column_name": "population_per_hex",
+      "dtype": "BIGINT",
+      "is_join_key": false,
+      "null_fraction": 0.0,
+      "description": "Total population residing within the hex itself (NON-OVERLAPPING). Use SUM(population_per_hex) for accurate region-wide totals; do NOT SUM population_7km (its 7km buffer overlaps neighbors and overcounts)."
+    }
+  ],
+  "join_rules": [
+    {
+      "id": "join__hex_id",
+      "join_type": "primary_key",
+      "join_key": "hex_id",
+      "tables": [
+        "CRIT_LIFE_001",
+        "CRIT_LIFE_002",
+        "CRIT_LIFE_003",
+        "CRIT_LIFE_004",
+        "CR_001",
+        "EX_BLD_001",
+        "EX_BLD_002",
+        "EX_INF_001",
+        "EX_LIFE_001",
+        "EX_LIFE_002",
+        "EX_LIFE_003",
+        "EX_LIFE_004",
+        "EX_POP_001",
+        "HIFLD-EMERGENC-FIRE_EMS-N",
+        "HIFLD-EMERGENC-LOCAL_EOC-N",
+        "HIFLD-EMERGENC-LOCAL_LAW-N",
+        "HIFLD-EMERGENC-SHELTER-N",
+        "HIFLD-EMERGENC-STATE_EOC-N",
+        "HIFLD-ENERGY-PLANTS-N",
+        "HIFLD-ENERGY-SUBSTN-N",
+        "HIFLD-ENERGY-TXKM-230P",
+        "HIFLD-HEALTH-HOSP-N",
+        "HIFLD-TRANSP-PRIMARY_RD-L",
+        "HIFLD-WATER-WTP-N",
+        "HP_FLD_002",
+        "HP_HUR_001",
+        "HP_HUR_002",
+        "HP_TOR_001",
+        "HP_WFIR_001",
+        "TRANS-ROAD-CRIT-INDEX",
+        "VUL_001",
+        "VUL_002",
+        "VUL_003",
+        "VUL_004",
+        "crown_fire_probability"
+      ],
+      "sql_template": "A.hex_id = B.hex_id",
+      "description": "All 35 data tables share hex_id (H3 level-8). Direct equi-join on hex_id."
+    },
+    {
+      "id": "join__crosswalk_county",
+      "join_type": "crosswalk",
+      "join_key": "County",
+      "tables": [
+        "hex_county_state_zip_crosswalk",
+        "CRIT_LIFE_001",
+        "CRIT_LIFE_002",
+        "CRIT_LIFE_003",
+        "CRIT_LIFE_004",
+        "CR_001",
+        "EX_BLD_001",
+        "EX_BLD_002",
+        "EX_INF_001",
+        "EX_LIFE_001",
+        "EX_LIFE_002",
+        "EX_LIFE_003",
+        "EX_LIFE_004",
+        "EX_POP_001",
+        "HIFLD-EMERGENC-FIRE_EMS-N",
+        "HIFLD-EMERGENC-LOCAL_EOC-N",
+        "HIFLD-EMERGENC-LOCAL_LAW-N",
+        "HIFLD-EMERGENC-SHELTER-N",
+        "HIFLD-EMERGENC-STATE_EOC-N",
+        "HIFLD-ENERGY-PLANTS-N",
+        "HIFLD-ENERGY-SUBSTN-N",
+        "HIFLD-ENERGY-TXKM-230P",
+        "HIFLD-HEALTH-HOSP-N",
+        "HIFLD-TRANSP-PRIMARY_RD-L",
+        "HIFLD-WATER-WTP-N",
+        "HP_FLD_002",
+        "HP_HUR_001",
+        "HP_HUR_002",
+        "HP_TOR_001",
+        "HP_WFIR_001",
+        "TRANS-ROAD-CRIT-INDEX",
+        "VUL_001",
+        "VUL_002",
+        "VUL_003",
+        "VUL_004",
+        "crown_fire_probability"
+      ],
+      "sql_template": "A.hex_id = hex_county_state_zip_crosswalk.hex_id AND hex_county_state_zip_crosswalk.County = '<value>'",
+      "description": "Filter any data table by County through the crosswalk table. Join data table to crosswalk on hex_id, then filter on County."
+    },
+    {
+      "id": "join__crosswalk_state",
+      "join_type": "crosswalk",
+      "join_key": "State",
+      "tables": [
+        "hex_county_state_zip_crosswalk",
+        "CRIT_LIFE_001",
+        "CRIT_LIFE_002",
+        "CRIT_LIFE_003",
+        "CRIT_LIFE_004",
+        "CR_001",
+        "EX_BLD_001",
+        "EX_BLD_002",
+        "EX_INF_001",
+        "EX_LIFE_001",
+        "EX_LIFE_002",
+        "EX_LIFE_003",
+        "EX_LIFE_004",
+        "EX_POP_001",
+        "HIFLD-EMERGENC-FIRE_EMS-N",
+        "HIFLD-EMERGENC-LOCAL_EOC-N",
+        "HIFLD-EMERGENC-LOCAL_LAW-N",
+        "HIFLD-EMERGENC-SHELTER-N",
+        "HIFLD-EMERGENC-STATE_EOC-N",
+        "HIFLD-ENERGY-PLANTS-N",
+        "HIFLD-ENERGY-SUBSTN-N",
+        "HIFLD-ENERGY-TXKM-230P",
+        "HIFLD-HEALTH-HOSP-N",
+        "HIFLD-TRANSP-PRIMARY_RD-L",
+        "HIFLD-WATER-WTP-N",
+        "HP_FLD_002",
+        "HP_HUR_001",
+        "HP_HUR_002",
+        "HP_TOR_001",
+        "HP_WFIR_001",
+        "TRANS-ROAD-CRIT-INDEX",
+        "VUL_001",
+        "VUL_002",
+        "VUL_003",
+        "VUL_004",
+        "crown_fire_probability"
+      ],
+      "sql_template": "A.hex_id = hex_county_state_zip_crosswalk.hex_id AND hex_county_state_zip_crosswalk.State = '<value>'",
+      "description": "Filter any data table by State through the crosswalk table. Join data table to crosswalk on hex_id, then filter on State."
+    },
+    {
+      "id": "join__crosswalk_zipcode",
+      "join_type": "crosswalk",
+      "join_key": "Zipcode",
+      "tables": [
+        "hex_county_state_zip_crosswalk",
+        "CRIT_LIFE_001",
+        "CRIT_LIFE_002",
+        "CRIT_LIFE_003",
+        "CRIT_LIFE_004",
+        "CR_001",
+        "EX_BLD_001",
+        "EX_BLD_002",
+        "EX_INF_001",
+        "EX_LIFE_001",
+        "EX_LIFE_002",
+        "EX_LIFE_003",
+        "EX_LIFE_004",
+        "EX_POP_001",
+        "HIFLD-EMERGENC-FIRE_EMS-N",
+        "HIFLD-EMERGENC-LOCAL_EOC-N",
+        "HIFLD-EMERGENC-LOCAL_LAW-N",
+        "HIFLD-EMERGENC-SHELTER-N",
+        "HIFLD-EMERGENC-STATE_EOC-N",
+        "HIFLD-ENERGY-PLANTS-N",
+        "HIFLD-ENERGY-SUBSTN-N",
+        "HIFLD-ENERGY-TXKM-230P",
+        "HIFLD-HEALTH-HOSP-N",
+        "HIFLD-TRANSP-PRIMARY_RD-L",
+        "HIFLD-WATER-WTP-N",
+        "HP_FLD_002",
+        "HP_HUR_001",
+        "HP_HUR_002",
+        "HP_TOR_001",
+        "HP_WFIR_001",
+        "TRANS-ROAD-CRIT-INDEX",
+        "VUL_001",
+        "VUL_002",
+        "VUL_003",
+        "VUL_004",
+        "crown_fire_probability"
+      ],
+      "sql_template": "A.hex_id = hex_county_state_zip_crosswalk.hex_id AND hex_county_state_zip_crosswalk.Zipcode = '<value>'",
+      "description": "Filter any data table by Zipcode through the crosswalk table. Join data table to crosswalk on hex_id, then filter on Zipcode."
+    },
+    {
+      "id": "join__hex_agg_l7",
+      "join_type": "hex_agg",
+      "join_key": "hex_id_l7",
+      "tables": [
+        "hex_county_state_zip_crosswalk",
+        "CRIT_LIFE_001",
+        "CRIT_LIFE_002",
+        "CRIT_LIFE_003",
+        "CRIT_LIFE_004",
+        "CR_001",
+        "EX_BLD_001",
+        "EX_BLD_002",
+        "EX_INF_001",
+        "EX_LIFE_001",
+        "EX_LIFE_002",
+        "EX_LIFE_003",
+        "EX_LIFE_004",
+        "EX_POP_001",
+        "HIFLD-EMERGENC-FIRE_EMS-N",
+        "HIFLD-EMERGENC-LOCAL_EOC-N",
+        "HIFLD-EMERGENC-LOCAL_LAW-N",
+        "HIFLD-EMERGENC-SHELTER-N",
+        "HIFLD-EMERGENC-STATE_EOC-N",
+        "HIFLD-ENERGY-PLANTS-N",
+        "HIFLD-ENERGY-SUBSTN-N",
+        "HIFLD-ENERGY-TXKM-230P",
+        "HIFLD-HEALTH-HOSP-N",
+        "HIFLD-TRANSP-PRIMARY_RD-L",
+        "HIFLD-WATER-WTP-N",
+        "HP_FLD_002",
+        "HP_HUR_001",
+        "HP_HUR_002",
+        "HP_TOR_001",
+        "HP_WFIR_001",
+        "TRANS-ROAD-CRIT-INDEX",
+        "VUL_001",
+        "VUL_002",
+        "VUL_003",
+        "VUL_004",
+        "crown_fire_probability"
+      ],
+      "sql_template": "A.hex_id = hex_county_state_zip_crosswalk.hex_id GROUP BY hex_county_state_zip_crosswalk.hex_id_l7",
+      "description": "Aggregate any data table from H3 level-8 to level-7. Join to crosswalk on hex_id, then GROUP BY hex_id_l7."
+    },
+    {
+      "id": "join__hex_agg_l6",
+      "join_type": "hex_agg",
+      "join_key": "hex_id_l6",
+      "tables": [
+        "hex_county_state_zip_crosswalk",
+        "CRIT_LIFE_001",
+        "CRIT_LIFE_002",
+        "CRIT_LIFE_003",
+        "CRIT_LIFE_004",
+        "CR_001",
+        "EX_BLD_001",
+        "EX_BLD_002",
+        "EX_INF_001",
+        "EX_LIFE_001",
+        "EX_LIFE_002",
+        "EX_LIFE_003",
+        "EX_LIFE_004",
+        "EX_POP_001",
+        "HIFLD-EMERGENC-FIRE_EMS-N",
+        "HIFLD-EMERGENC-LOCAL_EOC-N",
+        "HIFLD-EMERGENC-LOCAL_LAW-N",
+        "HIFLD-EMERGENC-SHELTER-N",
+        "HIFLD-EMERGENC-STATE_EOC-N",
+        "HIFLD-ENERGY-PLANTS-N",
+        "HIFLD-ENERGY-SUBSTN-N",
+        "HIFLD-ENERGY-TXKM-230P",
+        "HIFLD-HEALTH-HOSP-N",
+        "HIFLD-TRANSP-PRIMARY_RD-L",
+        "HIFLD-WATER-WTP-N",
+        "HP_FLD_002",
+        "HP_HUR_001",
+        "HP_HUR_002",
+        "HP_TOR_001",
+        "HP_WFIR_001",
+        "TRANS-ROAD-CRIT-INDEX",
+        "VUL_001",
+        "VUL_002",
+        "VUL_003",
+        "VUL_004",
+        "crown_fire_probability"
+      ],
+      "sql_template": "A.hex_id = hex_county_state_zip_crosswalk.hex_id GROUP BY hex_county_state_zip_crosswalk.hex_id_l6",
+      "description": "Aggregate any data table from H3 level-8 to level-6. Join to crosswalk on hex_id, then GROUP BY hex_id_l6."
+    },
+    {
+      "id": "join__spatial_geometry",
+      "join_type": "spatial",
+      "join_key": "geometry",
+      "tables": [
+        "HIFLD-ENERGY-PLANTS-N"
+      ],
+      "sql_template": "ST_Intersects(A.geometry, B.geometry)",
+      "description": "Spatial join via geometry column. Tables with geometry: HIFLD-ENERGY-PLANTS-N."
+    }
+  ],
+  "edges": [
+    {
+      "source": "CRIT_LIFE_001",
+      "target": "CRIT_LIFE_001.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_001",
+      "target": "CRIT_LIFE_001.hex_fc_rac_hospital",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_001",
+      "target": "CRIT_LIFE_001.hex_fc_rac_grocery",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_002",
+      "target": "CRIT_LIFE_002.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_002",
+      "target": "CRIT_LIFE_002.hex_fc_max_grocery",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_002",
+      "target": "CRIT_LIFE_002.hex_fc_max_hospital",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_003",
+      "target": "CRIT_LIFE_003.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_003",
+      "target": "CRIT_LIFE_003.conc_index_grocery",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_003",
+      "target": "CRIT_LIFE_003.conc_index_hospital",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_004",
+      "target": "CRIT_LIFE_004.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_004",
+      "target": "CRIT_LIFE_004.hex_fc_top3_grocery",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_004",
+      "target": "CRIT_LIFE_004.hex_fc_top3_hospital",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "CR_001",
+      "target": "CR_001.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "CR_001",
+      "target": "CR_001.nri_cri_value",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "CR_001",
+      "target": "CR_001.nri_cri_score",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "EX_BLD_001",
+      "target": "EX_BLD_001.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "EX_BLD_001",
+      "target": "EX_BLD_001.building_count",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "EX_BLD_002",
+      "target": "EX_BLD_002.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "EX_BLD_002",
+      "target": "EX_BLD_002.hEE",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "EX_INF_001",
+      "target": "EX_INF_001.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "EX_INF_001",
+      "target": "EX_INF_001.CID",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_001",
+      "target": "EX_LIFE_001.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_001",
+      "target": "EX_LIFE_001.groc_per1k",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_002",
+      "target": "EX_LIFE_002.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_002",
+      "target": "EX_LIFE_002.pharm_per10k",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_003",
+      "target": "EX_LIFE_003.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_003",
+      "target": "EX_LIFE_003.fuel_per10k",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_004",
+      "target": "EX_LIFE_004.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_004",
+      "target": "EX_LIFE_004.hosp_n",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "EX_POP_001",
+      "target": "EX_POP_001.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "EX_POP_001",
+      "target": "EX_POP_001.population_7km",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-FIRE_EMS-N",
+      "target": "HIFLD-EMERGENC-FIRE_EMS-N.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-FIRE_EMS-N",
+      "target": "HIFLD-EMERGENC-FIRE_EMS-N.hifld_fire_and_emergency_medical_service_stations_fire_stations_ems_stations_n",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-LOCAL_EOC-N",
+      "target": "HIFLD-EMERGENC-LOCAL_EOC-N.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-LOCAL_EOC-N",
+      "target": "HIFLD-EMERGENC-LOCAL_EOC-N.hifld_local_emergency_operations_center_local_eoc_n",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-LOCAL_LAW-N",
+      "target": "HIFLD-EMERGENC-LOCAL_LAW-N.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-LOCAL_LAW-N",
+      "target": "HIFLD-EMERGENC-LOCAL_LAW-N.hifld_local_law_enforcement_n",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-SHELTER-N",
+      "target": "HIFLD-EMERGENC-SHELTER-N.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-SHELTER-N",
+      "target": "HIFLD-EMERGENC-SHELTER-N.hifld_national_shelter_system_facilities_shelter_locations_n",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-STATE_EOC-N",
+      "target": "HIFLD-EMERGENC-STATE_EOC-N.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-STATE_EOC-N",
+      "target": "HIFLD-EMERGENC-STATE_EOC-N.hifld_state_emergency_operations_centers_n",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-ENERGY-PLANTS-N",
+      "target": "HIFLD-ENERGY-PLANTS-N.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-ENERGY-PLANTS-N",
+      "target": "HIFLD-ENERGY-PLANTS-N.geometry",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-ENERGY-PLANTS-N",
+      "target": "HIFLD-ENERGY-PLANTS-N.hifld_energy_plants_n",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-ENERGY-SUBSTN-N",
+      "target": "HIFLD-ENERGY-SUBSTN-N.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-ENERGY-SUBSTN-N",
+      "target": "HIFLD-ENERGY-SUBSTN-N.hifld_energy_substations_n",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-ENERGY-TXKM-230P",
+      "target": "HIFLD-ENERGY-TXKM-230P.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-ENERGY-TXKM-230P",
+      "target": "HIFLD-ENERGY-TXKM-230P.hifld_energy_tx_km_230p",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-HEALTH-HOSP-N",
+      "target": "HIFLD-HEALTH-HOSP-N.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-HEALTH-HOSP-N",
+      "target": "HIFLD-HEALTH-HOSP-N.hifld_health_hospitals_n",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-TRANSP-PRIMARY_RD-L",
+      "target": "HIFLD-TRANSP-PRIMARY_RD-L.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-TRANSP-PRIMARY_RD-L",
+      "target": "HIFLD-TRANSP-PRIMARY_RD-L.hifld_primary_roads_km",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-WATER-WTP-N",
+      "target": "HIFLD-WATER-WTP-N.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-WATER-WTP-N",
+      "target": "HIFLD-WATER-WTP-N.hifld_water_wtp_n",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HP_FLD_002",
+      "target": "HP_FLD_002.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HP_FLD_002",
+      "target": "HP_FLD_002.nri_coastal_flood_value",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HP_FLD_002",
+      "target": "HP_FLD_002.nri_coastal_flood_score",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HP_FLD_002",
+      "target": "HP_FLD_002.nri_riverine_flood_value",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HP_FLD_002",
+      "target": "HP_FLD_002.nri_riverine_flood_score",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HP_HUR_001",
+      "target": "HP_HUR_001.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HP_HUR_001",
+      "target": "HP_HUR_001.hurr_strike_rate_10y",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HP_HUR_002",
+      "target": "HP_HUR_002.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HP_HUR_002",
+      "target": "HP_HUR_002.ve_ae_fraction",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HP_TOR_001",
+      "target": "HP_TOR_001.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HP_TOR_001",
+      "target": "HP_TOR_001.nri_tornado_value",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HP_TOR_001",
+      "target": "HP_TOR_001.nri_tornado_score",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HP_WFIR_001",
+      "target": "HP_WFIR_001.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HP_WFIR_001",
+      "target": "HP_WFIR_001.nri_wildfire_value",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "HP_WFIR_001",
+      "target": "HP_WFIR_001.nri_wildfire_score",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "TRANS-ROAD-CRIT-INDEX",
+      "target": "TRANS-ROAD-CRIT-INDEX.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "TRANS-ROAD-CRIT-INDEX",
+      "target": "TRANS-ROAD-CRIT-INDEX.road_crit_index",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_001",
+      "target": "VUL_001.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_001",
+      "target": "VUL_001.inv_median_income",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_002",
+      "target": "VUL_002.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_002",
+      "target": "VUL_002.sovi",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_eal",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealb_AVLN",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealpe_AVLN",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_eal_AVLN",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealb_CFLD",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealpe_CFLD",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_eal_CFLD",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealb_CWAV",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealpe_CWAV",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_eala_CWAV",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_eal_CWAV",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_eala_DRGT",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_eal_DRGT",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealb_ERQK",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealpe_ERQK",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_eal_ERQK",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealb_HAIL",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealpe_HAIL",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_eala_HAIL",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_eal_HAIL",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealb_HWAV",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealpe_HWAV",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_eala_HWAV",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_eal_HWAV",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealb_HRCN",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealpe_HRCN",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_eala_HRCN",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_eal_HRCN",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealb_ISTM",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealpe_ISTM",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_eal_ISTM",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealb_LNDS",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealpe_LNDS",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_eal_LNDS",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealb_LTNG",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealpe_LTNG",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_eal_LTNG",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealb_RFLD",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealpe_RFLD",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_eala_RFLD",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_eal_RFLD",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealb_SWND",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealpe_SWND",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_eala_SWND",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_eal_SWND",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealb_TRND",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealpe_TRND",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_eala_TRND",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_eal_TRND",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealb_TSUN",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealpe_TSUN",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_eal_TSUN",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealb_VLCN",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealpe_VLCN",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_eal_VLCN",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealb_WFIR",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealpe_WFIR",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_eala_WFIR",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_eal_WFIR",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealb_WNTW",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_ealpe_WNTW",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_eala_WNTW",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "VUL_003.nri_eal_WNTW",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_004",
+      "target": "VUL_004.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "VUL_004",
+      "target": "VUL_004.psvi_score",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "crown_fire_probability",
+      "target": "crown_fire_probability.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "crown_fire_probability",
+      "target": "crown_fire_probability.crown_fire_prob",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "hex_county_state_zip_crosswalk",
+      "target": "hex_county_state_zip_crosswalk.hex_id",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "hex_county_state_zip_crosswalk",
+      "target": "hex_county_state_zip_crosswalk.County",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "hex_county_state_zip_crosswalk",
+      "target": "hex_county_state_zip_crosswalk.State",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "hex_county_state_zip_crosswalk",
+      "target": "hex_county_state_zip_crosswalk.Zipcode",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "hex_county_state_zip_crosswalk",
+      "target": "hex_county_state_zip_crosswalk.hex_id_l7",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "hex_county_state_zip_crosswalk",
+      "target": "hex_county_state_zip_crosswalk.hex_id_l6",
+      "edge_type": "HAS_COLUMN",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_001",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_002",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_003",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_004",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "CR_001",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_BLD_001",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_BLD_002",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_INF_001",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_001",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_002",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_003",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_004",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_POP_001",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-FIRE_EMS-N",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-LOCAL_EOC-N",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-LOCAL_LAW-N",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-SHELTER-N",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-STATE_EOC-N",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-ENERGY-PLANTS-N",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-ENERGY-SUBSTN-N",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-ENERGY-TXKM-230P",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-HEALTH-HOSP-N",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-TRANSP-PRIMARY_RD-L",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-WATER-WTP-N",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_FLD_002",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_HUR_001",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_HUR_002",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_TOR_001",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_WFIR_001",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "TRANS-ROAD-CRIT-INDEX",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "VUL_001",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "VUL_002",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "VUL_004",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "crown_fire_probability",
+      "target": "join__hex_id",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "hex_county_state_zip_crosswalk",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_001",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_002",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_003",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_004",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "CR_001",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_BLD_001",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_BLD_002",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_INF_001",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_001",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_002",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_003",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_004",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_POP_001",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-FIRE_EMS-N",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-LOCAL_EOC-N",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-LOCAL_LAW-N",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-SHELTER-N",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-STATE_EOC-N",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-ENERGY-PLANTS-N",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-ENERGY-SUBSTN-N",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-ENERGY-TXKM-230P",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-HEALTH-HOSP-N",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-TRANSP-PRIMARY_RD-L",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-WATER-WTP-N",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_FLD_002",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_HUR_001",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_HUR_002",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_TOR_001",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_WFIR_001",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "TRANS-ROAD-CRIT-INDEX",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "VUL_001",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "VUL_002",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "VUL_004",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "crown_fire_probability",
+      "target": "join__crosswalk_county",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "hex_county_state_zip_crosswalk",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_001",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_002",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_003",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_004",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "CR_001",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_BLD_001",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_BLD_002",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_INF_001",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_001",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_002",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_003",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_004",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_POP_001",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-FIRE_EMS-N",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-LOCAL_EOC-N",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-LOCAL_LAW-N",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-SHELTER-N",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-STATE_EOC-N",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-ENERGY-PLANTS-N",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-ENERGY-SUBSTN-N",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-ENERGY-TXKM-230P",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-HEALTH-HOSP-N",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-TRANSP-PRIMARY_RD-L",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-WATER-WTP-N",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_FLD_002",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_HUR_001",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_HUR_002",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_TOR_001",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_WFIR_001",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "TRANS-ROAD-CRIT-INDEX",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "VUL_001",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "VUL_002",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "VUL_004",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "crown_fire_probability",
+      "target": "join__crosswalk_state",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "hex_county_state_zip_crosswalk",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_001",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_002",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_003",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_004",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "CR_001",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_BLD_001",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_BLD_002",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_INF_001",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_001",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_002",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_003",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_004",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_POP_001",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-FIRE_EMS-N",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-LOCAL_EOC-N",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-LOCAL_LAW-N",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-SHELTER-N",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-STATE_EOC-N",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-ENERGY-PLANTS-N",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-ENERGY-SUBSTN-N",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-ENERGY-TXKM-230P",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-HEALTH-HOSP-N",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-TRANSP-PRIMARY_RD-L",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-WATER-WTP-N",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_FLD_002",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_HUR_001",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_HUR_002",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_TOR_001",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_WFIR_001",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "TRANS-ROAD-CRIT-INDEX",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "VUL_001",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "VUL_002",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "VUL_004",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "crown_fire_probability",
+      "target": "join__crosswalk_zipcode",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "hex_county_state_zip_crosswalk",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_001",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_002",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_003",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_004",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "CR_001",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_BLD_001",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_BLD_002",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_INF_001",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_001",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_002",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_003",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_004",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_POP_001",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-FIRE_EMS-N",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-LOCAL_EOC-N",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-LOCAL_LAW-N",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-SHELTER-N",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-STATE_EOC-N",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-ENERGY-PLANTS-N",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-ENERGY-SUBSTN-N",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-ENERGY-TXKM-230P",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-HEALTH-HOSP-N",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-TRANSP-PRIMARY_RD-L",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-WATER-WTP-N",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_FLD_002",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_HUR_001",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_HUR_002",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_TOR_001",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_WFIR_001",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "TRANS-ROAD-CRIT-INDEX",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "VUL_001",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "VUL_002",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "VUL_004",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "crown_fire_probability",
+      "target": "join__hex_agg_l7",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "hex_county_state_zip_crosswalk",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_001",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_002",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_003",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "CRIT_LIFE_004",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "CR_001",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_BLD_001",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_BLD_002",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_INF_001",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_001",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_002",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_003",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_LIFE_004",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "EX_POP_001",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-FIRE_EMS-N",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-LOCAL_EOC-N",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-LOCAL_LAW-N",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-SHELTER-N",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-EMERGENC-STATE_EOC-N",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-ENERGY-PLANTS-N",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-ENERGY-SUBSTN-N",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-ENERGY-TXKM-230P",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-HEALTH-HOSP-N",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-TRANSP-PRIMARY_RD-L",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-WATER-WTP-N",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_FLD_002",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_HUR_001",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_HUR_002",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_TOR_001",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HP_WFIR_001",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "TRANS-ROAD-CRIT-INDEX",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "VUL_001",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "VUL_002",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "VUL_003",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "VUL_004",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "crown_fire_probability",
+      "target": "join__hex_agg_l6",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    },
+    {
+      "source": "HIFLD-ENERGY-PLANTS-N",
+      "target": "join__spatial_geometry",
+      "edge_type": "JOINABLE_VIA",
+      "properties": {}
+    }
+  ]
+}
